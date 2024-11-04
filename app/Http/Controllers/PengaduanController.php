@@ -93,15 +93,15 @@ class PengaduanController extends Controller
         }
         if ($request->file('bukti')) {
             foreach ($request->bukti as $file) {
-                $namaFile = $file['nama_file'];
-                $name = $file['file']->getClientOriginalName();
+                $nama = $file['nama_file'];
                 $tipe = $file['file']->getClientOriginalExtension();
+                $namaFile = $nama.'.'.$tipe;
                 $bukti = $file['file']->storeAs('bukti/' . $noTiket, $namaFile, 'public');
                 $ukuran = $file['file']->getSize();
 
                 FileBukti::create([
                     'pengaduan_id' => $pengaduan->id,
-                    'nama' => $namaFile,
+                    'nama' => $nama,
                     'tipe' => $tipe,
                     'ukuran' => $this->formatSize($ukuran),
                     'path' => $bukti

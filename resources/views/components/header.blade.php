@@ -17,8 +17,8 @@
                         <li class="nav-item {{ Request::is('/') ? 'active' : '' }}"><a class="nav-link"
                                 href="/">Beranda</a></li>
                         {{-- <li class="nav-item {{ Request::is('*syarat-ketentuan*') ? 'active' : '' }}"><a class="nav-link" href="syarat-ketentuan">Syarat & Ketentuan</a></li> --}}
-                        <li class="nav-item {{ Request::is('*peraturan*') ? 'active' : '' }}"><a class="nav-link"
-                                href="peraturan">Kontak Kami</a>
+                        <li class="nav-item {{ Request::is('*kontak-kami*') ? 'active' : '' }}"><a class="nav-link"
+                                href="kontak-kami">Kontak Kami</a>
                         <li class="nav-item {{ Request::is('*faq*') ? 'active' : '' }}"><a class="nav-link"
                                 href="faq">Faq</a>
                     </ul>

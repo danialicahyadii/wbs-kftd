@@ -13,12 +13,7 @@ class FrontEndController extends Controller
         return view('apps.frontend.home', ['status' => session('status')]);
     }
 
-    public function syaratKetentuan()
-    {
-        return view('apps.syarat-ketentuan');
-    }
-
-    public function peraturan()
+    public function kontakKami()
     {
         return view('apps.frontend.kontak-kami');
     }

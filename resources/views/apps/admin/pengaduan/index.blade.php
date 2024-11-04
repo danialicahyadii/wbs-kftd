@@ -201,7 +201,7 @@
                                             <th class="sort">Jenis Pelanggaran</th>
                                             <th class="sort">Waktu Pelanggaran</th>
                                             <th class="sort">Tempat Pelanggaran</th>
-                                            <th class="sort">Jabatan</th>
+                                            <th class="sort">Konsekuensi</th>
                                             <th class="sort">Status</th>
                                             <th class="sort">Action</th>
                                         </tr>
@@ -229,9 +229,9 @@
                                                     </td>
                                                     <td>{{ $row->waktu_pelanggaran }}</td>
                                                     <td>{{ $row->tempat_pelanggaran }}</td>
-                                                    <td>{{ $row->jabatan_terlapor }}</td>
+                                                    <td>{{ $row->konsekuensi }}</td>
                                                     <td class="status"><span
-                                                            class="badge bg-warning-subtle text-warning text-uppercase">Inprogress</span>
+                                                            class="badge bg-{{ $row->statusPengaduan->warna }}-subtle text-{{ $row->statusPengaduan->warna }} text-uppercase">{{ $row->statusPengaduan->nama }}</span>
                                                     </td>
                                                     <td>
                                                         <div class="dropdown">

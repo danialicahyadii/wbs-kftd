@@ -23,4 +23,19 @@ class Pengaduan extends Model
         return $this->belongsTo(Status::class, 'status');
     }
 
+    public function terlapor()
+    {
+        return $this->hasMany(Terlapor::class);
+    }
+
+    public function pihakTerlibat()
+    {
+        return $this->hasMany(PihakTerlibat::class);
+    }
+
+    public function saksiSaksi()
+    {
+        return $this->hasMany(SaksiSaksi::class);
+    }
+
 }

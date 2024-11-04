@@ -108,24 +108,15 @@
                                             <div class="text-muted mt-4">
                                                 <h6 class="mb-3 fw-semibold text-uppercase">Terlapor</h6>
                                                 <ul class="ps-4 vstack gap-2">
-                                                    <li>
-                                                        <div>
-                                                            <h5 class="fs-15 mb-1">Gembong Addy Prabowo</h5>
-                                                            <p class="fs-13 text-muted mb-0">Unit SDM</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div>
-                                                            <h5 class="fs-15 mb-1">Gembong Addy Prabowo</h5>
-                                                            <p class="fs-13 text-muted mb-0">Unit SDM</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div>
-                                                            <h5 class="fs-15 mb-1">Gembong Addy Prabowo</h5>
-                                                            <p class="fs-13 text-muted mb-0">Unit SDM</p>
-                                                        </div>
-                                                    </li>
+                                                    @foreach ($laporan->terlapor as $item)
+                                                        <li>
+                                                            <div>
+                                                                <h5 class="fs-15 mb-1">{{ $item->nama }}</h5>
+                                                                <p class="fs-13 text-muted mb-0">{{ $item->jabatan }} -
+                                                                    Unit {{ $item->unit }}</p>
+                                                            </div>
+                                                        </li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
@@ -275,60 +266,29 @@
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div>
-                                                <div class="d-flex align-items-center py-3">
-                                                    <div class="avatar-xs flex-shrink-0 me-3">
-                                                        <img src="{{ asset('interactive/assets/images/users/avatar-3.jpg') }}"
-                                                            alt="" class="img-fluid rounded-circle">
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <div>
-                                                            <h5 class="fs-15 mb-1">Gembong Addy Prabowo</h5>
-                                                            <p class="fs-13 text-muted mb-0">Unit SDM</p>
+                                            @foreach ($laporan->pihakTerlibat as $item)
+                                                <div>
+                                                    <div class="d-flex align-items-center py-3">
+                                                        <div class="avatar-xs flex-shrink-0 me-3">
+                                                            <img src="{{ asset('interactive/assets/images/users/avatar-3.jpg') }}"
+                                                                alt="" class="img-fluid rounded-circle">
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <div>
+                                                                <h5 class="fs-15 mb-1">{{ $item->nama }}</h5>
+                                                                <p class="fs-13 text-muted mb-0">{{ $item->jabatan }} -
+                                                                    Unit {{ $item->unit }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-shrink-0 ms-2">
+                                                            <button type="button"
+                                                                class="btn btn-sm btn-outline-danger"><i
+                                                                    class="ri-delete-bin-line align-middle"></i></button>
                                                         </div>
                                                     </div>
-                                                    <div class="flex-shrink-0 ms-2">
-                                                        <button type="button" class="btn btn-sm btn-outline-danger"><i
-                                                                class="ri-delete-bin-line align-middle"></i></button>
-                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <div class="d-flex align-items-center py-3">
-                                                    <div class="avatar-xs flex-shrink-0 me-3">
-                                                        <img src="{{ asset('interactive/assets/images/users/avatar-3.jpg') }}"
-                                                            alt="" class="img-fluid rounded-circle">
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <div>
-                                                            <h5 class="fs-15 mb-1">Gembong Addy Prabowo</h5>
-                                                            <p class="fs-13 text-muted mb-0">Unit SDM</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-shrink-0 ms-2">
-                                                        <button type="button" class="btn btn-sm btn-outline-danger"><i
-                                                                class="ri-delete-bin-line align-middle"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="d-flex align-items-center py-3">
-                                                    <div class="avatar-xs flex-shrink-0 me-3">
-                                                        <img src="{{ asset('interactive/assets/images/users/avatar-3.jpg') }}"
-                                                            alt="" class="img-fluid rounded-circle">
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <div>
-                                                            <h5 class="fs-15 mb-1">Gembong Addy Prabowo</h5>
-                                                            <p class="fs-13 text-muted mb-0">Unit SDM</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-shrink-0 ms-2">
-                                                        <button type="button" class="btn btn-sm btn-outline-danger"><i
-                                                                class="ri-delete-bin-line align-middle"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div><!-- end card body -->
                                     </div>
 
@@ -343,28 +303,31 @@
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div>
-                                                <div class="d-flex align-items-center py-3">
-                                                    <div class="avatar-xs flex-shrink-0 me-3">
-                                                        <img src="{{ asset('interactive/assets/images/users/avatar-3.jpg') }}"
-                                                            alt="" class="img-fluid rounded-circle">
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <div>
-                                                            <h5 class="fs-15 mb-1">Gembong Addy Prabowo</h5>
-                                                            <p class="fs-13 text-muted mb-0">Unit SDM</p>
+                                            @foreach ($laporan->saksiSaksi as $item)
+                                                <div>
+                                                    <div class="d-flex align-items-center py-3">
+                                                        <div class="avatar-xs flex-shrink-0 me-3">
+                                                            <img src="{{ asset('interactive/assets/images/users/avatar-3.jpg') }}"
+                                                                alt="" class="img-fluid rounded-circle">
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <div>
+                                                                <h5 class="fs-15 mb-1">{{ $item->nama }}</h5>
+                                                                <p class="fs-13 text-muted mb-0">{{ $item->jabatan }} -
+                                                                    Unit {{ $item->unit }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-shrink-0 ms-2">
+                                                            <button type="button"
+                                                                class="btn btn-sm btn-outline-danger"><i
+                                                                    class="ri-delete-bin-line align-middle"></i></button>
                                                         </div>
                                                     </div>
-                                                    <div class="flex-shrink-0 ms-2">
-                                                        <button type="button" class="btn btn-sm btn-outline-danger"><i
-                                                                class="ri-delete-bin-line align-middle"></i></button>
-                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endforeach
                                         </div><!-- end card body -->
                                     </div>
 
-                                    {{-- @if ($laporan->fileBukti->count() != 0) --}}
                                     <div class="card">
                                         <div class="card-header align-items-center d-flex border-bottom-dashed">
                                             <h4 class="card-title mb-0 flex-grow-1">File Bukti
@@ -379,7 +342,7 @@
                                         <div class="card-body">
 
                                             <div class="vstack gap-2">
-                                                @forelse ($laporan->fileBukti as $item)
+                                                @forelse ($laporan->fileBukti->take(3) as $item)
                                                     <div class="border rounded border-dashed p-2">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0 me-3">
@@ -403,7 +366,7 @@
                                                             <div class="flex-shrink-0 ms-2">
                                                                 <div class="d-flex gap-1">
                                                                     <button type="button"
-                                                                        onclick="download('{{ route('file.download', ['filePath' => $item->path]) }}')"
+                                                                        onclick="download('{{ route('file.download', ['filePath' => $item->path, 'fileExtension' => $item->tipe]) }}')"
                                                                         class="btn btn-icon text-muted btn-sm fs-18"><i
                                                                             class="ri-download-2-line"></i></button>
                                                                     <button
@@ -470,282 +433,80 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar-sm">
-                                                                        <div
-                                                                            class="avatar-title bg-light text-secondary rounded fs-24">
-                                                                            <i class="ri-folder-zip-line"></i>
+                                                        @foreach ($laporan->fileBukti as $item)
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm">
+                                                                            @if ($item->tipe == 'xlsx')
+                                                                                <div
+                                                                                    class="avatar-title bg-light text-success rounded fs-24">
+                                                                                    <i class="ri-file-excel-fill"></i>
+                                                                                </div>
+                                                                            @elseif ($item->tipe == 'jpeg')
+                                                                                <div
+                                                                                    class="avatar-title bg-light text-danger rounded fs-24">
+                                                                                    <i class="ri-image-2-fill"></i>
+                                                                                </div>
+                                                                            @elseif ($item->tipe == 'pdf')
+                                                                                <div
+                                                                                    class="avatar-title bg-light text-danger rounded fs-24">
+                                                                                    <i class="ri-file-pdf-fill"></i>
+                                                                                </div>
+                                                                            @elseif ($item->tipe == 'docx')
+                                                                                <div
+                                                                                    class="avatar-title bg-light text-secondary rounded fs-24">
+                                                                                    <i class="ri-file-word-fill"></i>
+                                                                                </div>
+                                                                            @endif
+                                                                        </div>
+                                                                        <div class="ms-3 flex-grow-1">
+                                                                            <h5 class="fs-14 mb-0"><a
+                                                                                    href="javascript:void(0)"
+                                                                                    class="text-body">{{ $item->nama }}</a>
+                                                                            </h5>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="ms-3 flex-grow-1">
-                                                                        <h5 class="fs-14 mb-0"><a
-                                                                                href="javascript:void(0)"
-                                                                                class="text-body">Artboard-documents.zip</a>
-                                                                        </h5>
+                                                                </td>
+                                                                <td>{{ strtoupper($item->tipe) }} File</td>
+                                                                <td>{{ $item->ukuran }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
+                                                                </td>
+                                                                <td>
+                                                                    <div class="dropdown">
+                                                                        <a href="javascript:void(0);"
+                                                                            class="btn btn-soft-secondary btn-sm btn-icon"
+                                                                            data-bs-toggle="dropdown"
+                                                                            aria-expanded="true">
+                                                                            <i class="ri-more-fill"></i>
+                                                                        </a>
+                                                                        <ul class="dropdown-menu dropdown-menu-end">
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0);"><i
+                                                                                        class="ri-eye-fill me-2 align-bottom text-muted"></i>View</a>
+                                                                            </li>
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0);"><i
+                                                                                        class="ri-download-2-fill me-2 align-bottom text-muted"></i>Download</a>
+                                                                            </li>
+                                                                            <li class="dropdown-divider"></li>
+                                                                            <li><a class="dropdown-item"
+                                                                                    href="javascript:void(0);"><i
+                                                                                        class="ri-delete-bin-5-fill me-2 align-bottom text-muted"></i>Delete</a>
+                                                                            </li>
+                                                                        </ul>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>Zip File</td>
-                                                            <td>4.57 MB</td>
-                                                            <td>12 Dec 2021</td>
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <a href="javascript:void(0);"
-                                                                        class="btn btn-soft-secondary btn-sm btn-icon"
-                                                                        data-bs-toggle="dropdown" aria-expanded="true">
-                                                                        <i class="ri-more-fill"></i>
-                                                                    </a>
-                                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-eye-fill me-2 align-bottom text-muted"></i>View</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-download-2-fill me-2 align-bottom text-muted"></i>Download</a>
-                                                                        </li>
-                                                                        <li class="dropdown-divider"></li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-delete-bin-5-fill me-2 align-bottom text-muted"></i>Delete</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar-sm">
-                                                                        <div
-                                                                            class="avatar-title bg-light text-danger rounded fs-24">
-                                                                            <i class="ri-file-pdf-fill"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="ms-3 flex-grow-1">
-                                                                        <h5 class="fs-14 mb-0"><a
-                                                                                href="javascript:void(0);"
-                                                                                class="text-body">Bank Management
-                                                                                System</a></h5>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>PDF File</td>
-                                                            <td>8.89 MB</td>
-                                                            <td>24 Nov 2021</td>
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <a href="javascript:void(0);"
-                                                                        class="btn btn-soft-secondary btn-sm btn-icon"
-                                                                        data-bs-toggle="dropdown" aria-expanded="true">
-                                                                        <i class="ri-more-fill"></i>
-                                                                    </a>
-                                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-eye-fill me-2 align-bottom text-muted"></i>View</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-download-2-fill me-2 align-bottom text-muted"></i>Download</a>
-                                                                        </li>
-                                                                        <li class="dropdown-divider"></li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-delete-bin-5-fill me-2 align-bottom text-muted"></i>Delete</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar-sm">
-                                                                        <div
-                                                                            class="avatar-title bg-light text-secondary rounded fs-24">
-                                                                            <i class="ri-video-line"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="ms-3 flex-grow-1">
-                                                                        <h5 class="fs-14 mb-0"><a
-                                                                                href="javascript:void(0);"
-                                                                                class="text-body">Tour-video.mp4</a></h5>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>MP4 File</td>
-                                                            <td>14.62 MB</td>
-                                                            <td>19 Nov 2021</td>
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <a href="javascript:void(0);"
-                                                                        class="btn btn-soft-secondary btn-sm btn-icon"
-                                                                        data-bs-toggle="dropdown" aria-expanded="true">
-                                                                        <i class="ri-more-fill"></i>
-                                                                    </a>
-                                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-eye-fill me-2 align-bottom text-muted"></i>View</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-download-2-fill me-2 align-bottom text-muted"></i>Download</a>
-                                                                        </li>
-                                                                        <li class="dropdown-divider"></li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-delete-bin-5-fill me-2 align-bottom text-muted"></i>Delete</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar-sm">
-                                                                        <div
-                                                                            class="avatar-title bg-light text-success rounded fs-24">
-                                                                            <i class="ri-file-excel-fill"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="ms-3 flex-grow-1">
-                                                                        <h5 class="fs-14 mb-0"><a
-                                                                                href="javascript:void(0);"
-                                                                                class="text-body">Account-statement.xsl</a>
-                                                                        </h5>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>XSL File</td>
-                                                            <td>2.38 KB</td>
-                                                            <td>14 Nov 2021</td>
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <a href="javascript:void(0);"
-                                                                        class="btn btn-soft-secondary btn-sm btn-icon"
-                                                                        data-bs-toggle="dropdown" aria-expanded="true">
-                                                                        <i class="ri-more-fill"></i>
-                                                                    </a>
-                                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-eye-fill me-2 align-bottom text-muted"></i>View</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-download-2-fill me-2 align-bottom text-muted"></i>Download</a>
-                                                                        </li>
-                                                                        <li class="dropdown-divider"></li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-delete-bin-5-fill me-2 align-bottom text-muted"></i>Delete</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar-sm">
-                                                                        <div
-                                                                            class="avatar-title bg-light text-warning rounded fs-24">
-                                                                            <i class="ri-folder-fill"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="ms-3 flex-grow-1">
-                                                                        <h5 class="fs-14 mb-0"><a
-                                                                                href="javascript:void(0);"
-                                                                                class="text-body">Project Screenshots
-                                                                                Collection</a></h5>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>Folder File</td>
-                                                            <td>87.24 MB</td>
-                                                            <td>08 Nov 2021</td>
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <a href="javascript:void(0);"
-                                                                        class="btn btn-soft-secondary btn-sm btn-icon"
-                                                                        data-bs-toggle="dropdown" aria-expanded="true">
-                                                                        <i class="ri-more-fill"></i>
-                                                                    </a>
-                                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-eye-fill me-2 align-bottom text-muted"></i>View</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-download-2-fill me-2 align-bottom text-muted"></i>Download</a>
-                                                                        </li>
-                                                                        <li class="dropdown-divider"></li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-delete-bin-5-fill me-2 align-bottom text-muted"></i>Delete</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar-sm">
-                                                                        <div
-                                                                            class="avatar-title bg-light text-danger rounded fs-24">
-                                                                            <i class="ri-image-2-fill"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="ms-3 flex-grow-1">
-                                                                        <h5 class="fs-14 mb-0"><a
-                                                                                href="javascript:void(0);"
-                                                                                class="text-body">Velzon-logo.png</a></h5>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>PNG File</td>
-                                                            <td>879 KB</td>
-                                                            <td>02 Nov 2021</td>
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <a href="javascript:void(0);"
-                                                                        class="btn btn-soft-secondary btn-sm btn-icon"
-                                                                        data-bs-toggle="dropdown" aria-expanded="true">
-                                                                        <i class="ri-more-fill"></i>
-                                                                    </a>
-                                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-eye-fill me-2 align-bottom text-muted"></i>View</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-download-2-fill me-2 align-bottom text-muted"></i>Download</a>
-                                                                        </li>
-                                                                        <li class="dropdown-divider"></li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="javascript:void(0);"><i
-                                                                                    class="ri-delete-bin-5-fill me-2 align-bottom text-muted"></i>Delete</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <div class="text-center mt-3">
+                                            {{-- <div class="text-center mt-3">
                                                 <a href="javascript:void(0);" class="text-success "><i
                                                         class="mdi mdi-loading mdi-spin fs-20 align-middle me-2"></i> Load
                                                     more </a>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

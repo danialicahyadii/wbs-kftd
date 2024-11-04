@@ -20,27 +20,12 @@ use Inertia\Inertia;
 Route::get('/auth/{provider}', [SocialiteController::class, 'redirectToProvider']);
 Route::get('/auth/{provider}/callback', [SocialiteController::class, 'handleProvideCallback']);
 
-// Route::get('/', function () {
-//     // return Inertia::render('Welcome', [
-//     //     'canLogin' => Route::has('login'),
-//     //     'canRegister' => Route::has('register'),
-//     //     'laravelVersion' => Application::VERSION,
-//     //     'phpVersion' => PHP_VERSION,
-//     // ]);
-// });
-
 Route::controller(FrontEndController::class)->group(function () {
     Route::get('', 'beranda');
-    Route::get('syarat-ketentuan', 'syaratKetentuan');
-    Route::get('peraturan', 'peraturan');
+    Route::get('kontak-kami', 'kontakKami');
     Route::get('faq', 'faq');
-    // Route::get('laporan-detail', [LaporanController::class, 'laporanDetail'])->name('laporan.detail');
     Route::post('search-pengaduan', 'search')->name('search-pengaduan');
 });
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('download', [PengaduanController::class, 'download'])->name('file.download');
@@ -52,7 +37,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'saksi-saksi' => SaksiSaksiController::class,
         'file-bukti' => FileBuktiController::class,
         'status' => StatusController::class,
-        // 'faq' => FaqController::class,
         'cara-melapor' => CaraMelaporController::class,
     ]);
     Route::resource('laporan', LaporanController::class);
