@@ -2,6 +2,19 @@
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card overflow-hidden shadow-none">
+                        <div class="card-body bg-success-subtle text-success fw-semibold d-flex">
+                            <marquee class="fs-14">
+                                Platform yang memungkinkan individu atau pegawai untuk melaporkan dugaan pelanggaran atau
+                                tindakan tidak etis secara anonim atau teridentifikasi.
+                            </marquee>
+                        </div>
+                    </div>
+                </div>
+                <!--end col-->
+            </div>
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
