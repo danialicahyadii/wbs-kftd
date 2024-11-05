@@ -732,8 +732,10 @@
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
+                            {{-- {{ dd(asset('interactive/assets/images/user.png')) }} --}}
                             <img class="rounded-circle header-profile-user"
-                                src="{{ asset('interactive/assets/images/users/avatar-1.jpg') }}" alt="Header Avatar">
+                                src="{{ Auth::user()->avatar ? Storage::url(Auth::user()->avatar) : asset('interactive/assets/images/avatar.png') }}"
+                                alt="Header Avatar">
                             <span class="text-start ms-xl-2">
                                 <span
                                     class="d-none d-xl-inline-block ms-1 fw-semibold user-name-text">{{ Auth::user()->name }}</span>
@@ -745,7 +747,7 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
                         <h6 class="dropdown-header">Welcome {{ explode(' ', Auth::user()->name)[0] }}!</h6>
-                        <a class="dropdown-item" href="pages-profile.html"><i
+                        <a class="dropdown-item" href="{{ route('profile.edit') }}"><i
                                 class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Profile</span></a>
                         {{-- <a class="dropdown-item" href="apps-chat.html"><i class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Messages</span></a> --}}

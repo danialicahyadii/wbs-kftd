@@ -42,14 +42,16 @@
                 <div class="col-md-9 col-lg-10 pl-2 pl-xl-5">
                     <form class="form-inline flex-nowrap form-domainSearch" id="searchForm" method="post">
                         @csrf
+                        @method('POST')
                         <div class="form-group">
-                            <label for="staticDomainSearch" class="sr-only">Cari Pengaduanmu</label>
-                            <input type="text" name="tiket" class="form-control" id="staticDomainSearch"
+                            <label for="cariPengaduan" class="sr-only">Cari Pengaduanmu</label>
+                            <input type="text" name="tiket" class="form-control" id="cariPengaduan"
                                 placeholder="Masukkan Nomer Tiket">
                         </div>
                         <button type="submit" class="button rounded-0">Cek</button>
                     </form>
-                    <div id="result" class="mt-3"></div>
+                    <div id="result" class="mt-3">
+                    </div>
                 </div>
             </div>
         </div>
@@ -575,7 +577,7 @@
             $('#verificationModal').modal('show');
         }
     </script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#searchForm').on('submit', function(event) {
                 event.preventDefault(); // Mencegah form dari pengiriman default
@@ -588,67 +590,55 @@
                         $('#result').empty(); // Bersihkan hasil sebelumnya
 
                         if (response.found) {
-                            $('#result').append('<h5>Status Pengaduan: ' + response.status +
-                                '</h5>');
-                            $('#result').append('<div class="timeline mt-3"></div>');
+                            $('#result').append(
+                                '<h5>Status Pengaduan: <span class="badge badge-warning">' +
+                                response.status +
+                                '</span></h5>');
 
-                            // Menampilkan riwayat
-                            $.each(response.riwayat, function(index, item) {
-                                $('#result .timeline').append(`
-                            <div class="timeline-item">
-                                <div class="timeline-point"></div>
-                                <div class="timeline-content">
-                                    <h5>${item.tanggal}</h5>
-                                    <p>${item.deskripsi}</p>
-                                </div>
-                            </div>
-                        `);
-                            });
                         } else {
                             $('#result').append('<div class="alert alert-warning">' + response
-                                .message + '</div>');
+                                .message +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
+                            );
                         }
                     },
                     error: function(xhr) {
                         $('#result').empty();
                         $('#result').append(
                             '<div class="alert alert-danger">Terjadi kesalahan, silakan coba lagi.</div>'
-                            );
+                        );
                     }
                 });
             });
         });
+    </script> --}}
+    <script>
+        $(document).ready(function() {
+            $('#searchForm').on('submit', function(event) {
+                event.preventDefault();
+
+                $.ajax({
+                    url: '{{ route('search-pengaduan') }}',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        console.log(data.data);
+                        displayResult(data);
+                    },
+                    error: function() {
+                        $('#result').html(
+                            '<p class="text-danger">Pengaduan tidak ditemukan.</p>');
+                    }
+                });
+            });
+
+            function displayResult(data) {
+                $('#result').html(`
+                <h5>Status Pengaduan: <span class="badge badge-${data.status.warna}">${data.status.nama}</span></h5>
+                <p>Tiket: ${data.data.tiket}</p>
+                <a href="/pengaduan/${data.id}" class="btn btn-primary">Lihat Detail</a>
+            `);
+            }
+        });
     </script>
-    <style>
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .timeline-point {
-            position: absolute;
-            left: -15px;
-            width: 10px;
-            height: 10px;
-            background-color: #007bff;
-            /* Ganti dengan warna yang diinginkan */
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-
-        .timeline-content {
-            margin-left: 30px;
-            padding: 10px;
-            background: #f8f9fa;
-            /* Latar belakang konten */
-            border-radius: 5px;
-            border-left: 2px dashed #007bff;
-            /* Garis putus-putus */
-        }
-    </style>
 @endpush

@@ -25,10 +25,10 @@
 
                     <div class="nav-right text-center text-lg-right py-4 py-lg-0">
                         @if (auth()->user())
-                            @if (Auth::user()->name == 'Admin')
+                            @role('Admin')
                                 <a class="button button-link btn-small mr-4" style="color: yellow"
-                                    href="{{ route('login') }}">Hi, Admin</a>
-                            @endif
+                                    href="{{ route('pengaduan.index') }}">Hi, Admin</a>
+                            @endrole
                             <a class="button button-link mr-4" href="#"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span
                                     class="align-middle"><i class="ti-user"></i></span> Logout</a>

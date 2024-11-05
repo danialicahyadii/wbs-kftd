@@ -27,7 +27,7 @@ class FrontEndController extends Controller
     {
         $pengaduan = Pengaduan::where('tiket', $request->tiket)->first();
         if ($pengaduan) {
-            return response()->json(['status' => $pengaduan->statusPengaduan->nama, 'id' => Crypt::encrypt($pengaduan->id), 'found' => true]);
+            return response()->json(['data' => $pengaduan, 'status' => $pengaduan->statusPengaduan, 'id' => Crypt::encrypt($pengaduan->id), 'found' => true]);
         } else {
             return response()->json(['message' => 'Tiket tidak ditemukan.', 'found' => false]);
         }

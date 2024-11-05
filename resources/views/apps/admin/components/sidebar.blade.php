@@ -19,7 +19,8 @@
                 <img src="{{ asset('interactive/assets/images/logo_kftd_white.png') }}" alt="" height="65">
             </span>
         </a>
-        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+            id="vertical-hover">
             <i class="ri-record-circle-line"></i>
         </button>
     </div>
@@ -32,10 +33,19 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ Request::is('*pengaduan*') ? 'active' : '' }}" href="{{ route('pengaduan.index') }}">
+                    <a class="nav-link menu-link {{ Request::is('*pengaduan*') ? 'active' : '' }}"
+                        href="{{ route('pengaduan.index') }}">
                         <i class="ri-megaphone-fill"></i> <span data-key="t-widgets">Pengaduan</span>
                     </a>
                 </li>
+                {{-- @role('Admin')
+                    <li class="menu-title"><span data-key="t-menu">Admin</span></li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('pengaduan.index') }}">
+                            <i class="ri-account-circle-fill"></i> <span data-key="t-widgets">User</span>
+                        </a>
+                    </li>
+                @endrole --}}
                 {{-- <li class="menu-title"><span data-key="t-menu">Admin</span></li>
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Request::is('*pengaduan*') ? 'active' : '' }}" href="{{ route('pengaduan.index') }}">

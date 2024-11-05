@@ -6,6 +6,7 @@ use App\Models\Status;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,11 +17,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Admin',
+        $user = User::factory()->create([
+            'name' => 'Admin WBS',
             'email' => 'adminwbs@kftd.co.id',
             'password' => bcrypt('admin123')
         ]);
+        Role::create(['name' => 'Admin']);
+        Role::create(['name' => 'User']);
+        $user->assignRole('Admin');
 
         Status::create([
             'nama' => 'Verifikasi',

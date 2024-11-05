@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\SocialAccount;
 use App\Models\User;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
@@ -24,45 +26,46 @@ class SocialiteController extends Controller
             return redirect()->back();
         }
 
-        $authUser = $this->findOrCreateUser($user, $provider);
+        $authUser = $this->findOrCreateUser($user);
 
         Auth()->login($authUser, true);
 
         return redirect('pengaduan');
     }
 
-    public function findOrCreateUser($socialUser, $provider)
+    public function findOrCreateUser($socialUser)
     {
         $socialAccount = User::where('email', $socialUser->getEmail())
         ->first();
 
-        // Jika sudah ada
         if ($socialAccount) {
-            // return user
+            $client = new Client();
+            $response = $client->get($socialUser->getAvatar());
+            $imageName = $socialUser->getName() . '.jpg';
+            Storage::disk('public')->put('avatars/' . $imageName, $response->getBody());
+
+            $socialAccount->update([
+                'avatar' => 'avatars/'. $imageName,
+            ]);
             return $socialAccount;
 
-            // Jika belum ada
         } else {
-
-            // User berdasarkan email
             $user = User::where('email', $socialUser->getEmail())->first();
-
-            // Jika Tidak ada user
+            $client = new Client();
+            $response = $client->get($socialUser->getAvatar());
+            $imageName = $socialUser->getName() . '.jpg';
+            Storage::disk('public')->put('avatars/' . $imageName, $response->getBody());
             if (!$user) {
-                // Create user baru
                 $user = User::create([
                     'name'  => $socialUser->getName(),
                     'email' => $socialUser->getEmail(),
                     'email_verified_at' => now(),
-                    'password' => bcrypt('admin123')
+                    'password' => bcrypt('admin123'),
+                    'avatar' => 'avatars/'.$imageName,
                 ]);
-            }
 
-            // Buat Social Account baru
-            $user->update([
-                'name' => $socialUser->getName(),
-                'email' => $socialUser->getEmail(),
-            ]);
+                $user->assignRole('User');
+            }
 
             // return user
             return $user;
