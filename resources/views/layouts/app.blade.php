@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>WBS - KFTD</title>
-    {{-- <link rel="icon" href="{{ asset('larahost/img/kftd.png') }}" type="image/x-icon"> --}}
-    <link rel="shortcut icon" href="{{ asset('lorahost/img/kftd_white.png') }}">
+    <link rel="icon" href="{{ asset('lorahost/img/kftd.png') }}" type="image/x-icon">
+    {{-- <link rel="shortcut icon" href="{{ asset('lorahost/img/kftd_white.png') }}"> --}}
 
     <link rel="stylesheet" href="{{ asset('lorahost/vendors/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lorahost/vendors/themify-icons/themify-icons.css') }}">

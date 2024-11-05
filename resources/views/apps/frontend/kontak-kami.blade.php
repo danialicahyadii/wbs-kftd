@@ -4,11 +4,11 @@
     <section class="hero-banner hero-banner-sm text-center"
         style="background-image: url('https://kftd.co.id/assets/img/slider/slider-4.jpg')">
         <div class="container">
-            <h1>Contact us</h1>
+            <h1>Kontak Kami</h1>
             <nav aria-label="breadcrumb" class="banner-breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                    <li class="breadcrumb-item active" aria-current="page">Kontak Kami</li>
                 </ol>
             </nav>
         </div>
@@ -20,43 +20,34 @@
     <!-- ================ contact section start ================= -->
     <section class="section-margin">
         <div class="container">
-            <div class="d-none d-sm-block mb-5 pb-4">
-                <div id="map" style="height: 480px;"></div>
+            <div class="d-none d-sm-block mb-5 border shadow">
+                <div id="map" style="width:100%; min-height:80vh; position:relative; z-index:1;"></div>
+
+                <!-- Leaflet Maps -->
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+                    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
                 <script>
-                    function initMap() {
-                        var uluru = {
-                            lat: -25.363,
-                            lng: 131.044
-                        };
-                        var grayStyles = [{
-                                featureType: "all",
-                                stylers: [{
-                                        saturation: -90
-                                    },
-                                    {
-                                        lightness: 50
-                                    }
-                                ]
-                            },
-                            {
-                                elementType: 'labels.text.fill',
-                                stylers: [{
-                                    color: '#A3A3A3'
-                                }]
-                            }
-                        ];
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            center: {
-                                lat: -31.197,
-                                lng: 150.744
-                            },
-                            zoom: 9,
-                            styles: grayStyles,
-                            scrollwheel: false
-                        });
-                    }
-                </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap">
+                    var map = L.map('map', {
+                        center: [-6.161853, 106.835590],
+                        zoom: 15,
+                        scrollWheelZoom: false,
+                        zoomControl: false
+                    });
+                    var marker = L.marker([-6.167460, 106.835789]).addTo(map);
+                    L.tileLayer(
+                        'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 20,
+                        }).addTo(map);
+
+                    var popup = L.popup()
+                        .setLatLng([-6.165902, 106.835875])
+                        .setContent(
+                            "<center><img src='https://kftd.co.id/assets/img/content/map-popup.jpg' width='100px' class='shadow border rounded'/><hr class='hr m-1' /> <b>PT Kimia Farma Trading & Distribution</b> <br /> Jl. Budi Utomo No.1, Ps. Baru, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10710 <hr class='hr m-1' /> <a href='https://www.google.com/maps/dir//PT+Kimia+Farma+Trading+Dan+Distribution+(Kantor+Pusat)+Jl.+Budi+Utomo+No.1+Ps.+Baru+Kecamatan+Sawah+Besar,+Kota+Jakarta+Pusat,+Daerah+Khusus+Ibukota+Jakarta+10710/@-6.1674199,106.8360857,20z/data=!4m8!4m7!1m0!1m5!1m1!1s0x2e69f5d6f4d9dd95:0xdc6180f07e9c9130!2m2!1d106.8360857!2d-6.1674199?entry=ttu' class='genric-btn primary small' target='_blank'><i class='fas fa-map-marked-alt'></i> Rute</a> </center>"
+                        )
+                        .openOn(map);
                 </script>
 
             </div>
@@ -103,29 +94,8 @@
 
                 </div>
 
-                <div class="col-lg-4">
-                    <div class="media contact-info">
-                        <span class="contact-info__icon"><i class="ti-home"></i></span>
-                        <div class="media-body">
-                            <h3>Buttonwood, California.</h3>
-                            <p>Rosemead, CA 91770</p>
-                        </div>
-                    </div>
-                    <div class="media contact-info">
-                        <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-                        <div class="media-body">
-                            <h3><a href="tel:454545654">00 (440) 9865 562</a></h3>
-                            <p>Mon to Fri 9am to 6pm</p>
-                        </div>
-                    </div>
-                    <div class="media contact-info">
-                        <span class="contact-info__icon"><i class="ti-email"></i></span>
-                        <div class="media-body">
-                            <h3><a href="mailto:support@colorlib.com">support@colorlib.com</a></h3>
-                            <p>Send us your query anytime!</p>
-                        </div>
-                    </div>
-                </div>
+                @include('components.contact')
+
             </div>
         </div>
     </section>

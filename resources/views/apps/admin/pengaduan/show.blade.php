@@ -271,7 +271,7 @@
                                                 <div>
                                                     <div class="d-flex align-items-center py-3">
                                                         <div class="avatar-xs flex-shrink-0 me-3">
-                                                            <img src="{{ asset('interactive/assets/images/users/avatar-3.jpg') }}"
+                                                            <img src="{{ asset('interactive/assets/images/avatar.png') }}"
                                                                 alt="" class="img-fluid rounded-circle">
                                                         </div>
                                                         <div class="flex-grow-1">
@@ -308,7 +308,7 @@
                                                 <div>
                                                     <div class="d-flex align-items-center py-3">
                                                         <div class="avatar-xs flex-shrink-0 me-3">
-                                                            <img src="{{ asset('interactive/assets/images/users/avatar-3.jpg') }}"
+                                                            <img src="{{ asset('interactive/assets/images/avatar.png') }}"
                                                                 alt="" class="img-fluid rounded-circle">
                                                         </div>
                                                         <div class="flex-grow-1">

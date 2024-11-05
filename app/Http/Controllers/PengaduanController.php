@@ -22,7 +22,7 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        $pengaduan = Pengaduan::get();
+        $pengaduan = Pengaduan::where('user_id', Auth::user()->id)->get();
         return view('apps.admin.pengaduan.index', compact('pengaduan'));
     }
 
@@ -111,7 +111,7 @@ class PengaduanController extends Controller
         }
 
         Mail::to($request->user()->email)->send(new MailPengaduan($pengaduan));
-        return redirect('/')->with('success', 'Laporan berhasil dibuat  ');
+        return redirect('pengaduan')->with('success', 'Laporan berhasil dibuat  ');
     }
 
     /**
@@ -160,7 +160,7 @@ class PengaduanController extends Controller
     /**
      * Check the Tiket Exists.
      */
-    private function formatSize($bytes)
+    public static function formatSize($bytes)
     {
         if ($bytes >= 1073741824) {
             return number_format($bytes / 1073741824, 2) . ' GB';

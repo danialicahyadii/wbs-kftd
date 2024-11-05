@@ -28,7 +28,8 @@ class SaksiSaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        SaksiSaksi::create($request->all());
+        return back();
     }
 
     /**

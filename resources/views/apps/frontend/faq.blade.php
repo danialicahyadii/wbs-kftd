@@ -8,7 +8,7 @@
             <nav aria-label="breadcrumb" class="banner-breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Pricing</li>
+                    <li class="breadcrumb-item active" aria-current="page">Faq</li>
                 </ol>
             </nav>
         </div>
@@ -28,21 +28,17 @@
                     <div class="card-header" id="headingOne">
                         <h5 class="mb-0">
                             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                Collapsible Group Item #1
+                                aria-expanded="true" aria-controls="collapseOne" style="text-decoration: none; color:black">
+                                Apa yang dimaksud Sistem Pelaporan Dugaan Pelanggaran (Whistleblowing System) Kimia Farma?
                             </button>
                         </h5>
                     </div>
 
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                            laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                            coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                            anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                            occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                            of them accusamus labore sustainable VHS.
+                            “Sistem Pelaporan Pelanggaran/Whistleblowing System (WBS)” adalah Sistem yang digunakan untuk
+                            menampung, mengolah dan menindaklanjuti serta membuat Pelaporan atas informasi yang disampaikan
+                            oleh Pelapor mengenai tindakan pelanggaran yang terjadi di lingkungan Perseroan.
                         </div>
                     </div>
                 </div>
@@ -50,20 +46,15 @@
                     <div class="card-header" id="headingTwo">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Collapsible Group Item #2
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                                style="text-decoration: none; color:black">
+                                Siapa yang dapat menjadi Pelapor pada WBS Kimia Farma?
                             </button>
                         </h5>
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                         <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                            laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                            coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                            anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                            occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                            of them accusamus labore sustainable VHS.
+                            Insan Kimia Farma, Masyarakat dan stakeholders lainnya
                         </div>
                     </div>
                 </div>
@@ -71,20 +62,22 @@
                     <div class="card-header" id="headingThree">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Collapsible Group Item #3
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
+                                style="text-decoration: none; color:black">
+                                Apa saja jenis perbuatan yang dapat dilaporkan pada WBS Kimia Farma?
                             </button>
                         </h5>
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                         <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                            laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                            coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                            anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                            occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                            of them accusamus labore sustainable VHS.
+                            Pelanggaran yang dapat dilaporkan melalui WBS adalah sebagai berikut:<br>
+                            a. Benturan Kepentingan; <br>
+                            b. Korupsi; <br>
+                            c. Kecurangan; <br>
+                            d. Penggelapan; <br>
+                            e. Gratifikasi; <br>
+                            f. Suap; <br>
+                            g. Perselisihan Hubungan Industrial. <br>
                         </div>
                     </div>
                 </div>
@@ -92,20 +85,18 @@
                     <div class="card-header" id="headingThree">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                Collapsible Group Item #4
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
+                                style="text-decoration: none; color:black">
+                                Bagaimana cara pelaporan WBS Kimia Farma?
                             </button>
                         </h5>
                     </div>
                     <div id="collapseFour" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                         <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                            laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                            coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                            anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                            occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                            of them accusamus labore sustainable VHS.
+                            Pelaporan terkait WBS Kimia farma dapat dilakukan melalui: <br>
+                            - Email: wbs@kftd.co.id <br>
+                            - Surat: Unit Kepatuhan dan Hubungan Industrial PT Kimia Farma (Persero) Tbk Jl.Veteran no. 9
+                            Jakarta Pusat
                         </div>
                     </div>
                 </div>
@@ -113,20 +104,19 @@
                     <div class="card-header" id="headingThree">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                Collapsible Group Item #5
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"
+                                style="text-decoration: none; color:black">
+                                Bagaimana indikasi awal laporan WBS Kimia Farma yang dapat ditindaklanjuti?
                             </button>
                         </h5>
                     </div>
                     <div id="collapseFive" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                         <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                            laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                            coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                            anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                            occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                            of them accusamus labore sustainable VHS.
+                            • Bila ya, Pelaporan Pengaduan/Pengungkapan yang dapat ditindaklanjuti melalui mekanisme WBS ini
+                            adalah Pelaporan dan Pengaduan atas kasus pelanggaran yang berdampak signifikan terhadap
+                            Perseroan. Laporan pengaduan/pengungkapan yang diterima akan diteruskan ke Komite Etik. <br>
+                            • Bila Tidak, proses Sistem Pelaporan Pelanggaran selesai.
+
                         </div>
                     </div>
                 </div>

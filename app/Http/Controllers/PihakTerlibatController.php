@@ -28,7 +28,9 @@ class PihakTerlibatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        PihakTerlibat::create($request->all());
+
+        return back()->with("success","Berhasil Menambahkan Pihak Terlibat");
     }
 
     /**
