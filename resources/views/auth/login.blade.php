@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <!--================ Banner SM Section start =================-->
-    <section class="hero-banner hero-banner-sm text-center">
+    <section class="hero-banner hero-banner-sm text-center"
+        style="background-image: url('https://kftd.co.id/assets/img/slider/slider-1.jpg')">
         <div class="container">
-            <h1>Login</h1>
+            <h1>Masuk</h1>
             <nav aria-label="breadcrumb" class="banner-breadcrumb">
                 {{-- <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Home</a></li>

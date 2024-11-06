@@ -2,7 +2,7 @@
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-12">
                     <div class="card overflow-hidden shadow-none">
                         <div class="card-body bg-success-subtle text-success fw-semibold d-flex">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <!--end col-->
-            </div>
+            </div> --}}
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">

@@ -2,12 +2,13 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-4 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
-                <h4>About Us</h4>
+                <a class="navbar-brand logo_h d-none d-xl-block mb-2" href="/"><img
+                        src="{{ asset('interactive/assets/images/logo_kftd_white.png') }}" width="180px"
+                        alt=""></a>
+                {{-- <h4>About Us</h4> --}}
                 <p>Platform yang memungkinkan individu atau pegawai untuk melaporkan dugaan pelanggaran atau tindakan
                     tidak etis secara anonim atau teridentifikasi.</p>
-                <a class="navbar-brand logo_h d-none d-xl-block" href="/"><img
-                        src="{{ asset('interactive/assets/images/logo_kftd_white.png') }}" width="100"
-                        alt=""></a>
+
             </div>
             <div class="col-xl-4 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
                 <h4>Contact Info</h4>
@@ -61,7 +62,7 @@
                 Copyright &copy;
                 <script>
                     document.write(new Date().getFullYear());
-                </script> All rights reserved | Develope by
+                </script> All rights reserved | Develop by
                 IT <a href="https://kftd.co.id/" target="_blank">KFTD</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>

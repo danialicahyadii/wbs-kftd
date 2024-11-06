@@ -36,7 +36,7 @@
                                 @csrf
                             </form>
                         @else
-                            {{-- <a class="button button-outline button-small" href="{{ route('login') }}">Laporkan</a> --}}
+                            <a class="button button-outline button-small" href="{{ route('login') }}">Masuk/Daftar</a>
                         @endif
                     </div>
                 </div>

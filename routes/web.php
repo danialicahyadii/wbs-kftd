@@ -29,7 +29,9 @@ Route::controller(FrontEndController::class)->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('download', [PengaduanController::class, 'download'])->name('file.download');
-
+    Route::get('/print', function(){
+        return view('print');
+    });
     Route::resources([
         'pengaduan' => PengaduanController::class,
         'terlapor' => TerlaporController::class,

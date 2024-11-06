@@ -15,7 +15,7 @@
                     </button>
                 </div>
             @endif
-            <h1>Whistle Blowing System</h1>
+            <h1>Whistleblowing System</h1>
             <p class="hero-subtitle">Platform yang memungkinkan individu atau pegawai untuk melaporkan dugaan pelanggaran
                 atau tindakan tidak etis secara anonim atau teridentifikasi.</p>
             {{-- <p class="hero-subtitle">Form male saying she'd so every fifth winged after spirit male land moving won't seasons fish In shall given fifth edition</p> --}}
@@ -291,72 +291,105 @@
                 <div class="section-style"></div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="card-service text-center">
+            {{-- <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
                         <div class="service-icon">
                             <img src="{{ asset('lorahost/img/home/png/006-server.png') }}" alt="">
                             <h1>1</h1>
                         </div>
                         <h3>Login/Register ke Akun Anda</h3>
-                        <p>Sebelum melaporkan pengaduan Anda di Whistleblower System KBUMN, terlebih dahulu lakukan
+                        <p class="text-dark">Sebelum melaporkan pengaduan Anda di Whistleblower System KBUMN, terlebih
+                            dahulu lakukan
                             login/register </p>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-sm-6">
-                    <div class="card-service text-center">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
                         <div class="service-icon">
                             <img src="{{ asset('lorahost/img/home/png/004-home-page.png') }}" alt="">
                             <h1>2</h1>
                         </div>
                         <h3>Isi Form dan Ceritakan Kasusnya</h3>
-                        <p>Klik Menu "Pengaduan" dan lanjutkan dengan klik tombol tambah/"+" untuk mengisi formulir
+                        <p class="text-dark">Klik Menu "Pengaduan" dan lanjutkan dengan klik tombol tambah/"+" untuk
+                            mengisi formulir
                             pengaduan yang telah disediakan </p>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-sm-6">
-                    <div class="card-service text-center">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
                         <div class="service-icon">
                             <img src="{{ asset('lorahost/img/home/png/007-server-1.png') }}" alt="">
                             <h1>3</h1>
                         </div>
                         <h3>Kirimkan Form Yang sudah terisi</h3>
-                        <p>Klik tombol "Simpan" untuk mengirim pengaduan anda, anda dapat memantau pengaduan yang dikirim
+                        <p class="text-dark">Klik tombol "Simpan" untuk mengirim pengaduan anda, anda dapat memantau
+                            pengaduan yang dikirim
                             dan melakukan komunikasi secara pribadi dengan administrator WBS </p>
                     </div>
                 </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
+                        <div class="service-icon">
+                            <img src="{{ asset('lorahost/img/home/png/009-art.png') }}" alt="">
+                            <h1>4</h1>
+                        </div>
+                        <h3>Kirimkan Form Yang sudah terisi</h3>
+                        <p class="text-dark">Klik tombol "Simpan" untuk mengirim pengaduan anda, anda dapat memantau
+                            pengaduan yang dikirim
+                            dan melakukan komunikasi secara pribadi dengan administrator WBS </p>
+                    </div>
+                </div>
+            </div> --}}
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
+                        <div class="service-icon">
+                            <img src="{{ asset('lorahost/img/home/png/006-server.png') }}" alt="">
+                            <h1>1</h1>
+                        </div>
+                        <h3>Login/Registrasi</h3>
+                        <p class="text-dark">Pelapor Login/Registrasi terlebih dahulu untuk dapat mengisi form pelaporan
+                            pelanggaran. Kami menjamin kerahasiaan identitas dan Pelapor dapat melaporkan secara anonim</p>
+                    </div>
+                </div>
 
-                {{-- <div class="col-lg-4 col-sm-6">
-            <div class="card-service text-center">
-              <div class="service-icon">
-                <img src="img/home/png/002-shield.png" alt="">
-              </div>
-              <h3>Strong Backup</h3>
-              <p>Man greater image shall land air winged replenish whose winged great fifth fruitful Set days sealand over great  </p>
-            </div>
-          </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
+                        <div class="service-icon">
+                            <img src="{{ asset('lorahost/img/home/png/004-home-page.png') }}" alt="">
+                            <h1>2</h1>
+                        </div>
+                        <h3>Mengisi form pelaporan</h3>
+                        <p class="text-dark">Pelapor Mengisi form pelaporan Pelanggaran kemudian mengupload bukti pendukung
+                            kronologi kejadian secara lengkap guna mempermudah Admin untuk memverifikasi laporan.</p>
+                    </div>
+                </div>
 
-          <div class="col-lg-4 col-sm-6">
-            <div class="card-service text-center">
-              <div class="service-icon">
-                <img src="img/home/png/008-mail.png" alt="">
-              </div>
-              <h3>Email Service</h3>
-              <p>Man greater image shall land air winged replenish whose winged great fifth fruitful Set days sealand over great  </p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-sm-6">
-            <div class="card-service text-center">
-              <div class="service-icon">
-                <img src="img/home/png/009-art.png" alt="">
-              </div>
-              <h3>Data Analysis</h3>
-              <p>Man greater image shall land air winged replenish whose winged great fifth fruitful Set days sealand over great  </p>
-            </div>
-          </div> --}}
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
+                        <div class="service-icon">
+                            <img src="{{ asset('lorahost/img/home/png/007-server-1.png') }}" alt="">
+                            <h1>3</h1>
+                        </div>
+                        <h3>Submit Form pelaporan</h3>
+                        <p class="text-dark"> Submit Form pelaporan , dan selanjutnya akan mendapatkan Nomor Tiket Pelaporan
+                            dan notifikasi pelaporan yang dikirim lewat email pelapor. </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
+                        <div class="service-icon">
+                            <img src="{{ asset('lorahost/img/home/png/009-art.png') }}" alt="">
+                            <h1>4</h1>
+                        </div>
+                        <h3>Monitoring</h3>
+                        <p class="text-dark">Nomer tiket pelaporan digunakan untuk monitoring tindak lanjut pelaporan jika
+                            sewaktu-waktu Admin membutuhkan data tambahan yang diperlukan untuk verifikasi pelaporan.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -473,13 +506,13 @@
   </section> --}}
     <!--================ Testimonial section end =================-->
 
-    <!--================ Feature section start =================-->
+    {{-- <!--================ Feature section start =================-->
     <section class="section-margin">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-lg-4">
                     <div class="card-feature card-feature-content">
-                        <h2>Whistleblower System KFTD</h2>
+                        <h2>Whistleblowing System</h2>
                         <p>Jika anda melihat atau mengetahui dugaan pelanggaran atau penyalahgunaan wewenang yang dilakukan
                             pegawai di lingkungan Kementerian BUMN.Silahkan adukan dengan mengklik tombol Adukan Sekarang.
                             jika aduan anda memenuhi syarat/kriteria WBS, maka akan diproses lebih lanjut. </p>
@@ -538,7 +571,32 @@
             </div>
         </div>
     </section>
-    <!--================ Feature section end =================-->
+    <!--================ Feature section end =================--> --}}
+    <!--================  Dedicated server section start =================-->
+    <section class="section-margin">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <h2 class="mb-4">Whistleblowing System</h2>
+                    <p>
+
+                        Dalam pengelolaan kegiatan bisnisnya, PT Kimia Farma Trading & Distribution selalu berupaya bebas
+                        dari praktik-praktik korupsi, kolusi dan nepotisme (KKN), dan tetap memperhatikan prinsip-prinsip
+                        GCG, sehingga pengelolaan Perseroan ini dikelola dengan amanah, transparan dan akuntabel.</p>
+                </div>
+                <div class="col-lg-7">
+                    <div class="text-center">
+                        {{-- <img class="img-fluid" src="{{ asset('lorahost/img/home/server.png') }}" alt=""> --}}
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/d6lH75N4EiM"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================  Dedicated server section end =================-->
     <!-- Modal -->
     <div class="modal fade" id="verificationModal" tabindex="-1" role="dialog" aria-labelledby="verificationModalLabel"
         aria-hidden="true">

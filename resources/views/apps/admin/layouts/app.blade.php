@@ -69,7 +69,7 @@
     @include('apps.admin.components.preloader')
 
     <!-- Theme Settings -->
-    @include('apps.admin.components.theme')
+    {{-- @include('apps.admin.components.theme') --}}
 
     <!-- JAVASCRIPT -->
     <script src="{{ asset('interactive/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

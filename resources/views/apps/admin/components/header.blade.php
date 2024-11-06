@@ -419,7 +419,7 @@
                     </button>
                 </div>
 
-                {{-- <div class="dropdown topbar-head-dropdown ms-1 header-item" id="notificationDropdown">
+                <div class="dropdown topbar-head-dropdown ms-1 header-item" id="notificationDropdown">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                         id="page-header-notifications-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside"
                         aria-haspopup="true" aria-expanded="false">
@@ -726,7 +726,7 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
                 <div class="dropdown ms-sm-3 header-item topbar-user">
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
@@ -765,7 +765,8 @@
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
                                 class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle" data-key="t-logout">Logout</span></a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            style="display: none;">
                             @csrf
                         </form>
                     </div>

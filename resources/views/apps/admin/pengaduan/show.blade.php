@@ -1,6 +1,8 @@
 @extends('apps.admin.layouts.app')
 @push('css')
     <link href="{{ asset('interactive/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- choices.js -->
+    <script type='text/javascript' src='assets/libs/choices.js/public/assets/scripts/choices.min.js'></script>
 @endpush
 @section('content')
     <div class="page-content">
@@ -37,7 +39,9 @@
                                                         <div>Finish Date : <span class="fw-semibold">29 Dec, 2024</span>
                                                         </div>
                                                         <div class="vr"></div>
-                                                        <div class="badge rounded-pill bg-warning fs-12">Verifikasi</div>
+                                                        <div
+                                                            class="badge rounded-pill bg-{{ $laporan->statusPengaduan->warna }} fs-12">
+                                                            {{ $laporan->statusPengaduan->nama }}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -45,7 +49,8 @@
                                     </div>
                                     <div class="col-md-auto">
                                         <div class="hstack gap-1 flex-wrap">
-                                            <button type="button" class="btn py-0 fs-16 text-body" onclick="printPdf()">
+                                            <button type="button" class="btn py-0 fs-16 text-body"
+                                                onclick="window.location.href='/print'">
                                                 <i class="ri-printer-line"></i>
                                             </button>
                                         </div>
@@ -255,7 +260,117 @@
                                 </div>
                                 <!-- ene col -->
                                 <div class="col-xl-3 col-lg-4">
-
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Pengaduan Detail</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive table-card">
+                                                <table class="table table-borderless align-middle mb-0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="fw-semibold">Tiket</td>
+                                                            <td>#{{ $laporan->tiket }}</td>
+                                                        </tr>
+                                                        {{-- <tr>
+                                                            <td class="fw-semibold">Client</td>
+                                                            <td id="t-client">Themesbrand</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="fw-semibold">Project</td>
+                                                            <td>Velzon - Admin Dashboard</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="fw-semibold">Assigned To:</td>
+                                                            <td>
+                                                                <div class="avatar-group">
+                                                                    <a href="javascript:void(0);"
+                                                                        class="avatar-group-item" data-bs-toggle="tooltip"
+                                                                        data-bs-placement="top" data-bs-trigger="hover"
+                                                                        data-bs-original-title="Erica Kernan">
+                                                                        <img src="assets/images/users/avatar-4.jpg"
+                                                                            alt=""
+                                                                            class="rounded-circle avatar-xs">
+                                                                    </a>
+                                                                    <a href="javascript:void(0);"
+                                                                        class="avatar-group-item" data-bs-toggle="tooltip"
+                                                                        data-bs-placement="top" data-bs-trigger="hover"
+                                                                        data-bs-original-title="Alexis Clarke">
+                                                                        <img src="assets/images/users/avatar-10.jpg"
+                                                                            alt=""
+                                                                            class="rounded-circle avatar-xs">
+                                                                    </a>
+                                                                    <a href="javascript:void(0);"
+                                                                        class="avatar-group-item" data-bs-toggle="tooltip"
+                                                                        data-bs-placement="top" data-bs-trigger="hover"
+                                                                        data-bs-original-title="James Price">
+                                                                        <img src="assets/images/users/avatar-3.jpg"
+                                                                            alt=""
+                                                                            class="rounded-circle avatar-xs">
+                                                                    </a>
+                                                                    <a href="javascript: void(0);"
+                                                                        class="avatar-group-item" data-bs-toggle="tooltip"
+                                                                        data-bs-trigger="hover" data-bs-placement="top"
+                                                                        data-bs-original-title="Add Members">
+                                                                        <div class="avatar-xs">
+                                                                            <div
+                                                                                class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
+                                                                                +
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr> --}}
+                                                        <tr>
+                                                            @php
+                                                                $status = App\Models\Status::get();
+                                                            @endphp
+                                                            <td class="fw-semibold">Status:</td>
+                                                            <td>
+                                                                <select class="form-control" data-choices
+                                                                    data-choices-search-false name=""
+                                                                    id="">
+                                                                    @foreach ($status as $item)
+                                                                        <option>{{ $item->nama }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="fw-semibold">Create Date</td>
+                                                            <td id="c-date">
+                                                                {{ \Carbon\Carbon::parse($laporan->created_at)->format('d M, Y') }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="fw-semibold">Finish Date</td>
+                                                            <td id="d-date">{{ $laporan->finish_date ?? '-' }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="fw-semibold">Waktu Pelanggaran</td>
+                                                            <td>{{ \Carbon\Carbon::parse($laporan->waktu_pelanggaran)->format('d M, Y') }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="fw-semibold">Tempat Pelanggaran</td>
+                                                            <td>{{ $laporan->tempat_pelanggaran }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="fw-semibold">Jenis</td>
+                                                            <td class="hstack text-wrap gap-1">
+                                                                @foreach (json_decode($laporan->jenis_pelanggaran) as $item)
+                                                                    <span
+                                                                        class="badge bg-warning-subtle text-warning">{{ $item }}</span>
+                                                                @endforeach
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!--end card-body-->
+                                    </div>
                                     <div class="card">
                                         <div class="card-header align-items-center d-flex border-bottom-dashed">
                                             <h4 class="card-title mb-0 flex-grow-1">Pihak-pihak terlibat
@@ -283,7 +398,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="flex-shrink-0 ms-2">
-                                                            <button type="button"
+                                                            <button type="button" onclick="comment()"
                                                                 class="btn btn-sm btn-outline-danger"><i
                                                                     class="ri-delete-bin-line align-middle"></i></button>
                                                         </div>
@@ -319,7 +434,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="flex-shrink-0 ms-2">
-                                                            <button type="button"
+                                                            <button type="button" onclick="comment()"
                                                                 class="btn btn-sm btn-outline-danger"><i
                                                                     class="ri-delete-bin-line align-middle"></i></button>
                                                         </div>
@@ -445,6 +560,11 @@
                                                                                     <i class="ri-file-excel-fill"></i>
                                                                                 </div>
                                                                             @elseif ($item->tipe == 'jpeg')
+                                                                                <div
+                                                                                    class="avatar-title bg-light text-danger rounded fs-24">
+                                                                                    <i class="ri-image-2-fill"></i>
+                                                                                </div>
+                                                                            @elseif ($item->tipe == 'png')
                                                                                 <div
                                                                                     class="avatar-title bg-light text-danger rounded fs-24">
                                                                                     <i class="ri-image-2-fill"></i>
