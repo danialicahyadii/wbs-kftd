@@ -29,14 +29,24 @@
                                                     <h4 class="fw-bold">#{{ $laporan->tiket }}</h4>
                                                     <div class="hstack gap-3 flex-wrap">
                                                         <div><i class="ri-building-line align-bottom me-1"></i>
-                                                            {{ $laporan->tempat_pelanggaran }}
+                                                            Tempat Pelanggaran : {{ $laporan->tempat_pelanggaran }}
                                                         </div>
                                                         <div class="vr"></div>
-                                                        <div>Create Date : <span
+                                                        <div>Waktu Pelanggaran : <span
+                                                                class="fw-semibold">{{ \Carbon\Carbon::parse($laporan->waktu_pelanggaran)->format('d M, Y') }}</span>
+                                                        </div>
+                                                        <div class="vr"></div>
+                                                        <div>Waktu Pelaporan : <span
                                                                 class="fw-semibold">{{ \Carbon\Carbon::parse($laporan->created_at)->format('d M, Y') }}</span>
                                                         </div>
                                                         <div class="vr"></div>
-                                                        <div>Finish Date : <span class="fw-semibold">29 Dec, 2024</span>
+                                                        <div>Selesai Pelaporan : <span class="fw-semibold">
+                                                                @if ($laporan->finish_date)
+                                                                    {{ \Carbon\Carbon::parse($laporan->finish_date)->format('d M, Y') }}
+                                                                @else
+                                                                    -
+                                                                @endif
+                                                            </span>
                                                         </div>
                                                         <div class="vr"></div>
                                                         <div
@@ -50,7 +60,7 @@
                                     <div class="col-md-auto">
                                         <div class="hstack gap-1 flex-wrap">
                                             <button type="button" class="btn py-0 fs-16 text-body"
-                                                onclick="window.location.href='/print'">
+                                                onclick="window.print()">
                                                 <i class="ri-printer-line"></i>
                                             </button>
                                         </div>
@@ -107,23 +117,9 @@
                                                     @endforeach
                                                 </ul>
                                             </div>
-                                            <div class="text-muted mt-4 border-bottom border-bottom-dashed">
+                                            <div class="text-muted mt-4">
                                                 <h6 class="mb-3 fw-semibold text-uppercase">Konsekuensi</h6>
                                                 <p>{{ $laporan->konsekuensi }}</p>
-                                            </div>
-                                            <div class="text-muted mt-4">
-                                                <h6 class="mb-3 fw-semibold text-uppercase">Terlapor</h6>
-                                                <ul class="ps-4 vstack gap-2">
-                                                    @foreach ($laporan->terlapor as $item)
-                                                        <li>
-                                                            <div>
-                                                                <h5 class="fs-15 mb-1">{{ $item->nama }}</h5>
-                                                                <p class="fs-13 text-muted mb-0">{{ $item->jabatan }} -
-                                                                    Unit {{ $item->unit }}</p>
-                                                            </div>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
                                             </div>
                                         </div>
                                         <!-- end card body -->
@@ -260,19 +256,20 @@
                                 </div>
                                 <!-- ene col -->
                                 <div class="col-xl-3 col-lg-4">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-title mb-0">Pengaduan Detail</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive table-card">
-                                                <table class="table table-borderless align-middle mb-0">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="fw-semibold">Tiket</td>
-                                                            <td>#{{ $laporan->tiket }}</td>
-                                                        </tr>
-                                                        {{-- <tr>
+                                    @role('Admin')
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Update Status</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive table-card">
+                                                    <table class="table table-borderless align-middle mb-0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="fw-semibold">Tiket</td>
+                                                                <td>#{{ $laporan->tiket }}</td>
+                                                            </tr>
+                                                            {{-- <tr>
                                                             <td class="fw-semibold">Client</td>
                                                             <td id="t-client">Themesbrand</td>
                                                         </tr>
@@ -322,54 +319,63 @@
                                                                 </div>
                                                             </td>
                                                         </tr> --}}
-                                                        <tr>
-                                                            @php
-                                                                $status = App\Models\Status::get();
-                                                            @endphp
-                                                            <td class="fw-semibold">Status:</td>
-                                                            <td>
-                                                                <select class="form-control" data-choices
-                                                                    data-choices-search-false name=""
-                                                                    id="">
-                                                                    @foreach ($status as $item)
-                                                                        <option>{{ $item->nama }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="fw-semibold">Create Date</td>
-                                                            <td id="c-date">
-                                                                {{ \Carbon\Carbon::parse($laporan->created_at)->format('d M, Y') }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="fw-semibold">Finish Date</td>
-                                                            <td id="d-date">{{ $laporan->finish_date ?? '-' }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="fw-semibold">Waktu Pelanggaran</td>
-                                                            <td>{{ \Carbon\Carbon::parse($laporan->waktu_pelanggaran)->format('d M, Y') }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="fw-semibold">Tempat Pelanggaran</td>
-                                                            <td>{{ $laporan->tempat_pelanggaran }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="fw-semibold">Jenis</td>
-                                                            <td class="hstack text-wrap gap-1">
-                                                                @foreach (json_decode($laporan->jenis_pelanggaran) as $item)
-                                                                    <span
-                                                                        class="badge bg-warning-subtle text-warning">{{ $item }}</span>
-                                                                @endforeach
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                            <tr>
+                                                                @php
+                                                                    $status = App\Models\Status::get();
+                                                                @endphp
+                                                                <td class="fw-semibold">Status:</td>
+                                                                <td>
+                                                                    <select class="form-control" data-choices
+                                                                        data-choices-search-false name=""
+                                                                        id="">
+                                                                        @foreach ($status as $item)
+                                                                            <option>{{ $item->nama }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--end card-body-->
+                                        </div>
+                                    @endrole
+                                    <div class="card">
+                                        <div class="card-header align-items-center d-flex border-bottom-dashed">
+                                            <h4 class="card-title mb-0 flex-grow-1">Terlapor
+                                            </h4>
+                                            <div class="flex-shrink-0">
+                                                <button type="button" class="btn btn-soft-danger btn-sm"
+                                                    data-bs-toggle="modal" data-bs-target="#pihakTerlibat"><i
+                                                        class="ri-add-line me-1 align-bottom"></i> Add</button>
                                             </div>
                                         </div>
-                                        <!--end card-body-->
+                                        <div class="card-body">
+                                            @foreach ($laporan->terlapor as $item)
+                                                <div>
+                                                    <div class="d-flex align-items-center py-3">
+                                                        <div class="avatar-xs flex-shrink-0 me-3">
+                                                            <img src="{{ asset('interactive/assets/images/avatar.png') }}"
+                                                                alt="" class="img-fluid rounded-circle">
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <div>
+                                                                <h5 class="fs-15 mb-1">{{ $item->nama }}</h5>
+                                                                <p class="fs-13 text-muted mb-0">{{ $item->jabatan }} -
+                                                                    Unit {{ $item->unit }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-shrink-0 ms-2">
+                                                            <button type="button" onclick="comment()"
+                                                                class="btn btn-sm btn-outline-danger"><i
+                                                                    class="ri-delete-bin-line align-middle"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div><!-- end card body -->
                                     </div>
                                     <div class="card">
                                         <div class="card-header align-items-center d-flex border-bottom-dashed">
@@ -463,10 +469,32 @@
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0 me-3">
                                                                 <div class="avatar-sm">
-                                                                    <div
-                                                                        class="avatar-title bg-light text-secondary rounded fs-24">
-                                                                        <i class="ri-folder-zip-line"></i>
-                                                                    </div>
+                                                                    @if ($item->tipe == 'xlsx')
+                                                                        <div
+                                                                            class="avatar-title bg-light text-secondary rounded fs-24">
+                                                                            <i class="ri-file-excel-fill"></i>
+                                                                        </div>
+                                                                    @elseif ($item->tipe == 'jpeg')
+                                                                        <div
+                                                                            class="avatar-title bg-light text-secondary rounded fs-24">
+                                                                            <i class="ri-image-2-fill"></i>
+                                                                        </div>
+                                                                    @elseif ($item->tipe == 'png')
+                                                                        <div
+                                                                            class="avatar-title bg-light text-secondary rounded fs-24">
+                                                                            <i class="ri-image-2-fill"></i>
+                                                                        </div>
+                                                                    @elseif ($item->tipe == 'pdf')
+                                                                        <div
+                                                                            class="avatar-title bg-light text-secondary rounded fs-24">
+                                                                            <i class="ri-file-pdf-fill"></i>
+                                                                        </div>
+                                                                    @elseif ($item->tipe == 'docx')
+                                                                        <div
+                                                                            class="avatar-title bg-light text-secondary rounded fs-24">
+                                                                            <i class="ri-file-word-fill"></i>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                             <div class="flex-grow-1 overflow-hidden">
@@ -512,7 +540,6 @@
                                                         </div>
                                                     </div>
                                                 @endforelse
-
                                                 <div class="mt-2 text-center">
                                                     <button type="button" class="btn btn-success document-all"
                                                         href="#project-documents">Lihat Semua</button>

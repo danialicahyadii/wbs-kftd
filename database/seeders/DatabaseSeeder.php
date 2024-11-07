@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
         $user->assignRole('Admin');
 
         Status::create([
-            'nama' => 'Verifikasi',
-            'warna' => 'warning',
+            'nama' => 'Created',
+            'warna' => 'primary',
         ]);
     }
 }

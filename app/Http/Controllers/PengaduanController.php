@@ -22,7 +22,11 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        $pengaduan = Pengaduan::where('user_id', Auth::user()->id)->get();
+        if(Auth::user()->roles()->first()->name == 'Admin'){
+            $pengaduan = Pengaduan::get();
+        }else{
+            $pengaduan = Pengaduan::where('user_id', Auth::user()->id)->get();
+        }
         return view('apps.admin.pengaduan.index', compact('pengaduan'));
     }
 
