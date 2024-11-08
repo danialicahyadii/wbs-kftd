@@ -1,11 +1,21 @@
 @extends('layouts.app')
 @push('css')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .header_area .navbar {
+            background: #1f185944;
+            border: 0px;
+            border-radius: 0px;
+            width: 100%;
+            padding-top: 0;
+            padding-bottom: 0
+        }
+    </style>
 @endpush
 @section('content')
     <!--================ Banner Section start =================-->
-    <section class="hero-banner text-center" {{-- style="background-image: url('https://kftd.co.id/assets/img/slider/slider-1.jpg')" --}}>
-        <div class="container">
+    <section class="hero-banner" {{-- style="background-image: url('https://kftd.co.id/assets/img/slider/slider-1.jpg')" --}}>
+        <div class="container" style="margin-top: 100px">
             {{-- <p class="text-uppercase">Smart Company With perfect space</p> --}}
             @if (session('status'))
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -15,14 +25,15 @@
                     </button>
                 </div>
             @endif
-            <h1 data-aos="fade-up" data-aos-duration="1000">Whistleblowing System</h1>
-            <p class="hero-subtitle" data-aos="fade-up" data-aos-duration="1500">Platform yang memungkinkan individu atau
+            {{-- <h1 data-aos="fade-up" data-aos-duration="1000">Whistleblowing System</h1> --}}
+            {{-- <p class="hero-subtitle" data-aos="fade-up" data-aos-duration="1500">Platform yang memungkinkan individu atau
                 pegawai untuk melaporkan dugaan pelanggaran
-                atau tindakan tidak etis secara anonim atau teridentifikasi.</p>
+                atau tindakan tidak etis secara anonim atau teridentifikasi.</p> --}}
             {{-- <p class="hero-subtitle">Form male saying she'd so every fifth winged after spirit male land moving won't seasons fish In shall given fifth edition</p> --}}
             {{-- <a class="button button-outline" href="#">Get Started</a> --}}
             {{-- <a class="button button-outline" href="{{ url('pengaduan') }}">Laporkan Sekarang</a> --}}
-            <a class="button button-outline" data-aos="fade-up" data-aos-duration="2000"
+            <a class="button button-outline" style="background-color: #2826ac;" data-aos="fade-right"
+                data-aos-duration="2500"
                 href="{{ auth()->user() && !auth()->user()->hasVerifiedEmail() ? '#' : url('pengaduan') }}"
                 onclick="{{ auth()->user() && !auth()->user()->hasVerifiedEmail() ? 'event.preventDefault(); showVerificationModal();' : '' }}">
                 Laporkan Sekarang
@@ -49,7 +60,7 @@
                             <input type="text" name="tiket" class="form-control" id="cariPengaduan"
                                 placeholder="Masukkan Nomer Tiket">
                         </div>
-                        <button type="submit" class="button rounded-0">Cek</button>
+                        <button type="submit" class="button rounded-0" style="background-color: #2826ac;">Cek</button>
                     </form>
                     <div id="result" class="mt-3">
                     </div>
@@ -348,8 +359,8 @@
                 <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1000">
                     <div class="card-service text-center rounded">
                         <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/006-server.png') }}" alt=""
-                                style="background-color: white" class="p-2 rounded">
+                            <img src="{{ asset('lorahost/img/icon/Icon White.png') }}" alt="" class="p-2 rounded"
+                                width="50">
                             <h1 class="text-white">1</h1>
                         </div>
                         <h3 class="text-white">Login/Registrasi</h3>
@@ -361,8 +372,8 @@
                 <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1500">
                     <div class="card-service text-center rounded">
                         <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/004-home-page.png') }}" alt=""
-                                style="background-color: white" class="p-2 rounded">
+                            <img src="{{ asset('lorahost/img/icon/Icon 2 White.png') }}" alt="" class="p-2 rounded"
+                                width="50">
                             <h1 class="text-white">2</h1>
                         </div>
                         <h3 class="text-white">Mengisi form pelaporan</h3>
@@ -374,8 +385,8 @@
                 <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="2000">
                     <div class="card-service text-center rounded">
                         <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/007-server-1.png') }}" alt=""
-                                style="background-color: white" class="p-2 rounded">
+                            <img src="{{ asset('lorahost/img/icon/Icon 3 White.png') }}" alt="" class="p-2 rounded"
+                                width="50">
                             <h1 class="text-white">3</h1>
                         </div>
                         <h3 class="text-white">Submit Form pelaporan</h3>
@@ -387,8 +398,8 @@
                 <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="2500">
                     <div class="card-service text-center rounded">
                         <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/009-art.png') }}" alt=""
-                                style="background-color: white" class="p-2 rounded rounded-2">
+                            <img src="{{ asset('lorahost/img/icon/Icon 4 White.png') }}" alt=""
+                                class="p-2 rounded rounded-2" width="50">
                             <h1 class="text-white">4</h1>
                         </div>
                         <h3 class="text-white">Monitoring</h3>
@@ -594,10 +605,11 @@
                     <div class="text-center" data-aos="fade-up" data-aos-duration="3000">
                         {{-- <img class="img-fluid" src="{{ asset('lorahost/img/home/server.png') }}" alt=""> --}}
                         <div class="row p-2">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/d6lH75N4EiM"
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/p8JoPHk3pOw?si=74POHjPrdvuOgMVR"
                                 title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>

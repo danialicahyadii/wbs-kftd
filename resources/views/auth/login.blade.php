@@ -2,7 +2,7 @@
 @section('content')
     <!--================ Banner SM Section start =================-->
     <section class="hero-banner hero-banner-sm text-center"
-        style="background-image: url('https://kftd.co.id/assets/img/slider/slider-1.jpg')">
+        style="background-image: url({{ asset('lorahost/img/banner/1.png') }})">
         <div class="container">
             <h1>Masuk</h1>
             <nav aria-label="breadcrumb" class="banner-breadcrumb">

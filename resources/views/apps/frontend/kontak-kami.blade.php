@@ -5,7 +5,7 @@
 @section('content')
     <!--================ Banner SM Section start =================-->
     <section data-aos="fade-up" data-aos-duration="1000" class="hero-banner hero-banner-sm text-center"
-        style="background-image: url('https://kftd.co.id/assets/img/slider/slider-4.jpg')">
+        style="background-image: url({{ asset('lorahost/img/banner/1.png') }})">
         <div class="container">
             <h1 data-aos="fade-up" data-aos="fade-up" data-aos-duration="1000">Kontak Kami</h1>
             <nav aria-label="breadcrumb" class="banner-breadcrumb">
