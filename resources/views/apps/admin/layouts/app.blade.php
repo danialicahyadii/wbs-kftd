@@ -29,13 +29,16 @@
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}
     <script type='text/javascript'
         src='{{ asset('interactive/assets/libs/choices.js/public/assets/scripts/choices.min.js') }}'></script>
+
+
     @stack('css')
 </head>
 
 <body>
-
+    @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
     <!-- Begin page -->
     <div id="layout-wrapper">
+
 
         @include('apps.admin.components.header')
 

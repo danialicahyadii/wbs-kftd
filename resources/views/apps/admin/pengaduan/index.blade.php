@@ -260,16 +260,16 @@
                                                                             View</button></li>
                                                                     <li><a class="dropdown-item edit-item-btn"
                                                                             href="#showModal" data-bs-toggle="modal"><i
-                                                                                class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                                            Edit</a></li>
+                                                                                class="ri-printer-fill align-bottom me-2 text-muted"></i>
+                                                                            Print</a></li>
                                                                     <li>
-                                                                        @if ($row->status !== 1)
-                                                                            <button class="dropdown-item"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#deletePengaduan{{ $row->id }}"><i
-                                                                                    class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                                                Delete</button>
-                                                                        @endif
+                                                                        <button class="dropdown-item"
+                                                                            @if ($row->status !== 1) disabled @endif
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#deletePengaduan{{ $row->id }}"
+                                                                            {{-- data-confirm-delete="true" --}}><i
+                                                                                class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
+                                                                            Delete</button>
                                                                     </li>
                                                                 </ul>
                                                             </div>

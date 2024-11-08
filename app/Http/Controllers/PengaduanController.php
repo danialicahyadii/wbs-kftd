@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PengaduanController extends Controller
 {
@@ -22,6 +23,9 @@ class PengaduanController extends Controller
      */
     public function index()
     {
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         if(Auth::user()->roles()->first()->name == 'Admin'){
             $pengaduan = Pengaduan::get();
         }else{
@@ -115,6 +119,7 @@ class PengaduanController extends Controller
         }
 
         Mail::to($request->user()->email)->send(new MailPengaduan($pengaduan));
+        Alert::success('Success Title', 'Success Message');
         return redirect('pengaduan')->with('success', 'Laporan berhasil dibuat  ');
     }
 

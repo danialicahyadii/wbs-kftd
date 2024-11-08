@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @push('css')
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 @endpush
 @section('content')
     <!--================ Banner Section start =================-->
@@ -15,13 +16,14 @@
                     </button>
                 </div>
             @endif
-            <h1>Whistleblowing System</h1>
-            <p class="hero-subtitle">Platform yang memungkinkan individu atau pegawai untuk melaporkan dugaan pelanggaran
+            <h1 data-aos="fade-up" data-aos-duration="1000">Whistleblowing System</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-duration="1500">Platform yang memungkinkan individu atau
+                pegawai untuk melaporkan dugaan pelanggaran
                 atau tindakan tidak etis secara anonim atau teridentifikasi.</p>
             {{-- <p class="hero-subtitle">Form male saying she'd so every fifth winged after spirit male land moving won't seasons fish In shall given fifth edition</p> --}}
             {{-- <a class="button button-outline" href="#">Get Started</a> --}}
             {{-- <a class="button button-outline" href="{{ url('pengaduan') }}">Laporkan Sekarang</a> --}}
-            <a class="button button-outline"
+            <a class="button button-outline" data-aos="fade-up" data-aos-duration="2000"
                 href="{{ auth()->user() && !auth()->user()->hasVerifiedEmail() ? '#' : url('pengaduan') }}"
                 onclick="{{ auth()->user() && !auth()->user()->hasVerifiedEmail() ? 'event.preventDefault(); showVerificationModal();' : '' }}">
                 Laporkan Sekarang
@@ -33,7 +35,7 @@
 
 
     <!--================ Domain Search section start =================-->
-    <section class="bg-white domain-search">
+    <section class="bg-white domain-search" data-aos="fade-up" data-aos-duration="2500">
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-md-3 col-lg-2 text-center text-md-left mb-3 mb-md-0">
@@ -344,49 +346,54 @@
                 </div>
             </div> --}}
             <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
+                <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="card-service text-center rounded">
                         <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/006-server.png') }}" alt="">
-                            <h1>1</h1>
+                            <img src="{{ asset('lorahost/img/home/png/006-server.png') }}" alt=""
+                                style="background-color: white" class="p-2 rounded">
+                            <h1 class="text-white">1</h1>
                         </div>
-                        <h3>Login/Registrasi</h3>
-                        <p class="text-dark">Pelapor Login/Registrasi terlebih dahulu untuk dapat mengisi form pelaporan
+                        <h3 class="text-white">Login/Registrasi</h3>
+                        <p class="text-white">Pelapor Login/Registrasi terlebih dahulu untuk dapat mengisi form pelaporan
                             pelanggaran. Kami menjamin kerahasiaan identitas dan Pelapor dapat melaporkan secara anonim</p>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
+                <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1500">
+                    <div class="card-service text-center rounded">
                         <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/004-home-page.png') }}" alt="">
-                            <h1>2</h1>
+                            <img src="{{ asset('lorahost/img/home/png/004-home-page.png') }}" alt=""
+                                style="background-color: white" class="p-2 rounded">
+                            <h1 class="text-white">2</h1>
                         </div>
-                        <h3>Mengisi form pelaporan</h3>
-                        <p class="text-dark">Pelapor Mengisi form pelaporan Pelanggaran kemudian mengupload bukti pendukung
+                        <h3 class="text-white">Mengisi form pelaporan</h3>
+                        <p class="text-white">Pelapor Mengisi form pelaporan Pelanggaran kemudian mengupload bukti pendukung
                             kronologi kejadian secara lengkap guna mempermudah Admin untuk memverifikasi laporan.</p>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
+                <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="2000">
+                    <div class="card-service text-center rounded">
                         <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/007-server-1.png') }}" alt="">
-                            <h1>3</h1>
+                            <img src="{{ asset('lorahost/img/home/png/007-server-1.png') }}" alt=""
+                                style="background-color: white" class="p-2 rounded">
+                            <h1 class="text-white">3</h1>
                         </div>
-                        <h3>Submit Form pelaporan</h3>
-                        <p class="text-dark"> Submit Form pelaporan , dan selanjutnya akan mendapatkan Nomor Tiket Pelaporan
+                        <h3 class="text-white">Submit Form pelaporan</h3>
+                        <p class="text-white"> Submit Form pelaporan , dan selanjutnya akan mendapatkan Nomor Tiket
+                            Pelaporan
                             dan notifikasi pelaporan yang dikirim lewat email pelapor. </p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
+                <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="2500">
+                    <div class="card-service text-center rounded">
                         <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/009-art.png') }}" alt="">
-                            <h1>4</h1>
+                            <img src="{{ asset('lorahost/img/home/png/009-art.png') }}" alt=""
+                                style="background-color: white" class="p-2 rounded rounded-2">
+                            <h1 class="text-white">4</h1>
                         </div>
-                        <h3>Monitoring</h3>
-                        <p class="text-dark">Nomer tiket pelaporan digunakan untuk monitoring tindak lanjut pelaporan jika
+                        <h3 class="text-white">Monitoring</h3>
+                        <p class="text-white">Nomer tiket pelaporan digunakan untuk monitoring tindak lanjut pelaporan jika
                             sewaktu-waktu Admin membutuhkan data tambahan yang diperlukan untuk verifikasi pelaporan.</p>
                     </div>
                 </div>
@@ -577,20 +584,22 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 mb-5 mb-lg-0">
-                    <h2 class="mb-4">Whistleblowing System</h2>
-                    <p>
+                    <h2 class="mb-4" data-aos="fade-up" data-aos-duration="1000">Whistleblowing System</h2>
+                    <p data-aos="fade-up" data-aos-duration="1500">
 
                         Dalam pengelolaan kegiatan bisnisnya, PT Kimia Farma Trading & Distribution selalu berupaya bebas
                         dari praktik-praktik korupsi, kolusi dan nepotisme (KKN), dan tetap memperhatikan prinsip-prinsip
                         GCG, sehingga pengelolaan Perseroan ini dikelola dengan amanah, transparan dan akuntabel.</p>
                 </div>
                 <div class="col-lg-7">
-                    <div class="text-center">
+                    <div class="text-center" data-aos="fade-up" data-aos-duration="3000">
                         {{-- <img class="img-fluid" src="{{ asset('lorahost/img/home/server.png') }}" alt=""> --}}
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/d6lH75N4EiM"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                        <div class="row p-2">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/d6lH75N4EiM"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -598,8 +607,8 @@
     </section>
     <!--================  Dedicated server section end =================-->
     <!-- Modal -->
-    <div class="modal fade" id="verificationModal" tabindex="-1" role="dialog" aria-labelledby="verificationModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="verificationModal" tabindex="-1" role="dialog"
+        aria-labelledby="verificationModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="{{ route('verification.send') }}" method="post">
                 @csrf
@@ -698,5 +707,9 @@
             `);
             }
         });
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
     </script>
 @endpush

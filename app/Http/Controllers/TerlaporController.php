@@ -28,7 +28,8 @@ class TerlaporController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Terlapor::create($request->all());
+        return back()->with('toast_success', 'Terlapor Ditambahkan!');;
     }
 
     /**

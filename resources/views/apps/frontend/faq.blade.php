@@ -28,7 +28,7 @@
                     <div class="card-header" id="headingOne">
                         <h5 class="mb-0">
                             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne" style="text-decoration: none; color:black">
+                                aria-expanded="true" aria-controls="collapseOne">
                                 Apa yang dimaksud Sistem Pelaporan Dugaan Pelanggaran (Whistleblowing System) Kimia Farma?
                             </button>
                         </h5>
@@ -46,8 +46,7 @@
                     <div class="card-header" id="headingTwo">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
-                                style="text-decoration: none; color:black">
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 Siapa yang dapat menjadi Pelapor pada WBS Kimia Farma?
                             </button>
                         </h5>
@@ -62,8 +61,7 @@
                     <div class="card-header" id="headingThree">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
-                                style="text-decoration: none; color:black">
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 Apa saja jenis perbuatan yang dapat dilaporkan pada WBS Kimia Farma?
                             </button>
                         </h5>
@@ -85,8 +83,7 @@
                     <div class="card-header" id="headingThree">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
-                                style="text-decoration: none; color:black">
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                 Bagaimana cara pelaporan WBS Kimia Farma?
                             </button>
                         </h5>
@@ -104,8 +101,7 @@
                     <div class="card-header" id="headingThree">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"
-                                style="text-decoration: none; color:black">
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                 Bagaimana indikasi awal laporan WBS Kimia Farma yang dapat ditindaklanjuti?
                             </button>
                         </h5>

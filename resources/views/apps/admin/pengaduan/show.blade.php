@@ -347,7 +347,7 @@
                                             </h4>
                                             <div class="flex-shrink-0">
                                                 <button type="button" class="btn btn-soft-danger btn-sm"
-                                                    data-bs-toggle="modal" data-bs-target="#pihakTerlibat"><i
+                                                    data-bs-toggle="modal" data-bs-target="#terlapor"><i
                                                         class="ri-add-line me-1 align-bottom"></i> Add</button>
                                             </div>
                                         </div>
@@ -779,6 +779,7 @@
         <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
+    @include('apps.admin.pengaduan.components.modal-add-terlapor')
     @include('apps.admin.pengaduan.components.modal-add-terlibat')
     @include('apps.admin.pengaduan.components.modal-add-saksi')
     @include('apps.admin.pengaduan.components.modal-add-bukti')
