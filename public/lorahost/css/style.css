@@ -82,7 +82,7 @@ h3,
     background: -webkit-linear-gradient(to right, #2926ac 0%, #6128be 100%);
     background: -moz-linear-gradient(to right, #2926ac 0%, #6128be 100%);
     background: -o-linear-gradient(to right, #2926ac 0%, #6128be 100%);
-    background: linear-gradient(to right, #0000008a 20%, #6128be 400%);
+    background: linear-gradient(to right, #504f4f8a 20%, #6128be 400%);
 }
 
 .bg-gray {
@@ -797,7 +797,7 @@ h3,
 }
 
 .hero-banner {
-    /* background     : url(../img/banner/hero-banner-bg.png) left center no-repeat; */
+    background     : url(../img/banner/adhdhgavsdhas.png) left center no-repeat;
     background-size: cover;
     position       : relative;
     z-index        : 1;

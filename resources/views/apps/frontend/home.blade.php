@@ -4,8 +4,7 @@
 @endpush
 @section('content')
     <!--================ Banner Section start =================-->
-    <section class="hero-banner text-center"
-        style="background-image: url('https://kftd.co.id/assets/img/slider/slider-1.jpg')">
+    <section class="hero-banner text-center" {{-- style="background-image: url('https://kftd.co.id/assets/img/slider/slider-1.jpg')" --}}>
         <div class="container">
             {{-- <p class="text-uppercase">Smart Company With perfect space</p> --}}
             @if (session('status'))
@@ -289,7 +288,7 @@
     <section class="bg-gray section-padding" style="padding: 40px">
         <div class="container">
             <div class="section-intro pb-85px text-center">
-                <h2>Cara Melapor</h2>
+                <h2 data-aos="fade-up" data-aos-duration="2500">Cara Melapor</h2>
                 <div class="section-style"></div>
             </div>
 
