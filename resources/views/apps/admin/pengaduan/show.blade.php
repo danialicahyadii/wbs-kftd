@@ -149,16 +149,16 @@
 
                                             {{-- <div data-simplebar style="height: 300px;" class="px-3 mx-n3 mb-2"> jika sudah ada datanya buatkan style height nya 300px --}}
                                             <div data-simplebar
-                                                @if ($laporan->komentar->count() > 5) style="height: 300px;" @endif
+                                                @if ($laporan->komentar && $laporan->komentar->count() > 5) style="height: 300px;" @endif
                                                 class="px-3 mx-n3 mb-2">
-                                                @if ($laporan->komentar->count() == 0)
+                                                @if ($laporan->komentar && $laporan->komentar->count() == 0)
                                                     <div>
                                                         <div class="text-center">
                                                             <h5 class="mt-2 text-muted">Belum ada komentar</h5>
                                                         </div>
                                                     </div>
                                                 @else
-                                                    @foreach ($laporan->komentar as $item)
+                                                    @foreach ($laporan->komentar && $laporan->komentar as $item)
                                                         <div class="d-flex mb-2">
                                                             <div class="flex-shrink-0">
                                                                 <img src="{{ $item->user->avatar ? Storage::url($item->user->avatar) : asset('interactive/assets/images/avatar.png') }}"
