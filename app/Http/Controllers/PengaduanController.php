@@ -119,7 +119,7 @@ class PengaduanController extends Controller
             }
         }
 
-        Mail::to($request->user()->email)->send(new MailPengaduan($pengaduan));
+        // Mail::to($request->user()->email)->send(new MailPengaduan($pengaduan));
         Alert::success('Success Title', 'Success Message');
         return redirect('pengaduan')->with('success', 'Laporan berhasil dibuat  ');
     }

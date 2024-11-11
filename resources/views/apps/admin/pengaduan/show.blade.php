@@ -158,7 +158,7 @@
                                                         </div>
                                                     </div>
                                                 @else
-                                                    @foreach ($laporan->komentar && $laporan->komentar as $item)
+                                                    @foreach ($laporan->komentar as $item)
                                                         <div class="d-flex mb-2">
                                                             <div class="flex-shrink-0">
                                                                 <img src="{{ $item->user->avatar ? Storage::url($item->user->avatar) : asset('interactive/assets/images/avatar.png') }}"
@@ -751,17 +751,17 @@
             }
         }
 
-        function comment() {
-            Swal.fire({
-                html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Masih Tahap Pengembangan !</h4></div></div>',
-                showCancelButton: !0,
-                showConfirmButton: !1,
-                cancelButtonClass: "btn btn-primary w-xs mb-1",
-                cancelButtonText: "Oke",
-                buttonsStyling: !1,
-                showCloseButton: !0,
-            });
-        }
+        // function comment() {
+        //     Swal.fire({
+        //         html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Masih Tahap Pengembangan !</h4></div></div>',
+        //         showCancelButton: !0,
+        //         showConfirmButton: !1,
+        //         cancelButtonClass: "btn btn-primary w-xs mb-1",
+        //         cancelButtonText: "Oke",
+        //         buttonsStyling: !1,
+        //         showCloseButton: !0,
+        //     });
+        // }
 
         function lock(nama) {
             Swal.fire({
