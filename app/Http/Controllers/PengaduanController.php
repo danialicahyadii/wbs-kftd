@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Laporan as MailPengaduan;
 use App\Models\FileBukti;
+use App\Models\Komentar;
 use App\Models\PihakTerlibat;
 use App\Models\SaksiSaksi;
 use App\Models\Terlapor;
@@ -145,7 +146,19 @@ class PengaduanController extends Controller
      */
     public function update(Request $request, Pengaduan $pengaduan)
     {
-        //
+        if($request->status){
+            $pengaduan->update([
+                'status' => $request->status,
+            ]);
+            return back();
+        }elseif($request->komentar){
+            $komen = Komentar::create([
+                'pengaduan_id' => $pengaduan->id,
+                'user_id' => Auth::user()->id,
+                'komentar' => $request->komentar,
+            ]);
+            return back();
+        }
     }
 
     /**

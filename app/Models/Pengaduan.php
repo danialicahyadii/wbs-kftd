@@ -37,5 +37,9 @@ class Pengaduan extends Model
     {
         return $this->hasMany(SaksiSaksi::class);
     }
+    public function komentar()
+    {
+        return $this->hasMany(Komentar::class);
+    }
 
 }

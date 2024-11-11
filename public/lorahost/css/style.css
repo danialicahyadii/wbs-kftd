@@ -2585,7 +2585,7 @@ h3,
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition   : all 0.3s ease 0s;
     -o-transition     : all 0.3s ease 0s;
-    transition        : all 0.3s ease 0s
+    transition        : all 0.3s ease 0s;
 }
 
 @media (min-width: 1000px) {
@@ -2606,7 +2606,8 @@ h3,
 
 .button-outline {
     /* border    : 1px solid #fff; */
-    background: transparent
+    background-color   : #2012c0;
+    /* background      : transparent */
 }
 
 .button-link {

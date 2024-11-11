@@ -1,8 +1,7 @@
 @extends('apps.admin.layouts.app')
 @push('css')
     <link href="{{ asset('interactive/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- choices.js -->
-    <script type='text/javascript' src='assets/libs/choices.js/public/assets/scripts/choices.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css" />
 @endpush
 @section('content')
     <div class="page-content">
@@ -128,7 +127,7 @@
 
                                     <div class="card">
                                         <div class="card-header align-items-center d-flex">
-                                            <h4 class="card-title mb-0 flex-grow-1">Comments</h4>
+                                            <h4 class="card-title mb-0 flex-grow-1">Komentar</h4>
                                             {{-- <div class="flex-shrink-0">
                                                 <div class="dropdown card-header-dropdown">
                                                     <a class="text-reset dropdown-btn" href="#"
@@ -149,24 +148,37 @@
                                         <div class="card-body">
 
                                             {{-- <div data-simplebar style="height: 300px;" class="px-3 mx-n3 mb-2"> jika sudah ada datanya buatkan style height nya 300px --}}
-                                            <div data-simplebar class="px-3 mx-n3 mb-2">
-                                                <div>
-                                                    <div class="text-center">
-                                                        <h5 class="mt-2 text-muted">Belum ada komentar</h5>
+                                            <div data-simplebar
+                                                @if ($laporan->komentar->count() > 5) style="height: 300px;" @endif
+                                                class="px-3 mx-n3 mb-2">
+                                                @if ($laporan->komentar->count() == 0)
+                                                    <div>
+                                                        <div class="text-center">
+                                                            <h5 class="mt-2 text-muted">Belum ada komentar</h5>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                {{-- <div class="d-flex mb-4">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="{{ asset('interactive/assets/images/users/avatar-8.jpg') }}"
-                                                            alt="" class="avatar-xs rounded-circle" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h5 class="fs-14">Joseph Parker <small class="text-muted ms-2">20
-                                                                Dec 2021 - 05:47AM</small></h5>
-                                                        <p class="text-muted">I am getting message from customers that when
-                                                            they place order always get error message .</p>
-                                                    </div>
-                                                </div> --}}
+                                                @else
+                                                    @foreach ($laporan->komentar as $item)
+                                                        <div class="d-flex mb-2">
+                                                            <div class="flex-shrink-0">
+                                                                <img src="{{ $item->user->avatar ? Storage::url($item->user->avatar) : asset('interactive/assets/images/avatar.png') }}"
+                                                                    alt="" class="avatar-xs rounded-circle" />
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-3">
+                                                                <h5 class="fs-14">
+                                                                    @if ($item->user_id == $laporan->user_id)
+                                                                        {{ $laporan->nama_pelapor }}
+                                                                    @else
+                                                                        {{ $item->user->name }}
+                                                                    @endif
+                                                                    <small
+                                                                        class="text-muted ms-2">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y - H:m') }}</small>
+                                                                </h5>
+                                                                <p class="text-muted">{{ $item->komentar }}</p>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
                                                 {{-- <div class="d-flex mb-4">
                                                     <div class="flex-shrink-0">
                                                         <img src="assets/images/users/avatar-6.jpg" alt=""
@@ -180,8 +192,7 @@
                                                                 href="javascript:void(0);"
                                                                 class="text-decoration-underline">Online Order Support</a>.
                                                         </p>
-                                                        <a href="javascript: void(0);"
-                                                            class="badge text-muted bg-light"><i
+                                                        <a href="javascript: void(0);" class="badge text-muted bg-light"><i
                                                                 class="mdi mdi-reply"></i> Reply</a>
                                                     </div>
                                                 </div>
@@ -230,13 +241,16 @@
                                                     </div>
                                                 </div> --}}
                                             </div>
-                                            <form class="mt-4">
+                                            <form class="mt-2" action="{{ route('pengaduan.update', $laporan->id) }}"
+                                                id="komentar" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
                                                 <div class="row g-3">
                                                     <div class="col-12">
                                                         <label for="exampleFormControlTextarea1"
-                                                            class="form-label text-body">Leave a Comments</label>
-                                                        <textarea class="form-control bg-light border-light" rows="3" placeholder="Enter your comment..."
-                                                            onkeypress="submitOnEnter(event)"></textarea>
+                                                            class="form-label text-body">Tinggalkan Komentar</label>
+                                                        <textarea class="form-control bg-light border-light" name="komentar" rows="3"
+                                                            placeholder="Tinggalkan Komentarmu..." onkeypress="submitOnEnter(event)"></textarea>
                                                     </div>
                                                     <div class="col-12 text-end">
                                                         {{-- <button type="button"
@@ -244,8 +258,8 @@
                                                                 class="ri-attachment-line fs-16"></i></button> --}}
                                                         {{-- <a href="#" onclick="comment()"
                                                             class="btn btn-success">Post
-                                                            Comments</a> --}}
-                                                        <button onclick="comment()" class="btn btn-info">Comment</button>
+                                                            Komentar</a> --}}
+                                                        <button onclick="comment()" class="btn btn-info">Post</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -262,80 +276,13 @@
                                                 <h5 class="card-title mb-0">Update Status</h5>
                                             </div>
                                             <div class="card-body">
-                                                <div class="table-responsive table-card">
-                                                    <table class="table table-borderless align-middle mb-0">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="fw-semibold">Tiket</td>
-                                                                <td>#{{ $laporan->tiket }}</td>
-                                                            </tr>
-                                                            {{-- <tr>
-                                                            <td class="fw-semibold">Client</td>
-                                                            <td id="t-client">Themesbrand</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="fw-semibold">Project</td>
-                                                            <td>Velzon - Admin Dashboard</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="fw-semibold">Assigned To:</td>
-                                                            <td>
-                                                                <div class="avatar-group">
-                                                                    <a href="javascript:void(0);"
-                                                                        class="avatar-group-item" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top" data-bs-trigger="hover"
-                                                                        data-bs-original-title="Erica Kernan">
-                                                                        <img src="assets/images/users/avatar-4.jpg"
-                                                                            alt=""
-                                                                            class="rounded-circle avatar-xs">
-                                                                    </a>
-                                                                    <a href="javascript:void(0);"
-                                                                        class="avatar-group-item" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top" data-bs-trigger="hover"
-                                                                        data-bs-original-title="Alexis Clarke">
-                                                                        <img src="assets/images/users/avatar-10.jpg"
-                                                                            alt=""
-                                                                            class="rounded-circle avatar-xs">
-                                                                    </a>
-                                                                    <a href="javascript:void(0);"
-                                                                        class="avatar-group-item" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top" data-bs-trigger="hover"
-                                                                        data-bs-original-title="James Price">
-                                                                        <img src="assets/images/users/avatar-3.jpg"
-                                                                            alt=""
-                                                                            class="rounded-circle avatar-xs">
-                                                                    </a>
-                                                                    <a href="javascript: void(0);"
-                                                                        class="avatar-group-item" data-bs-toggle="tooltip"
-                                                                        data-bs-trigger="hover" data-bs-placement="top"
-                                                                        data-bs-original-title="Add Members">
-                                                                        <div class="avatar-xs">
-                                                                            <div
-                                                                                class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                                                                +
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                        </tr> --}}
-                                                            <tr>
-                                                                @php
-                                                                    $status = App\Models\Status::get();
-                                                                @endphp
-                                                                <td class="fw-semibold">Status:</td>
-                                                                <td>
-                                                                    <select class="form-control" data-choices
-                                                                        data-choices-search-false name=""
-                                                                        id="">
-                                                                        @foreach ($status as $item)
-                                                                            <option>{{ $item->nama }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                <div class="container">
+                                                    <div class="clearfix">
+                                                        <p class="fw-semibold float-start">Status:</p>
+                                                        <button type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#statusAlbert"
+                                                            class="btn btn-secondary float-end">Update</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!--end card-body-->
@@ -347,7 +294,8 @@
                                             </h4>
                                             <div class="flex-shrink-0">
                                                 <button type="button" class="btn btn-soft-danger btn-sm"
-                                                    data-bs-toggle="modal" data-bs-target="#terlapor"><i
+                                                    data-bs-toggle="modal"
+                                                    @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#terlapor" @endif><i
                                                         class="ri-add-line me-1 align-bottom"></i> Add</button>
                                             </div>
                                         </div>
@@ -564,7 +512,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <div class="table-responsive table-card">
+                                            <div class="table-responsive table-card"
+                                                @if ($laporan->fileBukti->count() == 1) style="height: 250px" @endif>
                                                 <table class="table table-borderless align-middle mb-0">
                                                     <thead class="table-light">
                                                         <tr>
@@ -783,6 +732,7 @@
     @include('apps.admin.pengaduan.components.modal-add-terlibat')
     @include('apps.admin.pengaduan.components.modal-add-saksi')
     @include('apps.admin.pengaduan.components.modal-add-bukti')
+    @include('apps.admin.pengaduan.components.modal-status')
 @endsection
 @push('js')
     {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
@@ -790,23 +740,36 @@
     <!-- choices.js -->
     <!-- Sweet Alert css-->
     <!-- Sweet Alerts js -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('interactive/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-
     <script>
         function submitOnEnter(event) {
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault(); // Prevent newline
-                comment(); // Call the comment function
+                document.getElementById('komentar').submit();
+                // comment(); //
             }
         }
 
         function comment() {
             Swal.fire({
-                html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! On Development !</h4></div></div>',
+                html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Masih Tahap Pengembangan !</h4></div></div>',
                 showCancelButton: !0,
                 showConfirmButton: !1,
                 cancelButtonClass: "btn btn-primary w-xs mb-1",
-                cancelButtonText: "Dismiss",
+                cancelButtonText: "Oke",
+                buttonsStyling: !1,
+                showCloseButton: !0,
+            });
+        }
+
+        function lock(nama) {
+            Swal.fire({
+                html: `<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Status Pengaduan Telah di ${nama}</h4><p class="fw-12">Pengaduan anda telah dikunci !</p></div></div>`,
+                showCancelButton: !0,
+                showConfirmButton: !1,
+                cancelButtonClass: "btn btn-primary w-xs mb-1",
+                cancelButtonText: "Oke",
                 buttonsStyling: !1,
                 showCloseButton: !0,
             });
@@ -849,6 +812,13 @@
 
             $('#myTab a').on('click', function(e) {
                 localStorage.setItem('activeTab', $(this).attr('href'));
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.tes').select2({
+                minimumResultsForSearch: Infinity
             });
         });
     </script>

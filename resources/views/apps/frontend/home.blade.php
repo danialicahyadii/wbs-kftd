@@ -32,8 +32,7 @@
             {{-- <p class="hero-subtitle">Form male saying she'd so every fifth winged after spirit male land moving won't seasons fish In shall given fifth edition</p> --}}
             {{-- <a class="button button-outline" href="#">Get Started</a> --}}
             {{-- <a class="button button-outline" href="{{ url('pengaduan') }}">Laporkan Sekarang</a> --}}
-            <a class="button button-outline" style="background-color: #2826ac;" data-aos="fade-right"
-                data-aos-duration="2500"
+            <a class="button button-outline" data-aos="fade-right" data-aos-duration="2500"
                 href="{{ auth()->user() && !auth()->user()->hasVerifiedEmail() ? '#' : url('pengaduan') }}"
                 onclick="{{ auth()->user() && !auth()->user()->hasVerifiedEmail() ? 'event.preventDefault(); showVerificationModal();' : '' }}">
                 Laporkan Sekarang
@@ -60,7 +59,7 @@
                             <input type="text" name="tiket" class="form-control" id="cariPengaduan"
                                 placeholder="Masukkan Nomer Tiket">
                         </div>
-                        <button type="submit" class="button rounded-0" style="background-color: #2826ac;">Cek</button>
+                        <button type="submit" class="button button-outline rounded-0">Cek</button>
                     </form>
                     <div id="result" class="mt-3">
                     </div>
