@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-12">
                                 @php
-                                    $status = app\Models\Status::whereNot('id', $laporan->status)->get();
+                                    $status = app\Models\Status::where('id', '>', $laporan->status)->get();
                                 @endphp
                                 <div class="mb-3">
                                     <label for="namaFile" class="form-label">Status<span

@@ -38,6 +38,15 @@
                         <i class="ri-megaphone-fill"></i> <span data-key="t-widgets">Pengaduan</span>
                     </a>
                 </li>
+                @role('Admin')
+                    <li class="menu-title"><span data-key="t-menu">Admin</span></li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ Request::is('*user*') ? 'active' : '' }}"
+                            href="{{ route('pengaduan.index') }}">
+                            <i class="ri-user-fill"></i> <span data-key="t-widgets">Profil</span>
+                        </a>
+                    </li>
+                @endrole
                 {{-- @role('Admin')
                     <li class="menu-title"><span data-key="t-menu">Admin</span></li>
                     <li class="nav-item">

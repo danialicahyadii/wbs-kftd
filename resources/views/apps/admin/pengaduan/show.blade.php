@@ -331,7 +331,8 @@
                                             </h4>
                                             <div class="flex-shrink-0">
                                                 <button type="button" class="btn btn-soft-danger btn-sm"
-                                                    data-bs-toggle="modal" data-bs-target="#pihakTerlibat"><i
+                                                    data-bs-toggle="modal"
+                                                    @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#pihakTerlibat" @endif><i
                                                         class="ri-add-line me-1 align-bottom"></i> Add</button>
                                             </div>
                                         </div>
@@ -368,7 +369,8 @@
                                             </h4>
                                             <div class="flex-shrink-0">
                                                 <button type="button" class="btn btn-soft-warning btn-sm"
-                                                    data-bs-toggle="modal" data-bs-target="#saksiSaksi"><i
+                                                    data-bs-toggle="modal"
+                                                    @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else   data-bs-target="#saksiSaksi" @endif><i
                                                         class="ri-add-line me-1 align-bottom"></i> Add</button>
                                             </div>
                                         </div>
@@ -404,7 +406,8 @@
                                             </h4>
                                             <div class="flex-shrink-0">
                                                 <button type="button" class="btn btn-soft-info btn-sm"
-                                                    data-bs-toggle="modal" data-bs-target="#buktiFile"><i
+                                                    data-bs-toggle="modal"
+                                                    @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#buktiFile" @endif><i
                                                         class="ri-upload-2-fill me-1 align-bottom"></i> Upload</button>
                                             </div>
                                         </div>
@@ -615,23 +618,32 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Activities</h5>
                                     <div class="acitivity-timeline py-3">
-                                        <div class="acitivity-item d-flex">
-                                            <div class="flex-shrink-0">
-                                                <img src="{{ asset('interactive/assets/images/users/avatar-1.jpg') }}"
-                                                    alt="" class="avatar-xs rounded-circle acitivity-avatar" />
+                                        @foreach ($activities as $index => $item)
+                                            <div class="acitivity-item {{ $index === 0 ? '' : 'py-3' }} d-flex">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{{ $item->causer->avatar ? Storage::url($item->causer->avatar) : asset('interactive/assets/images/avatar.png') }}"
+                                                        alt=""
+                                                        class="avatar-xs rounded-circle acitivity-avatar" />
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    @php
+                                                        $status = app\Models\Status::where(
+                                                            'nama',
+                                                            $item->properties['status'],
+                                                        )->first();
+                                                    @endphp
+                                                    <h6 class="mb-1">{{ $item->causer->name }} <span
+                                                            class="badge bg-{{ $status->warna }}-subtle text-{{ $status->warna }} align-middle">{{ $status->nama }}</span>
+                                                    </h6>
+                                                    <p class="text-muted mb-2"> <i
+                                                            class="ri-file-text-line align-middle ms-2"></i>
+                                                        {{ $item->description }}</p>
+                                                    <small
+                                                        class="mb-0 text-muted">{{ \Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</small>
+                                                </div>
                                             </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h6 class="mb-1">Anonymous <span
-                                                        class="badge bg-primary-subtle text-primary align-middle">Created</span>
-                                                </h6>
-                                                <p class="text-muted mb-2"> <i
-                                                        class="ri-file-text-line align-middle ms-2"></i> Pengaduan telah
-                                                    dibuat dengan nomer tiket
-                                                    #24110492132.</p>
-                                                <small class="mb-0 text-muted">Today</small>
-                                            </div>
-                                        </div>
-                                        <div class="acitivity-item py-3 d-flex">
+                                        @endforeach
+                                        {{-- <div class="acitivity-item py-3 d-flex">
                                             <div class="flex-shrink-0 avatar-xs acitivity-avatar">
                                                 <div class="avatar-title bg-success-subtle text-success rounded-circle">
                                                     A
@@ -711,7 +723,7 @@
                                                     selesaikan.</p>
                                                 <small class="mb-0 text-muted">Yesterday</small>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <!--end card-body-->
@@ -746,26 +758,26 @@
         function submitOnEnter(event) {
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault(); // Prevent newline
-                document.getElementById('komentar').submit();
-                // comment(); //
+                // document.getElementById('komentar').submit();
+                comment(); //
             }
         }
 
-        // function comment() {
-        //     Swal.fire({
-        //         html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Masih Tahap Pengembangan !</h4></div></div>',
-        //         showCancelButton: !0,
-        //         showConfirmButton: !1,
-        //         cancelButtonClass: "btn btn-primary w-xs mb-1",
-        //         cancelButtonText: "Oke",
-        //         buttonsStyling: !1,
-        //         showCloseButton: !0,
-        //     });
-        // }
+        function comment() {
+            Swal.fire({
+                html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Masih Tahap Pengembangan !</h4></div></div>',
+                showCancelButton: !0,
+                showConfirmButton: !1,
+                cancelButtonClass: "btn btn-primary w-xs mb-1",
+                cancelButtonText: "Oke",
+                buttonsStyling: !1,
+                showCloseButton: !0,
+            });
+        }
 
         function lock(nama) {
             Swal.fire({
-                html: `<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Status Pengaduan Telah di ${nama}</h4><p class="fw-12">Pengaduan anda telah dikunci !</p></div></div>`,
+                html: `<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Status Pengaduan ${nama}</h4><p class="fw-12">Pengaduan anda telah dikunci !</p></div></div>`,
                 showCancelButton: !0,
                 showConfirmButton: !1,
                 cancelButtonClass: "btn btn-primary w-xs mb-1",

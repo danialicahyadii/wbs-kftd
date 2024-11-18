@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Activitylog\Models\Activity;
 
 class PengaduanController extends Controller
 {
@@ -118,6 +119,10 @@ class PengaduanController extends Controller
                 ]);
             }
         }
+        activity()
+            ->performedOn($pengaduan)
+            ->withProperties(['status' => $pengaduan->statusPengaduan->nama])
+            ->log('Pengaduan telah dibuat dengan nomer tiket #'.$pengaduan->tiket);
 
         // Mail::to($request->user()->email)->send(new MailPengaduan($pengaduan));
         Alert::success('Success Title', 'Success Message');
@@ -130,7 +135,10 @@ class PengaduanController extends Controller
     public function show($id)
     {
         $laporan = Pengaduan::find(Crypt::decrypt($id));
-        return view('apps.admin.pengaduan.show', compact('laporan'));
+        $activities = Activity::where('subject_type', Pengaduan::class)
+                      ->where('subject_id', $laporan->id)
+                      ->get();
+        return view('apps.admin.pengaduan.show', compact('laporan', 'activities'));
     }
 
     /**
@@ -150,14 +158,23 @@ class PengaduanController extends Controller
             $pengaduan->update([
                 'status' => $request->status,
             ]);
+            activity()
+            ->performedOn($pengaduan)
+            ->withProperties(['status' => $pengaduan->statusPengaduan->nama])
+            ->log($request->keterangan);
             return back();
         }elseif($request->komentar){
             $komen = Komentar::create([
                 'pengaduan_id' => $pengaduan->id,
                 'user_id' => Auth::user()->id,
-                'komentar' => $request->komentar,
+                'komentar' => $request->komentar
             ]);
-            return back();
+
+            return response()->json([
+                'success' => 200
+            ]);
+            // activity()->log('Look mum, I logged something');
+
         }
     }
 

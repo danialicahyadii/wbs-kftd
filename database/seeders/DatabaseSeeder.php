@@ -26,9 +26,6 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'User']);
         $user->assignRole('Admin');
 
-        Status::create([
-            'nama' => 'Created',
-            'warna' => 'primary',
-        ]);
+        $this->call(StatusSeeder::class);
     }
 }
