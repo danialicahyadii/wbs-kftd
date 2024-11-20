@@ -17,5 +17,13 @@ class Komentar extends Model
     {
         return $this->belongsTo(Pengaduan::class, 'pengaduan_id');
     }
+    public function scopeUnseen($query)
+    {
+        return $query->where('is_seen', false);
+    }
+    public function replies()
+    {
+        return $this->hasMany(Komentar::class, 'parent_id'); // Asumsi kolom 'parent_id' digunakan untuk menandakan balasan
+    }
 
 }

@@ -30,7 +30,7 @@ class PihakTerlibatController extends Controller
     {
         PihakTerlibat::create($request->all());
 
-        return back()->with("success","Berhasil Menambahkan Pihak Terlibat");
+        return back()->with("toast_success","Berhasil Menambahkan Pihak Terlibat");
     }
 
     /**

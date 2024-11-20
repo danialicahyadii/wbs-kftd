@@ -46,7 +46,7 @@ class FileBuktiController extends Controller
             'path' => $path
         ]);
 
-        return back();
+        return back()->with('toast_success', 'File Ditambahkan!');
     }
 
     /**

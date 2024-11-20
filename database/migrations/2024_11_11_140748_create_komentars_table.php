@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('pengaduan_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('komentar');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->boolean('is_seen')->default(false);
             $table->timestamps();
         });
     }

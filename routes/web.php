@@ -5,6 +5,7 @@ use App\Http\Controllers\CaraMelaporController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FileBuktiController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PihakTerlibatController;
@@ -32,6 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/print', function(){
         return view('print');
     });
+    Route::get('/notifications/unseen', [KomentarController::class, 'loadUnseenNotifications'])->name('notifications.unseen');
+    Route::post('/notifications/mark-as-seen', [KomentarController::class, 'markAsSeen'])->name('notifications.mark_as_seen');
     Route::resources([
         'pengaduan' => PengaduanController::class,
         'terlapor' => TerlaporController::class,
@@ -40,6 +43,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'file-bukti' => FileBuktiController::class,
         'status' => StatusController::class,
         'cara-melapor' => CaraMelaporController::class,
+        'komentar' => KomentarController::class,
     ]);
     Route::resource('laporan', LaporanController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

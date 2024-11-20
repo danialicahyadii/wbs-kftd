@@ -154,7 +154,6 @@ class PengaduanController extends Controller
      */
     public function update(Request $request, Pengaduan $pengaduan)
     {
-        if($request->status){
             $pengaduan->update([
                 'status' => $request->status,
             ]);
@@ -162,20 +161,7 @@ class PengaduanController extends Controller
             ->performedOn($pengaduan)
             ->withProperties(['status' => $pengaduan->statusPengaduan->nama])
             ->log($request->keterangan);
-            return back();
-        }elseif($request->komentar){
-            $komen = Komentar::create([
-                'pengaduan_id' => $pengaduan->id,
-                'user_id' => Auth::user()->id,
-                'komentar' => $request->komentar
-            ]);
-
-            return response()->json([
-                'success' => 200
-            ]);
-            // activity()->log('Look mum, I logged something');
-
-        }
+            return back()->with('success', 'Status Berhasil Diperbarui');
     }
 
     /**

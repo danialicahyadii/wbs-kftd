@@ -1223,7 +1223,7 @@ h3,
     /* Pastikan konten di dalam card diatur secara vertikal */
     height            : 100%;
     /* Pastikan semua card punya tinggi yang sama */
-    background        : linear-gradient(to right, #5655af 0%, #6128be 400%);
+    background        : linear-gradient(to right, #2826ac 0%, #6128be 400%);
 }
 
 @media (min-width: 992px) {
@@ -1248,7 +1248,7 @@ h3,
 }
 
 .card-service:hover {
-    background: linear-gradient(to right, #2826ac 0%, #6128be 400%);
+    background: linear-gradient(to right, #000000 0%, #6128be 400%);
     box-shadow: 0px 20px 20px 0px rgba(40, 25, 114, 0.1)
 }
 

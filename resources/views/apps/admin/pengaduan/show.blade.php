@@ -4,6 +4,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css" />
 @endpush
 @section('content')
+    {{-- @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif --}}
     <div class="page-content">
         <div class="container-fluid">
 
@@ -146,123 +151,97 @@
                                         </div><!-- end card header -->
 
                                         <div class="card-body">
-
-                                            {{-- <div data-simplebar style="height: 300px;" class="px-3 mx-n3 mb-2"> jika sudah ada datanya buatkan style height nya 300px --}}
                                             <div data-simplebar
-                                                @if ($laporan->komentar && $laporan->komentar->count() > 5) style="height: 300px;" @endif
+                                                @if ($laporan->komentar->count() !== 0) style="height: 300px;" @endif
                                                 class="px-3 mx-n3 mb-2">
-                                                @if ($laporan->komentar && $laporan->komentar->count() == 0)
-                                                    <div>
-                                                        <div class="text-center">
-                                                            <h5 class="mt-2 text-muted">Belum ada komentar</h5>
-                                                        </div>
-                                                    </div>
-                                                @else
-                                                    @foreach ($laporan->komentar as $item)
-                                                        <div class="d-flex mb-2">
+                                                @if ($laporan->komentar->isNotEmpty())
+                                                    <!-- Cek apakah ada komentar -->
+                                                    @foreach ($laporan->komentar->where('parent_id', null) as $komentar)
+                                                        <div class="d-flex mb-4">
                                                             <div class="flex-shrink-0">
-                                                                <img src="{{ $item->user->avatar ? Storage::url($item->user->avatar) : asset('interactive/assets/images/avatar.png') }}"
-                                                                    alt="" class="avatar-xs rounded-circle" />
-                                                            </div>
-                                                            <div class="flex-grow-1 ms-3">
-                                                                <h5 class="fs-14">
-                                                                    @if ($item->user_id == $laporan->user_id)
-                                                                        {{ $laporan->nama_pelapor }}
-                                                                    @else
-                                                                        {{ $item->user->name }}
-                                                                    @endif
-                                                                    <small
-                                                                        class="text-muted ms-2">{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y - H:m') }}</small>
-                                                                </h5>
-                                                                <p class="text-muted">{{ $item->komentar }}</p>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                @endif
-                                                {{-- <div class="d-flex mb-4">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-6.jpg" alt=""
-                                                            class="avatar-xs rounded-circle" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h5 class="fs-14">Donald Palmer <small class="text-muted ms-2">24
-                                                                Dec 2021 - 05:20PM</small></h5>
-                                                        <p class="text-muted">If you have further questions, please contact
-                                                            Customer Support from the “Action Menu” on your <a
-                                                                href="javascript:void(0);"
-                                                                class="text-decoration-underline">Online Order Support</a>.
-                                                        </p>
-                                                        <a href="javascript: void(0);" class="badge text-muted bg-light"><i
-                                                                class="mdi mdi-reply"></i> Reply</a>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-10.jpg" alt=""
-                                                            class="avatar-xs rounded-circle" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h5 class="fs-14">Alexis Clarke <small class="text-muted ms-2">26
-                                                                min ago</small></h5>
-                                                        <p class="text-muted">Your <a href="javascript:void(0)"
-                                                                class="text-decoration-underline">Online Order Support</a>
-                                                            provides you with the most current status of your order. To help
-                                                            manage your order refer to the “Action Menu” to initiate return,
-                                                            contact Customer Support and more.</p>
-                                                        <div class="row g-2 mb-3">
-                                                            <div class="col-lg-1 col-sm-2 col-6">
-                                                                <img src="assets/images/small/img-4.jpg" alt=""
-                                                                    class="img-fluid rounded">
-                                                            </div>
-                                                            <div class="col-lg-1 col-sm-2 col-6">
-                                                                <img src="assets/images/small/img-5.jpg" alt=""
-                                                                    class="img-fluid rounded">
-                                                            </div>
-                                                        </div>
-                                                        <a href="javascript: void(0);"
-                                                            class="badge text-muted bg-light"><i
-                                                                class="mdi mdi-reply"></i> Reply</a>
-                                                        <div class="d-flex mt-4">
-                                                            <div class="flex-shrink-0">
-                                                                <img src="assets/images/users/avatar-6.jpg" alt=""
+                                                                <!-- Menampilkan avatar pengguna yang mengomentari -->
+                                                                <img src="{{ $komentar->user->avatar ? asset('storage/' . $komentar->user->avatar) : asset('interactive/assets/images/avatar.png') }}"
                                                                     class="avatar-xs rounded-circle" />
                                                             </div>
                                                             <div class="flex-grow-1 ms-3">
-                                                                <h5 class="fs-14">Donald Palmer <small
-                                                                        class="text-muted ms-2">8 sec ago</small></h5>
-                                                                <p class="text-muted">Other shipping methods are available
-                                                                    at checkout if you want your purchase delivered faster.
-                                                                </p>
-                                                                <a href="javascript: void(0);"
-                                                                    class="badge text-muted bg-light"><i
-                                                                        class="mdi mdi-reply"></i> Reply</a>
+                                                                <!-- Menampilkan nama pengguna dan waktu komentar -->
+                                                                <h5 class="fs-14">{{ $komentar->user->name }}
+                                                                    <small
+                                                                        class="text-muted ms-2">{{ $komentar->created_at->format('d M Y - h:i A') }}</small>
+                                                                </h5>
+                                                                <!-- Menampilkan isi komentar -->
+                                                                <p class="text-muted">{{ $komentar->komentar }}</p>
+                                                                <a href="javascript:void(0);"
+                                                                    class="badge text-muted bg-light"
+                                                                    onclick="showReplyForm({{ $komentar->id }})">
+                                                                    <i class="mdi mdi-reply"></i> Reply
+                                                                </a>
+                                                                <div id="reply-form-{{ $komentar->id }}" class="mt-2"
+                                                                    style="display: none;">
+                                                                    <form action="{{ route('komentar.store') }}"
+                                                                        id="form-reply-{{ $komentar->id }}" method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" id="parent_id"
+                                                                            name="parent_id">
+                                                                        <input type="hidden" name="pengaduan_id"
+                                                                            value="{{ $laporan->id }}">
+                                                                        <textarea name="komentar" class="form-control" rows="3" placeholder="Balas Pesan ini..."
+                                                                            onkeydown="submitOnEnter(event, {{ $komentar->id }})"></textarea>
+                                                                        {{-- <button type="submit"
+                                                                            class="btn btn-info mt-2">Kirim
+                                                                            Balasan</button> --}}
+                                                                    </form>
+                                                                </div>
+
+                                                                <!-- Menampilkan balasan jika ada -->
+                                                                @if ($komentar->replies->isNotEmpty())
+                                                                    @foreach ($komentar->replies as $reply)
+                                                                        <div class="d-flex mt-4">
+                                                                            <div class="flex-shrink-0">
+                                                                                <img src="{{ $reply->user->avatar ? asset('storage/' . $reply->user->avatar) : 'assets/images/users/default-avatar.jpg' }}"
+                                                                                    alt="User Avatar"
+                                                                                    class="avatar-xs rounded-circle" />
+                                                                            </div>
+                                                                            <div class="flex-grow-1 ms-3">
+                                                                                <h5 class="fs-14">
+                                                                                    {{ $reply->user->name }}
+                                                                                    <small
+                                                                                        class="text-muted ms-2">{{ $reply->created_at->format('d M Y - h:i A') }}</small>
+                                                                                </h5>
+                                                                                <p class="text-muted">
+                                                                                    {{ $reply->komentar }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+                                                                @endif
                                                             </div>
                                                         </div>
+                                                    @endforeach
+                                                @else
+                                                    <div class="text-center">
+                                                        <p class="text-muted text-center">Belum ada Komentar!</p>
                                                     </div>
-                                                </div> --}}
+                                                @endif
+
                                             </div>
-                                            <form class="mt-2" action="{{ route('pengaduan.update', $laporan->id) }}"
-                                                id="komentar" method="POST" enctype="multipart/form-data">
+                                            <form class="mt-2" method="post" action="{{ route('komentar.store') }}">
                                                 @csrf
-                                                @method('PUT')
+                                                @method('POST')
                                                 <div class="row g-3">
                                                     <div class="col-12">
                                                         <label for="exampleFormControlTextarea1"
                                                             class="form-label text-body">Tinggalkan Komentar</label>
+                                                        <input type="text" name="pengaduan_id" id="pengaduanId"
+                                                            value="{{ $laporan->id }}" hidden>
                                                         <textarea class="form-control bg-light border-light" name="komentar" rows="3"
-                                                            placeholder="Tinggalkan Komentarmu..." onkeypress="submitOnEnter(event)"></textarea>
+                                                            placeholder="Tinggalkan Komentarmu..."></textarea>
                                                     </div>
                                                     <div class="col-12 text-end">
-                                                        {{-- <button type="button"
-                                                            class="btn btn-ghost-secondary btn-icon waves-effect me-1"><i
-                                                                class="ri-attachment-line fs-16"></i></button> --}}
-                                                        {{-- <a href="#" onclick="comment()"
-                                                            class="btn btn-success">Post
-                                                            Komentar</a> --}}
-                                                        <button onclick="comment()" class="btn btn-info">Post</button>
+                                                        <button type="submit" class="btn btn-info">Kirim</button>
                                                     </div>
                                                 </div>
                                             </form>
+
                                         </div>
                                         <!-- end card body -->
                                     </div>
@@ -626,14 +605,18 @@
                                                         class="avatar-xs rounded-circle acitivity-avatar" />
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
-                                                    @php
-                                                        $status = app\Models\Status::where(
-                                                            'nama',
-                                                            $item->properties['status'],
-                                                        )->first();
-                                                    @endphp
-                                                    <h6 class="mb-1">{{ $item->causer->name }} <span
-                                                            class="badge bg-{{ $status->warna }}-subtle text-{{ $status->warna }} align-middle">{{ $status->nama }}</span>
+                                                    @if (!empty($item->properties['status']))
+                                                        @php
+                                                            $status = app\Models\Status::where(
+                                                                'nama',
+                                                                $item->properties['status'],
+                                                            )->first();
+                                                        @endphp
+                                                    @endif
+                                                    <h6 class="mb-1">{{ $item->causer->name }} @if (!empty($item->properties['status']))
+                                                            <span
+                                                                class="badge bg-{{ $status->warna }}-subtle text-{{ $status->warna }} align-middle">{{ $status->nama }}</span>
+                                                        @endif
                                                     </h6>
                                                     <p class="text-muted mb-2"> <i
                                                             class="ri-file-text-line align-middle ms-2"></i>
@@ -754,25 +737,26 @@
     <!-- Sweet Alerts js -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('interactive/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
     <script>
         function submitOnEnter(event) {
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault(); // Prevent newline
-                // document.getElementById('komentar').submit();
-                comment(); //
+                document.getElementById('komentar').submit();
+                // comment(); //
             }
         }
 
         function comment() {
-            Swal.fire({
-                html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Masih Tahap Pengembangan !</h4></div></div>',
-                showCancelButton: !0,
-                showConfirmButton: !1,
-                cancelButtonClass: "btn btn-primary w-xs mb-1",
-                cancelButtonText: "Oke",
-                buttonsStyling: !1,
-                showCloseButton: !0,
-            });
+            // Swal.fire({
+            //     html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Masih Tahap Pengembangan !</h4></div></div>',
+            //     showCancelButton: !0,
+            //     showConfirmButton: !1,
+            //     cancelButtonClass: "btn btn-primary w-xs mb-1",
+            //     cancelButtonText: "Oke",
+            //     buttonsStyling: !1,
+            //     showCloseButton: !0,
+            // });
         }
 
         function lock(nama) {
@@ -834,4 +818,100 @@
             });
         });
     </script>
+    <script>
+        function showReplyForm(komentarId) {
+            var replyForm = document.getElementById('reply-form-' + komentarId);
+            var textarea = replyForm.querySelector('textarea');
+            var parentId = replyForm.querySelector("#parent_id");
+            if (replyForm.style.display === 'none' || replyForm.style.display === '') {
+                replyForm.style.display = 'block';
+                parentId.value = komentarId;
+                setTimeout(function() {
+                    textarea.focus(); // Fokus ke textarea setelah form tampil
+                }, 100); // Delay untuk memastikan form tampil terlebih dahulu
+            } else {
+                replyForm.style.display = 'none';
+                textarea.value = '';
+            }
+        }
+
+        function submitOnEnter(event, komentarId) {
+            // Cek apakah tombol yang ditekan adalah "Enter" (kode 13)
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Mencegah enter membuat baris baru di textarea
+
+                // Ambil form berdasarkan ID dinamis
+                var form = document.getElementById('form-reply-' + komentarId);
+                form.submit(); // Kirimkan form
+            }
+        }
+    </script>
+    {{-- <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            function load_unseen_notification(view = '') {
+                $.ajax({
+                    url: '/notifications/unseen',
+                    method: 'GET',
+                    success: function(response) {
+                        $('#notification-list').html(response
+                            .notifications);
+                        $('#notification-count').text(response
+                            .unseen_notification);
+                        new SimpleBar(document.getElementById('notification-list'));
+                        notificationList.scrollTop = notificationList.scrollHeight;
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Terjadi kesalahan saat memuat notifikasi.');
+                    }
+                });
+            }
+
+            load_unseen_notification();
+
+            $('#submit-comment').click(function(event) {
+                var comment = $('#comment-text').val().trim();
+                var pengaduanId = $('#pengaduanId').val().trim();
+                var urlAction = $('#form-comment').attr('action');
+
+                if (comment == '') {
+                    Swal.fire({
+                        html: `<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Komentar Kosong!</h4></div></div>`,
+                        showCancelButton: !0,
+                        showConfirmButton: !1,
+                        cancelButtonClass: "btn btn-primary w-xs mb-1",
+                        cancelButtonText: "Oke",
+                        buttonsStyling: !1,
+                        showCloseButton: !0,
+                    });
+                    return;
+                }
+
+                $.ajax({
+                    url: urlAction,
+                    method: 'POST',
+                    data: {
+                        comment: comment,
+                        pengaduanId: pengaduanId,
+                    },
+                    success: function(response) {
+                        $('#form-comment')[0].reset();
+                        load_unseen_notification();
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan saat mengirim komentar.');
+                    }
+                });
+            });
+
+            setInterval(function() {
+                load_unseen_notification();;
+            }, 5000);
+        })
+    </script> --}}
 @endpush

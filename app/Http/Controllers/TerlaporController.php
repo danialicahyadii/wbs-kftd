@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengaduan;
 use App\Models\Terlapor;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,11 @@ class TerlaporController extends Controller
      */
     public function store(Request $request)
     {
+        $pengaduan = Pengaduan::find($request->pengaduan_id);
         Terlapor::create($request->all());
+        activity()
+            ->performedOn($pengaduan)
+            ->log('Menambahkan Terlapor '. $request->nama);
         return back()->with('toast_success', 'Terlapor Ditambahkan!');;
     }
 

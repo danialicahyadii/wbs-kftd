@@ -29,7 +29,7 @@ class SaksiSaksiController extends Controller
     public function store(Request $request)
     {
         SaksiSaksi::create($request->all());
-        return back();
+        return back()->with('toast_success', 'Saksi Ditambahkan!');
     }
 
     /**
