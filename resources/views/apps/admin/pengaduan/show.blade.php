@@ -4,11 +4,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css" />
 @endpush
 @section('content')
-    {{-- @if (session('success'))
+    @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
-    @endif --}}
+    @endif
     <div class="page-content">
         <div class="container-fluid">
 

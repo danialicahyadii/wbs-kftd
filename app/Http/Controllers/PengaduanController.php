@@ -25,10 +25,9 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-        if(Auth::user()->roles()->first()->name == 'Admin'){
+        $role = '';
+        $role = Auth::user()->getRoleName();
+        if($role == 'Admin'){
             $pengaduan = Pengaduan::get();
         }else{
             $pengaduan = Pengaduan::where('user_id', Auth::user()->id)->get();
