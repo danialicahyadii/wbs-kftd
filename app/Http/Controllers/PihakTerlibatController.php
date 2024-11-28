@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengaduan;
 use App\Models\PihakTerlibat;
 use Illuminate\Http\Request;
 
@@ -28,8 +29,11 @@ class PihakTerlibatController extends Controller
      */
     public function store(Request $request)
     {
+        $pengaduan = Pengaduan::find($request->pengaduan_id);
         PihakTerlibat::create($request->all());
-
+        activity()
+        ->performedOn($pengaduan)
+        ->log('Menambahkan Pihak Terlibat "'. $request->nama.'"');
         return back()->with("toast_success","Berhasil Menambahkan Pihak Terlibat");
     }
 

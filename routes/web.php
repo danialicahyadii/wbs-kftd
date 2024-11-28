@@ -44,6 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'status' => StatusController::class,
         'cara-melapor' => CaraMelaporController::class,
         'komentar' => KomentarController::class,
+        'faq-admin' => FaqController::class,
     ]);
     Route::resource('laporan', LaporanController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

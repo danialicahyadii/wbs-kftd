@@ -24,98 +24,29 @@
                 <div class="section-style"></div>
             </div>
             <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                Apa yang dimaksud Sistem Pelaporan Dugaan Pelanggaran (Whistleblowing System) Kimia Farma?
-                            </button>
-                        </h5>
-                    </div>
+                @php
+                    $faq = App\Models\Faq::get();
+                @endphp
+                @foreach ($faq as $index => $item)
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapse{{ $index }}" aria-expanded="true"
+                                    aria-controls="{{ $index }}">
+                                    {{ $item->faq }}
+                                </button>
+                            </h5>
+                        </div>
 
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            “Sistem Pelaporan Pelanggaran/Whistleblowing System (WBS)” adalah Sistem yang digunakan untuk
-                            menampung, mengolah dan menindaklanjuti serta membuat Pelaporan atas informasi yang disampaikan
-                            oleh Pelapor mengenai tindakan pelanggaran yang terjadi di lingkungan Perseroan.
+                        <div id="collapse{{ $index }}" class="collapse" aria-labelledby="headingOne"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+                                {{ $item->answer }}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Siapa yang dapat menjadi Pelapor pada WBS Kimia Farma?
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Insan Kimia Farma, Masyarakat dan stakeholders lainnya
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Apa saja jenis perbuatan yang dapat dilaporkan pada WBS Kimia Farma?
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Pelanggaran yang dapat dilaporkan melalui WBS adalah sebagai berikut:<br>
-                            a. Benturan Kepentingan; <br>
-                            b. Korupsi; <br>
-                            c. Kecurangan; <br>
-                            d. Penggelapan; <br>
-                            e. Gratifikasi; <br>
-                            f. Suap; <br>
-                            g. Perselisihan Hubungan Industrial. <br>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                Bagaimana cara pelaporan WBS Kimia Farma?
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseFour" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Pelaporan terkait WBS Kimia farma dapat dilakukan melalui: <br>
-                            - Email: wbs@kftd.co.id <br>
-                            - Surat: Unit Kepatuhan dan Hubungan Industrial PT Kimia Farma (Persero) Tbk Jl.Veteran no. 9
-                            Jakarta Pusat
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                Bagaimana indikasi awal laporan WBS Kimia Farma yang dapat ditindaklanjuti?
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseFive" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <div class="card-body">
-                            • Bila ya, Pelaporan Pengaduan/Pengungkapan yang dapat ditindaklanjuti melalui mekanisme WBS ini
-                            adalah Pelaporan dan Pengaduan atas kasus pelanggaran yang berdampak signifikan terhadap
-                            Perseroan. Laporan pengaduan/pengungkapan yang diterima akan diteruskan ke Komite Etik. <br>
-                            • Bila Tidak, proses Sistem Pelaporan Pelanggaran selesai.
-
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

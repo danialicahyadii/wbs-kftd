@@ -12,7 +12,11 @@ class FaqController extends Controller
      */
     public function index()
     {
-        //
+        $faq = Faq::get();
+        $title = 'Delete FAQ!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return view('apps.admin.faq.index', compact('faq'));
     }
 
     /**
@@ -28,7 +32,8 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Faq::create($request->all());
+        return back()->with('toast_success', 'FAQ Berhasil Ditambahkan!');
     }
 
     /**
@@ -58,8 +63,11 @@ class FaqController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Faq $faq)
+    public function destroy($id)
     {
-        //
+        $faq = Faq::find($id);
+        $faq->delete();
+
+        return back()->with('toast_success', 'Berhasil Dihapus !!');
     }
 }

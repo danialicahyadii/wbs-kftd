@@ -6,16 +6,17 @@
                         src="{{ asset('interactive/assets/images/logo_kftd_white.png') }}" width="180px"
                         alt=""></a>
                 {{-- <h4>About Us</h4> --}}
-                <p>Platform yang memungkinkan individu atau pegawai untuk melaporkan dugaan pelanggaran atau tindakan
-                    tidak etis secara anonim atau teridentifikasi.</p>
+                {{-- <p>Platform yang memungkinkan individu atau pegawai untuk melaporkan dugaan pelanggaran atau tindakan
+                    tidak etis secara anonim atau teridentifikasi.</p> --}}
 
             </div>
             <div class="col-xl-4 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
                 <h4>Contact Info</h4>
                 <ul>
                     <li>Address: Jl. Budi Utomo No.1, Ps. Baru, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus
-                        Ibukota Jakarta 10710.</li>
-                    <li><a href="tel:+0213456959">Phone: (021) 3456959</a></li>
+                        Ibukota Jakarta 10710.
+                        Subunit Compliance Unit Manajemen Risiko</li>
+                    <li><a href="tel:+0213456959">WA: 081313138812</a></li>
                     <li><a href="mailto:business@kftd.co.id">Email: wbs@kftd.co.id</a></li>
                 </ul>
             </div>

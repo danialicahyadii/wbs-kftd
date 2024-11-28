@@ -48,7 +48,7 @@
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-md-3 col-lg-2 text-center text-md-left mb-3 mb-md-0">
-                    <h3>Status Pengaduanmu!</h3>
+                    <h3>Cek Status Pengaduanmu!</h3>
                 </div>
                 <div class="col-md-9 col-lg-10 pl-2 pl-xl-5">
                     <form class="form-inline flex-nowrap form-domainSearch" id="searchForm" method="post">
@@ -596,9 +596,9 @@
                     <h2 class="mb-4" data-aos="fade-up" data-aos-duration="1000">Whistleblowing System</h2>
                     <p data-aos="fade-up" data-aos-duration="1500">
 
-                        Dalam pengelolaan kegiatan bisnisnya, PT Kimia Farma Trading & Distribution selalu berupaya bebas
-                        dari praktik-praktik korupsi, kolusi dan nepotisme (KKN), dan tetap memperhatikan prinsip-prinsip
-                        GCG, sehingga pengelolaan Perseroan ini dikelola dengan amanah, transparan dan akuntabel.</p>
+                        Sistem yang digunakan untuk menampung, mengolah, dan menindaklanjuti serta membuat pelaporan atas
+                        informasi yang disampaikan oleh pelapor mengenai tindakan pelanggaran yang terjadi di lingkungan
+                        perusahaan, termasuk pelanggaran terhadap Sistem Manajemen Anti Penyuapan.</p>
                 </div>
                 <div class="col-lg-7">
                     <div class="text-center" data-aos="fade-up" data-aos-duration="3000">

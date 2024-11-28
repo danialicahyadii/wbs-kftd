@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Laporan as MailPengaduan;
 use App\Models\FileBukti;
+use App\Models\JenisPelanggaran;
 use App\Models\Komentar;
 use App\Models\PihakTerlibat;
 use App\Models\SaksiSaksi;
@@ -48,38 +49,85 @@ class PengaduanController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all(), $request->bukti[0]['nama_file']);
-        // $data = $request->validated();
+        $validated = $request->validate([
+            'nama_pelapor' => 'required|string|max:255',
+            'alamat_pelapor' => 'required|string|max:255',
+            'no_hp_pelapor' => 'required|numeric|digits_between:10,15',
+            'jenis_pelanggaran' => 'required|array|min:1',
+            'kronologi' => 'required|string|max:1000',
+            'waktu_pelanggaran' => 'required|date',
+            'tempat_pelanggaran' => 'required|string|max:255',
+            'konsekuensi' => 'nullable|string|max:255',
+            'terlapor' => 'nullable|array|min:1', // Minimal 1 terlapor
+            'terlapor.*.nama' => 'required|string|max:255',
+            'terlapor.*.jabatan' => 'required|string|max:255',
+            'terlapor.*.unit' => 'required|string|max:255',
+            'terlibat' => 'nullable|array',
+            'terlibat.*.nama' => 'nullable|string|max:255',
+            'terlibat.*.jabatan' => 'nullable|string|max:255',
+            'terlibat.*.unit' => 'nullable|string|max:255',
+            'saksi' => 'nullable|array',
+            'saksi.*.nama' => 'nullable|string|max:255',
+            'saksi.*.jabatan' => 'nullable|string|max:255',
+            'saksi.*.unit' => 'nullable|string|max:255',
+            'bukti' => 'nullable|array',
+            'bukti.*.file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:10240',
+            'bukti.*.nama_file' => 'nullable|string|max:255',
+        ],[
+            'nama_pelapor.required' => 'Nama Pelapor wajib diisi.',
+            'alamat_pelapor.required' => 'Alamat Pelapor wajib diisi.',
+            'no_hp_pelapor.required' => 'Nomor HP Pelapor wajib diisi.',
+            'no_hp_pelapor.numeric' => 'Nomor HP Pelapor harus berupa angka.',
+            'no_hp_pelapor.digits_between' => 'Nomor HP Pelapor harus terdiri dari 10 hingga 15 digit.',
+            'jenis_pelanggaran.required' => 'Pilih setidaknya satu jenis pelanggaran.',
+            'kronologi.required' => 'Kronologi wajib diisi.',
+            'waktu_pelanggaran.required' => 'Waktu pelanggaran wajib diisi.',
+            'tempat_pelanggaran.required' => 'Tempat pelanggaran wajib diisi.',
+            'konsekuensi.max' => 'Konsekuensi tidak boleh lebih dari 500 karakter.',
+            'terlapor.min' => 'Minimal satu terlapor harus diisi.',
+            'terlapor.*.nama.required' => 'Nama terlapor wajib diisi.',
+            'terlapor.*.jabatan.required' => 'Jabatan terlapor wajib diisi.',
+            'terlapor.*.unit.required' => 'Unit terlapor wajib diisi.',
+            'bukti.*.file.mimes' => 'File yang diperbolehkan hanya : jpg, jpeg, png, pdf, doc, docx',
+        ]);
+
+        // Generate tiket baru
         $noTiket = $this->generateTicketCode();
 
+        // Create the Pengaduan entry
         $pengaduan = Pengaduan::create([
             'tiket' => $noTiket,
             'user_id' => Auth::user()->id,
-            'nama_pelapor' => $request->nama_pelapor,
-            'alamat_pelapor' => $request->alamat_pelapor,
-            'no_hp_pelapor' => $request->no_hp_pelapor,
+            'nama_pelapor' => $validated['nama_pelapor'],
+            'alamat_pelapor' => $validated['alamat_pelapor'],
+            'no_hp_pelapor' => $validated['no_hp_pelapor'],
             'email_pelapor' => Auth::user()->email,
-            'jenis_pelanggaran' => json_encode($request->jenis_pelanggaran),
-            'kronologi' => $request->kronologi,
-            'waktu_pelanggaran' => $request->waktu_pelanggaran,
-            'tempat_pelanggaran' => $request->tempat_pelanggaran,
-            'konsekuensi' => $request->konsekuensi,
+            'jenis_pelanggaran' => json_encode($validated['jenis_pelanggaran']),
+            'kronologi' => $validated['kronologi'],
+            'waktu_pelanggaran' => $validated['waktu_pelanggaran'],
+            'tempat_pelanggaran' => $validated['tempat_pelanggaran'],
+            'konsekuensi' => $validated['konsekuensi'] ?? null,
             'status' => 1,
         ]);
 
+        // Menambahkan Terlapor jika ada
         $terlapor = $request->terlapor ?? null;
         $pihakTerlibat = $request->terlibat ?? null;
         $saksiSaksi = $request->saksi ?? null;
 
-        foreach ($terlapor as $row) {
-            Terlapor::create([
-                'pengaduan_id' => $pengaduan->id,
-                'nama' => $row['nama'],
-                'jabatan' => $row['jabatan'],
-                'unit' => $row['unit'],
-            ]);
+        // Menambahkan data Terlapor
+        if ($terlapor) {
+            foreach ($terlapor as $row) {
+                Terlapor::create([
+                    'pengaduan_id' => $pengaduan->id,
+                    'nama' => $row['nama'],
+                    'jabatan' => $row['jabatan'],
+                    'unit' => $row['unit'],
+                ]);
+            }
         }
 
+        // Menambahkan Pihak Terlibat jika ada
         if ($pihakTerlibat) {
             foreach ($pihakTerlibat as $row) {
                 PihakTerlibat::create([
@@ -90,6 +138,8 @@ class PengaduanController extends Controller
                 ]);
             }
         }
+
+        // Menambahkan Saksi-saksi jika ada
         if ($saksiSaksi) {
             foreach ($saksiSaksi as $row) {
                 SaksiSaksi::create([
@@ -100,11 +150,13 @@ class PengaduanController extends Controller
                 ]);
             }
         }
+
+        // Menambahkan bukti jika ada
         if ($request->file('bukti')) {
-            foreach ($request->bukti as $file) {
+            foreach ($validated['bukti'] as $file) {
                 $nama = $file['nama_file'];
                 $tipe = $file['file']->getClientOriginalExtension();
-                $namaFile = $nama.'.'.$tipe;
+                $namaFile = $nama . '.' . $tipe;
                 $bukti = $file['file']->storeAs('bukti/' . $noTiket, $namaFile, 'public');
                 $ukuran = $file['file']->getSize();
 
@@ -114,18 +166,23 @@ class PengaduanController extends Controller
                     'tipe' => $tipe,
                     'ukuran' => $this->formatSize($ukuran),
                     'path' => $bukti
-                    // 'url' => asset('storage/' . $bukti)
                 ]);
             }
         }
+
+        // Log activity
         activity()
             ->performedOn($pengaduan)
             ->withProperties(['status' => $pengaduan->statusPengaduan->nama])
-            ->log('Pengaduan telah dibuat dengan nomer tiket #'.$pengaduan->tiket);
+            ->log('Pengaduan telah dibuat dengan nomer tiket #' . $pengaduan->tiket);
 
-        // Mail::to($request->user()->email)->send(new MailPengaduan($pengaduan));
+        // Kirim email ke pengguna
+        Mail::to($request->user()->email)->send(new MailPengaduan($pengaduan));
+
+        // Notifikasi
         Alert::success('Success Title', 'Success Message');
-        return redirect('pengaduan')->with('success', 'Laporan berhasil dibuat  ');
+
+        return redirect('pengaduan');
     }
 
     /**
@@ -134,10 +191,12 @@ class PengaduanController extends Controller
     public function show($id)
     {
         $laporan = Pengaduan::find(Crypt::decrypt($id));
+        $jenisPelanggaran = JenisPelanggaran::get();
         $activities = Activity::where('subject_type', Pengaduan::class)
                       ->where('subject_id', $laporan->id)
                       ->get();
-        return view('apps.admin.pengaduan.show', compact('laporan', 'activities'));
+        // dd($activities->where('description', 'like', '%Keren%'));
+        return view('apps.admin.pengaduan.show', compact('laporan', 'activities', 'jenisPelanggaran'));
     }
 
     /**
@@ -153,6 +212,13 @@ class PengaduanController extends Controller
      */
     public function update(Request $request, Pengaduan $pengaduan)
     {
+        if($request->kronologi){
+            activity('kronologi')
+            ->performedOn($pengaduan)
+            ->withProperties(['kronologi' => $request->kronologi])
+            ->log('Menambahkan Kronologi');
+            return back()->with('toast_success', 'Kronologi Berhasil Ditambah');
+        }elseif ($request->status){
             $pengaduan->update([
                 'status' => $request->status,
             ]);
@@ -160,7 +226,45 @@ class PengaduanController extends Controller
             ->performedOn($pengaduan)
             ->withProperties(['status' => $pengaduan->statusPengaduan->nama])
             ->log($request->keterangan);
-            return back()->with('success', 'Status Berhasil Diperbarui');
+            return back()->with('toast_success', 'Status Berhasil Diperbarui');
+        }elseif ($request->jenis_pelanggaran){
+
+            // Ambil nilai lama dari jenis_pelanggaran yang ada
+            $oldJenisPelanggaran = json_decode($pengaduan->jenis_pelanggaran, true);
+
+            // Ambil data jenis_pelanggaran yang dipilih dari form
+            $newJenisPelanggaran = $request->input('jenis_pelanggaran', []);
+
+            // Cari tahu elemen yang baru ditambahkan (yang ada di newJenisPelanggaran tapi tidak ada di oldJenisPelanggaran)
+            $newlyAdded = array_diff($newJenisPelanggaran, $oldJenisPelanggaran);
+            $removed = array_diff($oldJenisPelanggaran, $newJenisPelanggaran);
+            $pengaduan->update([
+                'jenis_pelanggaran' => json_encode($newJenisPelanggaran)
+            ]);
+            if (!empty($newlyAdded)) {
+                activity()
+                    ->performedOn($pengaduan)
+                    ->log('Jenis Pelanggaran Baru Ditambahkan: ' . implode(', ', $newlyAdded));
+            }
+
+            // Catat log perubahan untuk elemen yang dihapus
+            if (!empty($removed)) {
+                activity()
+                    ->performedOn($pengaduan)
+                    ->log('Jenis Pelanggaran Dihapus: ' . implode(', ', $removed));
+            }
+            // activity()
+            // ->performedOn($pengaduan)
+            // ->log('Jenis Pelanggaran Diperbarui :'. json_encode($pengaduan->jenis_pelanggaran));
+            return back()->with('toast_success', 'Jenis Pelanggaran Berhasil Ditambah');
+        }else{
+            activity('konsekuensi')
+            ->performedOn($pengaduan)
+            ->withProperties(['konsekuensi' => $request->konsekuensi])
+            ->log('Menambahkan Kronologi');
+            return back()->with('toast_success', 'Konsekuensi Berhasil Ditambah');
+        }
+
     }
 
     /**

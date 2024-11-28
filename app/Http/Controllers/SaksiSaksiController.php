@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengaduan;
 use App\Models\SaksiSaksi;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,11 @@ class SaksiSaksiController extends Controller
      */
     public function store(Request $request)
     {
+        $pengaduan = Pengaduan::find($request->pengaduan_id);
         SaksiSaksi::create($request->all());
+        activity()
+            ->performedOn($pengaduan)
+            ->log('Menambahkan Saksi "'. $request->nama.'"');
         return back()->with('toast_success', 'Saksi Ditambahkan!');
     }
 

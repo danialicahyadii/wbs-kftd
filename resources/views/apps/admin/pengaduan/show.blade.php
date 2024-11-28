@@ -109,12 +109,33 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="text-muted border-bottom border-bottom-dashed">
-                                                <h6 class="mb-3 fw-semibold text-uppercase">Kronologi</h6>
+                                                <div class="clearfix">
+                                                    <h6 class="mb-3 fw-semibold text-uppercase float-start">Kronologi</h6>
+                                                    <button type="button" class="btn btn-soft-primary btn-sm float-end"
+                                                        data-bs-toggle="modal"
+                                                        @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#kronologi" @endif><i
+                                                            class="ri-edit-2-fill me-1 align-bottom"></i> Update</button>
+                                                </div>
                                                 {{-- <p>{!! $laporan->kronologi !!}</p> --}}
                                                 {!! $laporan->kronologi !!}
+                                                @if ($activities->where('log_name', 'kronologi')->count() !== 0)
+                                                    <p class="fw-bold">Kronologi Tambahan :</p>
+                                                    @foreach ($activities->where('log_name', 'kronologi') as $item)
+                                                        <p class="mb-4">{{ $item->getExtraProperty('kronologi') }}
+                                                            <small>{{ $item->created_at->diffForHumans() }}</small>
+                                                        </p>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                             <div class="text-muted mt-4 border-bottom border-bottom-dashed">
-                                                <h6 class="mb-3 fw-semibold text-uppercase">Jenis Pelanggaran</h6>
+                                                <div class="clearfix">
+                                                    <h6 class="mb-3 fw-semibold text-uppercase float-start">Jenis
+                                                        Pelanggaran</h6>
+                                                    <button type="button" class="btn btn-soft-primary btn-sm float-end"
+                                                        data-bs-toggle="modal"
+                                                        @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#jenis-pelanggaran" @endif><i
+                                                            class="ri-edit-2-fill me-1 align-bottom"></i> Update</button>
+                                                </div>
                                                 <ul class="ps-4 vstack gap-2">
                                                     @foreach (json_decode($laporan->jenis_pelanggaran) as $item)
                                                         <li>{{ $item }}</li>
@@ -122,8 +143,27 @@
                                                 </ul>
                                             </div>
                                             <div class="text-muted mt-4">
-                                                <h6 class="mb-3 fw-semibold text-uppercase">Konsekuensi</h6>
+                                                <div class="clearfix">
+                                                    <h6 class="mb-3 fw-semibold text-uppercase float-start">Konsekuensi</h6>
+                                                    <button type="button" class="btn btn-soft-primary btn-sm float-end"
+                                                        data-bs-toggle="modal"
+                                                        @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#konsekuensi" @endif><i
+                                                            class="ri-edit-2-fill me-1 align-bottom"></i> Update</button>
+                                                </div>
                                                 <p>{{ $laporan->konsekuensi }}</p>
+                                                @if ($activities->where('log_name', 'konsekuensi'))
+                                                    <p class="fw-bold">Konsekuensi Tambahan :</p>
+                                                    @foreach ($activities->where('log_name', 'konsekuensi') as $item)
+                                                        <td class="d-flex">
+                                                            <div class="mb-3">
+                                                                <h5 class="fs-13 mb-0 text-muted">
+                                                                    {{ $item->getExtraProperty('konsekuensi') }}</h5>
+                                                                <small class="mb-0 text-muted">
+                                                                    {{ $item->created_at->diffForHumans() }}</small>
+                                                            </div>
+                                                        </td>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                         <!-- end card body -->
@@ -165,7 +205,12 @@
                                                             </div>
                                                             <div class="flex-grow-1 ms-3">
                                                                 <!-- Menampilkan nama pengguna dan waktu komentar -->
-                                                                <h5 class="fs-14">{{ $komentar->user->name }}
+                                                                <h5 class="fs-14">
+                                                                    @if ($komentar->user_id === $laporan->user_id)
+                                                                        {{ $laporan->nama_pelapor }}
+                                                                    @else
+                                                                        {{ $komentar->user->name }}
+                                                                    @endif
                                                                     <small
                                                                         class="text-muted ms-2">{{ $komentar->created_at->format('d M Y - h:i A') }}</small>
                                                                 </h5>
@@ -179,7 +224,8 @@
                                                                 <div id="reply-form-{{ $komentar->id }}" class="mt-2"
                                                                     style="display: none;">
                                                                     <form action="{{ route('komentar.store') }}"
-                                                                        id="form-reply-{{ $komentar->id }}" method="post">
+                                                                        id="form-reply-{{ $komentar->id }}"
+                                                                        method="post">
                                                                         @csrf
                                                                         <input type="hidden" id="parent_id"
                                                                             name="parent_id">
@@ -198,7 +244,7 @@
                                                                     @foreach ($komentar->replies as $reply)
                                                                         <div class="d-flex mt-4">
                                                                             <div class="flex-shrink-0">
-                                                                                <img src="{{ $reply->user->avatar ? asset('storage/' . $reply->user->avatar) : 'assets/images/users/default-avatar.jpg' }}"
+                                                                                <img src="{{ $reply->user->avatar ? asset('storage/' . $reply->user->avatar) : asset('interactive/assets/images/avatar.png') }}"
                                                                                     alt="User Avatar"
                                                                                     class="avatar-xs rounded-circle" />
                                                                             </div>
@@ -609,11 +655,11 @@
                                                         @php
                                                             $status = app\Models\Status::where(
                                                                 'nama',
-                                                                $item->properties['status'],
+                                                                $item->getExtraProperty('status'),
                                                             )->first();
                                                         @endphp
                                                     @endif
-                                                    <h6 class="mb-1">{{ $item->causer->name }} @if (!empty($item->properties['status']))
+                                                    <h6 class="mb-1">{{ $item->causer->name }} @if (!empty($item->getExtraProperty('status')))
                                                             <span
                                                                 class="badge bg-{{ $status->warna }}-subtle text-{{ $status->warna }} align-middle">{{ $status->nama }}</span>
                                                         @endif
@@ -723,6 +769,9 @@
         <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
+    @include('apps.admin.pengaduan.components.modal-add-kronologi')
+    @include('apps.admin.pengaduan.components.modal-add-jenis-pelanggaran')
+    @include('apps.admin.pengaduan.components.modal-add-konsekuensi')
     @include('apps.admin.pengaduan.components.modal-add-terlapor')
     @include('apps.admin.pengaduan.components.modal-add-terlibat')
     @include('apps.admin.pengaduan.components.modal-add-saksi')

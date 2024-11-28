@@ -20,8 +20,16 @@
                     </div>
                 </div>
             </div>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <!-- end page title -->
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -51,7 +59,7 @@
                                                 id="firstNameinput" style="background-color: var(--vz-tertiary-bg)"
                                                 readonly>
                                             @error('nama_pelapor')
-                                                <p class="text-danger">{{ $message }}</p>
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div><!--end col-->
@@ -59,16 +67,22 @@
                                         <div class="mb-3">
                                             <label for="lastNameinput" class="form-label">No.HP (Pelapor) <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" name="no_hp_pelapor" id="lastNameinput"
-                                                class="form-control" placeholder="+(62) 8212 45123">
+                                            <input type="text" name="no_hp_pelapor" value="{{ old('no_hp_pelapor') }}"
+                                                id="lastNameinput" class="form-control" placeholder="+(62) 8212 45123">
+                                            @error('no_hp_pelapor')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-lg-6 col-sm-12">
                                         <div class="mb-3">
                                             <label for="phonenumberInput" class="form-label">Alamat/Tempat Tugas
                                                 (Pelapor)</label>
-                                            <input type="text" name="alamat_pelapor" class="form-control"
-                                                placeholder="Masukkan alamat">
+                                            <input type="text" name="alamat_pelapor" value="{{ old('alamat_pelapor') }}"
+                                                class="form-control" placeholder="Masukkan alamat">
+                                            @error('alamat_pelapor')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-lg-6 col-sm-12">
@@ -76,6 +90,9 @@
                                             <label for="emailidInput" class="form-label">Email Address</label>
                                             <input type="email" class="form-control"
                                                 value="{{ substr(auth()->user()->email, 0, 3) }}{{ str_repeat('•', strlen(auth()->user()->email) - 6) }}{{ substr(auth()->user()->email, -3) }}"disabled>
+                                            @error('email')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div><!--end col-->
                                 </div><!--end row-->
@@ -95,16 +112,24 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Nama (Terlapor) <span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="terlapor[0][nama]" class="form-control"
+                                                <input type="text" name="terlapor[0][nama]"
+                                                    value="{{ old('terlapor.' . 0 . '.nama') }}" class="form-control"
                                                     placeholder="Masukkan nama terlapor">
+                                                @error('terlapor.0.nama')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Jabatan/Unit (Terlapor) <span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="terlapor[0][jabatan]" class="form-control"
+                                                <input type="text" name="terlapor[0][jabatan]"
+                                                    value="{{ old('terlapor.' . 0 . '.jabatan') }}" class="form-control"
                                                     placeholder="Masukkan Bagian/Unit terlapor">
+                                                @error('terlapor.0.jabatan')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-lg-4 col-sm-12">
@@ -112,7 +137,11 @@
                                                 <label class="form-label">Unit Kerja (Terlapor) <span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="terlapor[0][unit]"
+                                                    value="{{ old('terlapor.' . 0 . '.unit') }}"
                                                     placeholder="Masukkan Unit Kerja Terlapor">
+                                                @error('terlapor.0.unit')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div><!--end col-->
                                     </div><!--end row-->
@@ -122,7 +151,10 @@
                                     <div class="col-lg-6 col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">Kronologi <span class="text-danger">*</span></label>
-                                            <textarea class="ckeditor-classic" name="kronologi" cols="30" rows="10"></textarea>
+                                            <textarea class="ckeditor-classic" name="kronologi" cols="30" rows="10">{{ old('kronologi') }}</textarea>
+                                            @error('kronologi')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                             {{-- <div class="ckeditor-classic"></div> --}}
                                             {{-- <textarea name="kronologi" class="form-control" id="" cols="30" rows="15"></textarea> --}}
                                         </div>
@@ -134,71 +166,28 @@
                                                     <label class="form-label">Jenis Pelanggaran <span
                                                             class="text-danger">*</span></label>
                                                     <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="form-check form-check form-check-primary mb-3">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="benturanKepentingan" value="Benturan Kepentingan"
-                                                                    name="jenis_pelanggaran[]">
-                                                                <label class="form-check-label" for="benturanKepentingan">
-                                                                    Benturan Kepentingan
-                                                                </label>
+                                                        @php
+                                                            $jenisPelanggaran = App\Models\JenisPelanggaran::get();
+                                                        @endphp
+                                                        @foreach ($jenisPelanggaran as $item)
+                                                            <div class="col-6">
+                                                                <div class="form-check form-check form-check-primary mb-3">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="{{ $item->nama }}"
+                                                                        value="{{ $item->nama }}"
+                                                                        name="jenis_pelanggaran[]"
+                                                                        @if (in_array($item->nama, old('jenis_pelanggaran', []))) checked @endif>
+                                                                    <label class="form-check-label"
+                                                                        for="{{ $item->nama }}">
+                                                                        {{ $item->nama }}
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-check form-check form-check-primary mb-3">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="indispliner" value="Indispliner"
-                                                                    name="jenis_pelanggaran[]">
-                                                                <label class="form-check-label" for="indispliner">
-                                                                    Indispliner
-                                                                </label>
+                                                        @endforeach
+                                                        @error('jenis_pelanggaran')
+                                                            <div class="invalid-feedback d-block">{{ $message }}
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="form-check form-check form-check-primary mb-3">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="penyuapanKecurangan"
-                                                                    value="Penyuapan dan Kecurangan"
-                                                                    name="jenis_pelanggaran[]">
-                                                                <label class="form-check-label" for="penyuapanKecurangan">
-                                                                    Penyuapan dan Kecurangan
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-check form-check form-check-primary mb-3">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="etikaMoral" value="Pelanggaran Etika dan Moral"
-                                                                    name="jenis_pelanggaran[]">
-                                                                <label class="form-check-label" for="etikaMoral">
-                                                                    Pelanggaran Etika dan Moral
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="form-check form-check form-check-primary mb-3">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="gratifikasi" value="Gratifikasi"
-                                                                    name="jenis_pelanggaran[]">
-                                                                <label class="form-check-label" for="gratifikasi">
-                                                                    Gratifikasi
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-check form-check form-check-primary mb-3">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="pelanggaranProsedur" value="Pelanggaran Prosedur"
-                                                                    name="jenis_pelanggaran[]">
-                                                                <label class="form-check-label" for="pelanggaranProsedur">
-                                                                    Pelanggaran Prosedur
-                                                                </label>
-                                                            </div>
-                                                        </div>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div><!--end col-->
@@ -207,7 +196,11 @@
                                                     <label class="form-label">Perkiraan Waktu
                                                         Pelanggaran <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control date"
-                                                        name="waktu_pelanggaran" placeholder="Pilih Tanggal Kejadian">
+                                                        name="waktu_pelanggaran" placeholder="Pilih Tanggal Kejadian"
+                                                        value="{{ old('waktu_pelanggaran') }}">
+                                                    @error('waktu_pelanggaran')
+                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-12">
@@ -215,7 +208,11 @@
                                                     <label class="form-label">Tempat Pelanggaran
                                                         <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control" name="tempat_pelanggaran"
-                                                        placeholder="Masukkan Tempat Pelanggaran">
+                                                        placeholder="Masukkan Tempat Pelanggaran"
+                                                        value="{{ old('tempat_pelanggaran') }}">
+                                                    @error('tempat_pelanggaran')
+                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-12">
@@ -224,7 +221,11 @@
                                                         nilai kerugian perusahaan/
                                                         konsekuensi yang diterima perusahaan</label>
                                                     <input type="text" class="form-control" name="konsekuensi"
+                                                        value="{{ old('konsekuensi') }}"
                                                         placeholder="Masukkan Perkiraan Kerugian/Konsekuensi yang diterima Perusahaan">
+                                                    @error('konsekuensi')
+                                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div><!--end col-->
                                         </div>
@@ -244,24 +245,21 @@
                                     <div class="row data-terlibat">
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Nama (Terlibat) <span
-                                                        class="text-danger">*</span></label>
+                                                <label class="form-label">Nama (Terlibat)</label>
                                                 <input type="text" name="terlibat[0][nama]" class="form-control"
                                                     placeholder="Masukkan Nama Terlibat">
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Jabatan/Unit (Terlibat) <span
-                                                        class="text-danger">*</span></label>
+                                                <label class="form-label">Jabatan/Unit (Terlibat)</label>
                                                 <input type="text" name="terlibat[0][jabatan]" class="form-control"
                                                     placeholder="Masukkan Bagian/Unit Terlibat">
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Unit Kerja (Terlibat) <span
-                                                        class="text-danger">*</span></label>
+                                                <label class="form-label">Unit Kerja (Terlibat)</label>
                                                 <input type="text" class="form-control" name="terlibat[0][unit]"
                                                     placeholder="Masukkan Unit Kerja Terlibat">
                                             </div>
@@ -282,24 +280,21 @@
                                     <div class="row data-saksi">
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Nama (Saksi) <span
-                                                        class="text-danger">*</span></label>
+                                                <label class="form-label">Nama (Saksi)</label>
                                                 <input type="text" name="saksi[0][nama]" class="form-control"
                                                     placeholder="Masukkan Nama Saksi">
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Jabatan/Unit (Saksi) <span
-                                                        class="text-danger">*</span></label>
+                                                <label class="form-label">Jabatan/Unit (Saksi)</label>
                                                 <input type="text" name="saksi[0][jabatan]" class="form-control"
                                                     placeholder="Masukkan Bagian/Unit Saksi">
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Unit Kerja (Saksi) <span
-                                                        class="text-danger">*</span></label>
+                                                <label class="form-label">Unit Kerja (Saksi)</label>
                                                 <input type="text" class="form-control" name="saksi[0][unit]"
                                                     placeholder="Masukkan Unit Kerja Saksi">
                                             </div>
@@ -320,6 +315,9 @@
                                             <label class="form-label">File</label>
                                             <input type="file" name="bukti[0][file]" class="form-control"
                                                 placeholder="Enter your firstname" id="firstNameinput">
+                                            @error('bukti.0.file')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-2">
@@ -517,19 +515,19 @@
                 <div class="row data-terlibat mt-sm-3">
                     <div class="col-lg-4 col-sm-12">
                         <div class="mb-3">
-                            <label class="form-label">Nama (Terlibat) <span class="text-danger">*</span></label>
+                            <label class="form-label">Nama (Terlibat)</label>
                             <input type="text" name="terlibat[${indexTerlibat}][nama]" class="form-control" placeholder="Masukkan Nama Terlibat">
                         </div>
                     </div><!--end col-->
                     <div class="col-lg-4 col-sm-12">
                         <div class="mb-3">
-                            <label class="form-label">Jabatan/Bagian (Terlibat) <span class="text-danger">*</span></label>
+                            <label class="form-label">Jabatan/Bagian (Terlibat)</label>
                             <input type="text" name="terlibat[${indexTerlibat}][jabatan]" class="form-control" placeholder="Masukkan Jabatan/Bagian Terlibat">
                         </div>
                     </div><!--end col-->
                     <div class="col-lg-4 col-sm-12">
                         <div class="mb-3">
-                            <label class="form-label">Unit Kerja (Terlibat) <span class="text-danger">*</span></label>
+                            <label class="form-label">Unit Kerja (Terlibat)</label>
                             <input type="text" class="form-control" name="terlibat[${indexTerlibat}][unit]" placeholder="Masukkan Unit Kerja Terlibat">
                         </div>
                     </div><!--end col-->
@@ -557,19 +555,19 @@
                 <div class="row data-saksi mt-sm-3">
                     <div class="col-lg-4 col-sm-12">
                         <div class="mb-3">
-                            <label class="form-label">Nama (Saksi) <span class="text-danger">*</span></label>
+                            <label class="form-label">Nama (Saksi)</label>
                             <input type="text" name="saksi[${indexSaksi}][nama]" class="form-control" placeholder="Masukkan Nama Saksi">
                         </div>
                     </div><!--end col-->
                     <div class="col-lg-4 col-sm-12">
                         <div class="mb-3">
-                            <label class="form-label">Jabatan/Bagian (Saksi) <span class="text-danger">*</span></label>
+                            <label class="form-label">Jabatan/Bagian (Saksi)</label>
                             <input type="text" name="saksi[${indexSaksi}][jabatan]" class="form-control" placeholder="Masukkan Jabatan/Bagian Saksi">
                         </div>
                     </div><!--end col-->
                     <div class="col-lg-4 col-sm-12">
                         <div class="mb-3">
-                            <label class="form-label">Unit Kerja (Saksi) <span class="text-danger">*</span></label>
+                            <label class="form-label">Unit Kerja (Saksi)</label>
                             <input type="text" class="form-control" name="saksi[${indexSaksi}][unit]" placeholder="Masukkan Unit Kerja Saksi">
                         </div>
                     </div><!--end col-->
