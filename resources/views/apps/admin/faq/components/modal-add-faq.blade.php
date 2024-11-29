@@ -15,16 +15,15 @@
                                 <div class="mb-3">
                                     <label for="namaFile" class="form-label">FAQ<span
                                             class="text-danger">*</span></label>
-                                    <textarea type="text" class="form-control" cols="40" rows="10" name="faq"
+                                    <textarea type="text" class="form-control" cols="15" rows="5" name="faq"
                                         placeholder="Masukkan Pertanyaan" required></textarea>
                                 </div>
                             </div><!--end col-->
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="file" class="form-label">Answer <span
+                                    <label for="file" class="form-label">Answer<span
                                             class="text-danger">*</span></label>
-                                    <textarea type="text" class="form-control" placeholder="Masukkan Jawaban" name="answer" cols="40"
-                                        rows="10" required></textarea>
+                                    <textarea type="text" class="form-control answerCk" name="answer" placeholder="Masukkan Jawaban"></textarea>
                                 </div>
                             </div><!--end col-->
                         </div><!--end row-->

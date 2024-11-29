@@ -32,9 +32,10 @@
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
                                 <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    style="text-decoration: none; color: #2826ac;"
                                     data-target="#collapse{{ $index }}" aria-expanded="true"
                                     aria-controls="{{ $index }}">
-                                    {{ $item->faq }}
+                                    {!! $item->faq !!}
                                 </button>
                             </h5>
                         </div>
@@ -42,7 +43,7 @@
                         <div id="collapse{{ $index }}" class="collapse" aria-labelledby="headingOne"
                             data-parent="#accordionExample">
                             <div class="card-body">
-                                {{ $item->answer }}
+                                {!! $item->answer !!}
                             </div>
                         </div>
                     </div>

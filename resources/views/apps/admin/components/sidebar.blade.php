@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link {{ Request::is('*user*') ? 'active' : '' }}"
+                        <a class="nav-link menu-link {{ Request::is('*faq-admin*') ? 'active' : '' }}"
                             href="{{ route('faq-admin.index') }}">
                             <i class="ri-question-fill"></i> <span data-key="t-widgets">FAQ</span>
                         </a>

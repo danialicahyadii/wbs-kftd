@@ -128,8 +128,8 @@
                                                             href="{{ route('pengaduan.show', Crypt::encrypt($row->id)) }}"
                                                             onclick="ViewTickets(this)"
                                                             class="fw-medium link-primary">#{{ $loop->iteration }}</a></td>
-                                                    <td>{{ $row->faq }}</td>
-                                                    <td>{{ $row->answer }}</td>
+                                                    <td>{!! $row->faq !!}</td>
+                                                    <td>{!! $row->answer !!}</td>
                                                     <td>
                                                         <div class="dropdown">
                                                             <button class="btn btn-soft-secondary btn-sm dropdown"
@@ -199,6 +199,32 @@
     <script src="{{ asset('interactive/assets/js/pages/ticketlist.init.js') }}"></script>
     <script src="{{ asset('interactive/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{{ asset('interactive/assets/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
+    <script>
+        var ckClassicEditor = document.querySelectorAll(".faqCk")
+        ckClassicEditor.forEach(function() {
+            ClassicEditor
+                .create(document.querySelector('.faqCk'))
+                .then(function(editor) {
+                    editor.ui.view.editable.element.style.height = '200px';
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        });
+
+        var ckClassicEditor2 = document.querySelectorAll(".answerCk")
+        ckClassicEditor2.forEach(function() {
+            ClassicEditor
+                .create(document.querySelector('.answerCk'))
+                .then(function(editor) {
+                    editor.ui.view.editable.element.style.height = '200px';
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        });
+    </script>
     <script>
         function createPengaduan() {
             window.location.href = "{{ route('pengaduan.create') }}";
