@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CaraMelapor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CaraMelaporController extends Controller
 {
@@ -12,7 +13,11 @@ class CaraMelaporController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Delete Tutorial!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        $tutorial = CaraMelapor::orderBy('no_urut')->get();
+        return view('apps.admin.tutorial.index', compact('tutorial'));
     }
 
     /**
@@ -28,7 +33,20 @@ class CaraMelaporController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $iconUrl = asset('storage/' . $iconPath);
+        $icon = $request->icon_tutorial ?? null;
+        if($request->hasFile('icon_tutorial')){
+            $iconName = $icon->hashName();
+            $iconPath = $icon->storeAs('icon/cara-melapor', $iconName, 'public');
+        }
+        CaraMelapor::create([
+            'no_urut' => $request->no_urut,
+            'judul' => $request->judul,
+            'detail' => $request->detail,
+            'icon' => $iconPath
+        ]);
+        return back()->with('toast_success', 'Tutorial Berhasil Ditambahkan!');
+
     }
 
     /**
@@ -60,6 +78,8 @@ class CaraMelaporController extends Controller
      */
     public function destroy(CaraMelapor $caraMelapor)
     {
-        //
+        Storage::disk('public')->delete($caraMelapor->icon);
+        $caraMelapor->delete();
+        return back()->with('toast_success', 'Tutorial Berhasil Dihapus!');
     }
 }

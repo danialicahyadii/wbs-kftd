@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('cara_melapors', function (Blueprint $table) {
             $table->id();
+            $table->smallInteger('no_urut');
             $table->string('judul');
-            $table->string('detail');
+            $table->text('detail');
+            $table->string('icon');
             $table->timestamps();
         });
     }

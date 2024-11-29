@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaksiSaksiController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TerlaporController;
+use App\Http\Controllers\TutorialController;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

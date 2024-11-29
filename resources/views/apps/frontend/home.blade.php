@@ -355,57 +355,23 @@
                 </div>
             </div> --}}
             <div class="row">
-                <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="card-service text-center rounded">
-                        <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/icon/Icon White.png') }}" alt="" class="p-2 rounded"
-                                width="50">
-                            <h1 class="text-white">1</h1>
+                @php
+                    $tutorial = App\Models\CaraMelapor::orderBy('no_urut')->get();
+                @endphp
+                @foreach ($tutorial as $item => $row)
+                    <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="card-service text-center rounded">
+                            <div class="service-icon">
+                                <img src="{{ asset('storage/' . $row->icon) }}" alt="" class="p-2 rounded"
+                                    width="50">
+                                <h1 class="text-white">{{ $row->no_urut }}</h1>
+                            </div>
+                            <h3 class="text-white">{{ $row->judul }}</h3>
+                            <p class="text-white">{{ $row->detail }}
+                            </p>
                         </div>
-                        <h3 class="text-white">Login/Registrasi</h3>
-                        <p class="text-white">Pelapor Login/Registrasi terlebih dahulu untuk dapat mengisi form pelaporan
-                            pelanggaran. Kami menjamin kerahasiaan identitas dan Pelapor dapat melaporkan secara anonim</p>
                     </div>
-                </div>
-
-                <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1500">
-                    <div class="card-service text-center rounded">
-                        <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/icon/Icon 2 White.png') }}" alt="" class="p-2 rounded"
-                                width="50">
-                            <h1 class="text-white">2</h1>
-                        </div>
-                        <h3 class="text-white">Mengisi form pelaporan</h3>
-                        <p class="text-white">Pelapor Mengisi form pelaporan Pelanggaran kemudian mengupload bukti pendukung
-                            kronologi kejadian secara lengkap guna mempermudah Admin untuk memverifikasi laporan.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="2000">
-                    <div class="card-service text-center rounded">
-                        <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/icon/Icon 3 White.png') }}" alt="" class="p-2 rounded"
-                                width="50">
-                            <h1 class="text-white">3</h1>
-                        </div>
-                        <h3 class="text-white">Submit Form pelaporan</h3>
-                        <p class="text-white"> Submit Form pelaporan , dan selanjutnya akan mendapatkan Nomor Tiket
-                            Pelaporan
-                            dan notifikasi pelaporan yang dikirim lewat email pelapor. </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="2500">
-                    <div class="card-service text-center rounded">
-                        <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/icon/Icon 4 White.png') }}" alt=""
-                                class="p-2 rounded rounded-2" width="50">
-                            <h1 class="text-white">4</h1>
-                        </div>
-                        <h3 class="text-white">Monitoring</h3>
-                        <p class="text-white">Nomer tiket pelaporan digunakan untuk monitoring tindak lanjut pelaporan jika
-                            sewaktu-waktu Admin membutuhkan data tambahan yang diperlukan untuk verifikasi pelaporan.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -617,8 +583,8 @@
     </section>
     <!--================  Dedicated server section end =================-->
     <!-- Modal -->
-    <div class="modal fade" id="verificationModal" tabindex="-1" role="dialog"
-        aria-labelledby="verificationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="verificationModal" tabindex="-1" role="dialog" aria-labelledby="verificationModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="{{ route('verification.send') }}" method="post">
                 @csrf

@@ -40,16 +40,22 @@
                 </li>
                 @role('Admin')
                     <li class="menu-title"><span data-key="t-menu">Admin</span></li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link menu-link {{ Request::is('*user*') ? 'active' : '' }}"
                             href="{{ route('pengaduan.index') }}">
                             <i class="ri-user-fill"></i> <span data-key="t-widgets">Profil</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link menu-link {{ Request::is('*faq-admin*') ? 'active' : '' }}"
                             href="{{ route('faq-admin.index') }}">
                             <i class="ri-question-fill"></i> <span data-key="t-widgets">FAQ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ Request::is('*cara-melapor*') ? 'active' : '' }}"
+                            href="{{ route('cara-melapor.index') }}">
+                            <i class="ri-file-list-fill"></i> <span data-key="t-widgets">Cara Melapor</span>
                         </a>
                     </li>
                 @endrole
