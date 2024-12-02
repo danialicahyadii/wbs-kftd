@@ -6,9 +6,8 @@
                 <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
                     colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px"></lord-icon>
                 <div class="mt-4 text-center">
-                    <h4>You are about to delete a order ?</h4>
-                    <p class="text-muted fs-14 mb-4">Deleting your order will remove all of
-                        your information from our database.</p>
+                    <h4>Kamu ingin Menghapus Pengaduan ?</h4>
+                    <p class="text-muted fs-14 mb-4">Pengaduan akan dihapus beserta dengan detail detailnya</p>
                     <div class="hstack gap-2 justify-content-center remove">
                         <form action="{{ route('pengaduan.destroy', $row->id) }}" method="POST"
                             enctype="multipart/form-data">

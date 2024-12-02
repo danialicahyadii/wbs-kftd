@@ -14,7 +14,8 @@
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label class="form-label">Icon</label>
-                                    <input type="file" class="form-control" name="icon_tutorial" required>
+                                    <input type="file" class="form-control" name="icon_tutorial" required
+                                        accept=".jpg,.jpeg,.png">
                                 </div>
                             </div>
                             <div class="col-12">

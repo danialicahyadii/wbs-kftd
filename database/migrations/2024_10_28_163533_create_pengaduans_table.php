@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('tempat_pelanggaran');
             $table->string('jenis_pelanggaran');
             $table->longText('konsekuensi');
-            $table->date('finish_date')->nullable();
+            $table->date('finish_date')->nullable();    
             $table->timestamps();
         });
     }

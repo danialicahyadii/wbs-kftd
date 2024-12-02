@@ -277,8 +277,8 @@
                                                                         data-id="{{ Crypt::encrypt($row->id) }}"><i
                                                                             class="ri-eye-fill align-bottom me-2 text-muted"></i>
                                                                         View</button></li>
-                                                                <li><a class="dropdown-item edit-item-btn"
-                                                                        href="#showModal" data-bs-toggle="modal"><i
+                                                                <li><a class="dropdown-item"
+                                                                        href="{{ route('pengaduan.print', $row->id) }}"><i
                                                                             class="ri-printer-fill align-bottom me-2 text-muted"></i>
                                                                         Print</a></li>
                                                                 <li>

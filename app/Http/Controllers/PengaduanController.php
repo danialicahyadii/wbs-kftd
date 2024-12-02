@@ -33,6 +33,9 @@ class PengaduanController extends Controller
         }else{
             $pengaduan = Pengaduan::where('user_id', Auth::user()->id)->get();
         }
+        $title = 'Delete!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('apps.admin.pengaduan.index', compact('pengaduan'));
     }
 
@@ -182,7 +185,7 @@ class PengaduanController extends Controller
         // Notifikasi
         Alert::success('Success Title', 'Success Message');
 
-        return redirect('pengaduan');
+        return redirect('pengaduan')->with('toast_success', 'Pengaduan Berhasil Dibuat!');
     }
 
     /**
@@ -195,6 +198,9 @@ class PengaduanController extends Controller
         $activities = Activity::where('subject_type', Pengaduan::class)
                       ->where('subject_id', $laporan->id)
                       ->get();
+        $title = 'Delete!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         // dd($activities->where('description', 'like', '%Keren%'));
         return view('apps.admin.pengaduan.show', compact('laporan', 'activities', 'jenisPelanggaran'));
     }
@@ -222,6 +228,11 @@ class PengaduanController extends Controller
             $pengaduan->update([
                 'status' => $request->status,
             ]);
+            if($pengaduan->statusPengaduan->nama === 'Selesai'){
+                $pengaduan->update([
+                    'finish_date' => Carbon::now(),
+                ]);
+            }
             activity()
             ->performedOn($pengaduan)
             ->withProperties(['status' => $pengaduan->statusPengaduan->nama])
@@ -335,5 +346,11 @@ class PengaduanController extends Controller
         } else {
             return response()->json(['message' => 'File not found.'], 404);
         }
+    }
+
+    public function print($id)
+    {
+        $pengaduan = Pengaduan::find($id);
+        return view('apps.admin.pengaduan.print', compact('pengaduan'));
     }
 }

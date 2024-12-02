@@ -23,8 +23,8 @@
                                             <div class="col-md-auto">
                                                 <div class="avatar-md">
                                                     <div class="avatar-title bg-white rounded-circle">
-                                                        <img src="{{ asset('interactive/assets/images/companies/img-4.png') }}"
-                                                            alt="" class="avatar-xs">
+                                                        <img src="{{ asset('interactive/assets/images/logo_kftd.png') }}"
+                                                            class="avatar-xs">
                                                     </div>
                                                 </div>
                                             </div>
@@ -64,7 +64,7 @@
                                     <div class="col-md-auto">
                                         <div class="hstack gap-1 flex-wrap">
                                             <button type="button" class="btn py-0 fs-16 text-body"
-                                                onclick="window.print()">
+                                                onclick="printPdf('{{ route('pengaduan.print', $laporan->id) }}')">
                                                 <i class="ri-printer-line"></i>
                                             </button>
                                         </div>
@@ -113,7 +113,7 @@
                                                     <h6 class="mb-3 fw-semibold text-uppercase float-start">Kronologi</h6>
                                                     <button type="button" class="btn btn-soft-primary btn-sm float-end"
                                                         data-bs-toggle="modal"
-                                                        @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#kronologi" @endif><i
+                                                        @if ($laporan->status !== 1 && Auth::user()->getRoleName() !== 'Admin') onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#kronologi" @endif><i
                                                             class="ri-edit-2-fill me-1 align-bottom"></i> Update</button>
                                                 </div>
                                                 {{-- <p>{!! $laporan->kronologi !!}</p> --}}
@@ -133,7 +133,7 @@
                                                         Pelanggaran</h6>
                                                     <button type="button" class="btn btn-soft-primary btn-sm float-end"
                                                         data-bs-toggle="modal"
-                                                        @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#jenis-pelanggaran" @endif><i
+                                                        @if ($laporan->status !== 1 && Auth::user()->getRoleName() !== 'Admin') onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#jenis-pelanggaran" @endif><i
                                                             class="ri-edit-2-fill me-1 align-bottom"></i> Update</button>
                                                 </div>
                                                 <ul class="ps-4 vstack gap-2">
@@ -147,7 +147,7 @@
                                                     <h6 class="mb-3 fw-semibold text-uppercase float-start">Konsekuensi</h6>
                                                     <button type="button" class="btn btn-soft-primary btn-sm float-end"
                                                         data-bs-toggle="modal"
-                                                        @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#konsekuensi" @endif><i
+                                                        @if ($laporan->status !== 1 && Auth::user()->getRoleName() !== 'Admin') onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#konsekuensi" @endif><i
                                                             class="ri-edit-2-fill me-1 align-bottom"></i> Update</button>
                                                 </div>
                                                 <p>{{ $laporan->konsekuensi }}</p>
@@ -296,22 +296,24 @@
                                 <!-- ene col -->
                                 <div class="col-xl-3 col-lg-4">
                                     @role('Admin')
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="card-title mb-0">Update Status</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="container">
-                                                    <div class="clearfix">
-                                                        <p class="fw-semibold float-start">Status:</p>
-                                                        <button type="button" data-bs-toggle="modal"
-                                                            data-bs-target="#statusAlbert"
-                                                            class="btn btn-secondary float-end">Update</button>
+                                        @if ($laporan->statusPengaduan->nama !== 'Selesai')
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="card-title mb-0">Update Status</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="container">
+                                                        <div class="clearfix">
+                                                            <p class="fw-semibold float-start">Status:</p>
+                                                            <button type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#statusAlbert"
+                                                                class="btn btn-secondary float-end">Update</button>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <!--end card-body-->
                                             </div>
-                                            <!--end card-body-->
-                                        </div>
+                                        @endif
                                     @endrole
                                     <div class="card">
                                         <div class="card-header align-items-center d-flex border-bottom-dashed">
@@ -320,7 +322,7 @@
                                             <div class="flex-shrink-0">
                                                 <button type="button" class="btn btn-soft-danger btn-sm"
                                                     data-bs-toggle="modal"
-                                                    @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#terlapor" @endif><i
+                                                    @if ($laporan->status !== 1 && Auth::user()->getRoleName() !== 'Admin') onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#terlapor" @endif><i
                                                         class="ri-add-line me-1 align-bottom"></i> Add</button>
                                             </div>
                                         </div>
@@ -341,9 +343,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="flex-shrink-0 ms-2">
-                                                            <button type="button" onclick="comment()"
-                                                                class="btn btn-sm btn-outline-danger"><i
-                                                                    class="ri-delete-bin-line align-middle"></i></button>
+                                                            <a href="{{ route('terlapor.destroy', $item->id) }}"
+                                                                class="btn btn-sm btn-outline-danger"
+                                                                data-confirm-delete="true"><i
+                                                                    class="ri-delete-bin-line align-middle"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -357,7 +360,7 @@
                                             <div class="flex-shrink-0">
                                                 <button type="button" class="btn btn-soft-danger btn-sm"
                                                     data-bs-toggle="modal"
-                                                    @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#pihakTerlibat" @endif><i
+                                                    @if ($laporan->status !== 1 && Auth::user()->getRoleName() !== 'Admin') onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#pihakTerlibat" @endif><i
                                                         class="ri-add-line me-1 align-bottom"></i> Add</button>
                                             </div>
                                         </div>
@@ -378,16 +381,16 @@
                                                             </div>
                                                         </div>
                                                         <div class="flex-shrink-0 ms-2">
-                                                            <button type="button" onclick="comment()"
-                                                                class="btn btn-sm btn-outline-danger"><i
-                                                                    class="ri-delete-bin-line align-middle"></i></button>
+                                                            <a href="{{ route('pihak-terlibat.destroy', $item->id) }}"
+                                                                class="btn btn-sm btn-outline-danger"
+                                                                data-confirm-delete="true"><i
+                                                                    class="ri-delete-bin-line align-middle"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             @endforeach
                                         </div><!-- end card body -->
                                     </div>
-
                                     <div class="card">
                                         <div class="card-header align-items-center d-flex border-bottom-dashed">
                                             <h4 class="card-title mb-0 flex-grow-1">Saksi-saksi
@@ -395,7 +398,7 @@
                                             <div class="flex-shrink-0">
                                                 <button type="button" class="btn btn-soft-warning btn-sm"
                                                     data-bs-toggle="modal"
-                                                    @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else   data-bs-target="#saksiSaksi" @endif><i
+                                                    @if ($laporan->status !== 1 && Auth::user()->getRoleName() !== 'Admin') onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else   data-bs-target="#saksiSaksi" @endif><i
                                                         class="ri-add-line me-1 align-bottom"></i> Add</button>
                                             </div>
                                         </div>
@@ -415,16 +418,16 @@
                                                             </div>
                                                         </div>
                                                         <div class="flex-shrink-0 ms-2">
-                                                            <button type="button" onclick="comment()"
-                                                                class="btn btn-sm btn-outline-danger"><i
-                                                                    class="ri-delete-bin-line align-middle"></i></button>
+                                                            <a href="{{ route('saksi-saksi.destroy', $item->id) }}"
+                                                                class="btn btn-sm btn-outline-danger"
+                                                                data-confirm-delete="true"><i
+                                                                    class="ri-delete-bin-line align-middle"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             @endforeach
                                         </div><!-- end card body -->
                                     </div>
-
                                     <div class="card">
                                         <div class="card-header align-items-center d-flex border-bottom-dashed">
                                             <h4 class="card-title mb-0 flex-grow-1">File Bukti
@@ -432,7 +435,7 @@
                                             <div class="flex-shrink-0">
                                                 <button type="button" class="btn btn-soft-info btn-sm"
                                                     data-bs-toggle="modal"
-                                                    @if ($laporan->status !== 1) onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#buktiFile" @endif><i
+                                                    @if ($laporan->status !== 1 && Auth::user()->getRoleName() !== 'Admin') onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else data-bs-target="#buktiFile" @endif><i
                                                         class="ri-upload-2-fill me-1 align-bottom"></i> Upload</button>
                                             </div>
                                         </div>
@@ -820,8 +823,8 @@
             });
         }
 
-        function printPdf() {
-            window.print()
+        function printPdf(url) {
+            window.location.href = url;
         }
 
         function downloadFile(url) {
@@ -837,17 +840,6 @@
         }
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const activeTab = localStorage.getItem('activeTab');
-            if (activeTab) {
-                $('#myTab a[href="' + activeTab + '"]').tab('show');
-            }
-
-            $('#myTab a').on('click', function(e) {
-                localStorage.setItem('activeTab', $(this).attr('href'));
-            });
-        });
-
         $('.document-all').on('click', function() {
             var tabId = $(this).attr('href');
             console.log(tabId);

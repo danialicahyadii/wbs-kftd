@@ -752,14 +752,14 @@
                         {{-- <a class="dropdown-item" href="apps-chat.html"><i class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Messages</span></a> --}}
                         {{-- <a class="dropdown-item" href="apps-tasks-kanban.html"><i class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Taskboard</span></a> --}}
                         <a class="dropdown-item" href="/"><i
-                                class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
-                                class="align-middle">Help</span></a>
+                                class="mdi mdi-home text-muted fs-16 align-middle me-1"></i> <span
+                                class="align-middle">Home</span></a>
                         <div class="dropdown-divider"></div>
                         {{-- <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$5971.67</b></span></a> --}}
                         {{-- <a class="dropdown-item" href="pages-profile-settings.html"><span class="badge bg-success-subtle text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a> --}}
-                        <a class="dropdown-item" href="interactive/auth-lockscreen.html"><i
+                        {{-- <a class="dropdown-item" href="interactive/auth-lockscreen.html"><i
                                 class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
-                                class="align-middle">Lock screen</span></a>
+                                class="align-middle">Lock screen</span></a> --}}
                         <a class="dropdown-item" href="#"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
                                 class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span

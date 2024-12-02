@@ -31,9 +31,7 @@ Route::controller(FrontEndController::class)->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('download', [PengaduanController::class, 'download'])->name('file.download');
-    Route::get('/print', function(){
-        return view('print');
-    });
+    Route::get('pengaduan/print/{id}', [PengaduanController::class, 'print'])->name('pengaduan.print');
     Route::get('/notifications/unseen', [KomentarController::class, 'loadUnseenNotifications'])->name('notifications.unseen');
     Route::post('/notifications/mark-as-seen', [KomentarController::class, 'markAsSeen'])->name('notifications.mark_as_seen');
     Route::resources([
