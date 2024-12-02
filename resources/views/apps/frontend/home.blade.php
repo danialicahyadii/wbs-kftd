@@ -301,259 +301,84 @@
                 <h2 data-aos="fade-up" data-aos-duration="2500">Cara Melapor</h2>
                 <div class="section-style"></div>
             </div>
-
-            {{-- <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
-                        <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/006-server.png') }}" alt="">
-                            <h1>1</h1>
-                        </div>
-                        <h3>Login/Register ke Akun Anda</h3>
-                        <p class="text-dark">Sebelum melaporkan pengaduan Anda di Whistleblower System KBUMN, terlebih
-                            dahulu lakukan
-                            login/register </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
-                        <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/004-home-page.png') }}" alt="">
-                            <h1>2</h1>
-                        </div>
-                        <h3>Isi Form dan Ceritakan Kasusnya</h3>
-                        <p class="text-dark">Klik Menu "Pengaduan" dan lanjutkan dengan klik tombol tambah/"+" untuk
-                            mengisi formulir
-                            pengaduan yang telah disediakan </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
-                        <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/007-server-1.png') }}" alt="">
-                            <h1>3</h1>
-                        </div>
-                        <h3>Kirimkan Form Yang sudah terisi</h3>
-                        <p class="text-dark">Klik tombol "Simpan" untuk mengirim pengaduan anda, anda dapat memantau
-                            pengaduan yang dikirim
-                            dan melakukan komunikasi secara pribadi dengan administrator WBS </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card-service text-center rounded" style="background-color: #eb5f013d">
-                        <div class="service-icon">
-                            <img src="{{ asset('lorahost/img/home/png/009-art.png') }}" alt="">
-                            <h1>4</h1>
-                        </div>
-                        <h3>Kirimkan Form Yang sudah terisi</h3>
-                        <p class="text-dark">Klik tombol "Simpan" untuk mengirim pengaduan anda, anda dapat memantau
-                            pengaduan yang dikirim
-                            dan melakukan komunikasi secara pribadi dengan administrator WBS </p>
-                    </div>
-                </div>
-            </div> --}}
-            <div class="row">
-                @php
-                    $tutorial = App\Models\CaraMelapor::orderBy('no_urut')->get();
-                @endphp
-                @foreach ($tutorial as $item => $row)
-                    <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1000">
+            @php
+                $tutorial = App\Models\CaraMelapor::orderBy('no_urut')->get();
+            @endphp
+            @if ($tutorial->isEmpty())
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
                         <div class="card-service text-center rounded">
                             <div class="service-icon">
-                                <img src="{{ asset('storage/' . $row->icon) }}" alt="" class="p-2 rounded"
-                                    width="50">
-                                <h1 class="text-white">{{ $row->no_urut }}</h1>
+                                <img src="{{ asset('lorahost/img/home/png/006-server.png') }}" alt="">
+                                <h1 class="text-white">1</h1>
                             </div>
-                            <h3 class="text-white">{{ $row->judul }}</h3>
-                            <p class="text-white">{{ $row->detail }}
-                            </p>
+                            <h3 class="text-white">Login/Register ke Akun Anda</h3>
+                            <p class="text-white">Sebelum melaporkan pengaduan Anda di Whistleblower System KBUMN, terlebih
+                                dahulu lakukan
+                                login/register </p>
                         </div>
                     </div>
-                @endforeach
-            </div>
+
+                    <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="card-service text-center rounded">
+                            <div class="service-icon">
+                                <img src="{{ asset('lorahost/img/home/png/004-home-page.png') }}" alt="">
+                                <h1 class="text-white">2</h1>
+                            </div>
+                            <h3 class="text-white">Isi Form dan Ceritakan Kasusnya</h3>
+                            <p class="text-white">Klik Menu "Pengaduan" dan lanjutkan dengan klik tombol tambah/"+" untuk
+                                mengisi formulir
+                                pengaduan yang telah disediakan </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="card-service text-center rounded">
+                            <div class="service-icon">
+                                <img src="{{ asset('lorahost/img/home/png/007-server-1.png') }}" alt="">
+                                <h1 class="text-white">3</h1>
+                            </div>
+                            <h3 class="text-white">Kirimkan Form Yang sudah terisi</h3>
+                            <p class="text-white">Klik tombol "Simpan" untuk mengirim pengaduan anda, anda dapat memantau
+                                pengaduan yang dikirim
+                                dan melakukan komunikasi secara pribadi dengan administrator WBS </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="card-service text-center rounded">
+                            <div class="service-icon">
+                                <img src="{{ asset('lorahost/img/home/png/009-art.png') }}" alt="">
+                                <h1 class="text-white">4</h1>
+                            </div>
+                            <h3 class="text-white">Kirimkan Form Yang sudah terisi</h3>
+                            <p class="text-white">Klik tombol "Simpan" untuk mengirim pengaduan anda, anda dapat memantau
+                                pengaduan yang dikirim
+                                dan melakukan komunikasi secara pribadi dengan administrator WBS </p>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div class="row">
+                    @foreach ($tutorial as $item => $row)
+                        <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1000">
+                            <div class="card-service text-center rounded">
+                                <div class="service-icon">
+                                    <img src="{{ asset('storage/' . $row->icon) }}" alt="" class="p-2 rounded"
+                                        width="50">
+                                    <h1 class="text-white">{{ $row->no_urut }}</h1>
+                                </div>
+                                <h3 class="text-white">{{ $row->judul }}</h3>
+                                <p class="text-white">{{ $row->detail }}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </section>
     <!--================ Subscribe section end =================-->
 
-
-    <!--================  Dedicated server section start =================-->
-    {{-- <section class="section-margin">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-5 mb-5 mb-lg-0">
-          <h2 class="mb-4">Dedicated <br class="d-none d-xl-block"> and Secured server <br class="d-none d-xl-block"> for your website</h2>
-          <p>There third us one you. Spirit tree. Together have brought bez and to wherein a so above all female likeness open herbed rappear yielding own behold fourth without. You creature kind cree There third us one your</p>
-        </div>
-        <div class="col-lg-7">
-          <div class="text-center">
-            <img class="img-fluid" src="img/home/server.png" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-    <!--================  Dedicated server section end =================-->
-
-
-    <!--================ Testimonial section start =================-->
-    {{-- <section class="bg-gray section-padding">
-    <div class="container">
-      <div class="section-intro pb-85px text-center">
-        <h2>Happy Customer Says</h2>
-        <div class="section-style"></div>
-      </div>
-
-      <div class="owl-carousel owl-theme testimonial">
-        <div class="testimonial-item">
-          <div class="media">
-            <img class="testimonial-img" src="img/testimonial/testimonial1.png" alt="">
-            <div class="media-body">
-              <p>Give dry stars form. Us called an won't winged had land cru abundantly land Midst</p>
-              <h4>Forden miliard</h4>
-              <p class="testi-intro">CEO & Founder</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-item">
-          <div class="media">
-            <img class="testimonial-img" src="img/testimonial/testimonial2.png" alt="">
-            <div class="media-body">
-              <p>Give dry stars form. Us called an won't winged had land cru abundantly land Midst</p>
-              <h4>Manel Djuice</h4>
-              <p class="testi-intro">CEO & Founder</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-item">
-          <div class="media">
-            <img class="testimonial-img" src="img/testimonial/testimonial3.png" alt="">
-            <div class="media-body">
-              <p>Give dry stars form. Us called an won't winged had land cru abundantly land Midst</p>
-              <h4>Manel Djuice</h4>
-              <p class="testi-intro">CEO & Founder</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-item">
-          <div class="media">
-            <img class="testimonial-img" src="img/testimonial/testimonial2.png" alt="">
-            <div class="media-body">
-              <p>Give dry stars form. Us called an won't winged had land cru abundantly land Midst</p>
-              <h4>Manel Djuice</h4>
-              <p class="testi-intro">CEO & Founder</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-item">
-          <div class="media">
-            <img class="testimonial-img" src="img/testimonial/testimonial3.png" alt="">
-            <div class="media-body">
-              <p>Give dry stars form. Us called an won't winged had land cru abundantly land Midst</p>
-              <h4>Manel Djuice</h4>
-              <p class="testi-intro">CEO & Founder</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-item">
-          <div class="media">
-            <img class="testimonial-img" src="img/testimonial/testimonial2.png" alt="">
-            <div class="media-body">
-              <p>Give dry stars form. Us called an won't winged had land cru abundantly land Midst</p>
-              <h4>Manel Djuice</h4>
-              <p class="testi-intro">CEO & Founder</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-item">
-          <div class="media">
-            <img class="testimonial-img" src="img/testimonial/testimonial3.png" alt="">
-            <div class="media-body">
-              <p>Give dry stars form. Us called an won't winged had land cru abundantly land Midst</p>
-              <h4>Manel Djuice</h4>
-              <p class="testi-intro">CEO & Founder</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section> --}}
-    <!--================ Testimonial section end =================-->
-
-    {{-- <!--================ Feature section start =================-->
-    <section class="section-margin">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-feature card-feature-content">
-                        <h2>Whistleblowing System</h2>
-                        <p>Jika anda melihat atau mengetahui dugaan pelanggaran atau penyalahgunaan wewenang yang dilakukan
-                            pegawai di lingkungan Kementerian BUMN.Silahkan adukan dengan mengklik tombol Adukan Sekarang.
-                            jika aduan anda memenuhi syarat/kriteria WBS, maka akan diproses lebih lanjut. </p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-feature text-center">
-                        <div class="feature-icon">
-                            <img src="{{ asset('lorahost/img/home/png/001-unlock.png') }}" alt="">
-                        </div>
-                        <h3>Secured Server</h3>
-                        <p>Let place fly together third creature night at called fowl fill upon the grass </p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-feature text-center">
-                        <div class="feature-icon">
-                            <img src="{{ asset('lorahost/img/home/png/002-shield.png') }}" alt="">
-                        </div>
-                        <h3>Backup Facility</h3>
-                        <p>Let place fly together third creature night at called fowl fill upon the grass </p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-feature text-center">
-                        <div class="feature-icon">
-                            <img src="{{ asset('lorahost/img/home/png/003-pencil.png') }}" alt="">
-                        </div>
-                        <h3>Easy To Customize</h3>
-                        <p>Let place fly together third creature night at called fowl fill upon the grass </p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-feature text-center">
-                        <div class="feature-icon">
-                            <img src="{{ asset('lorahost/img/home/png/004-home-page.png') }}" alt="">
-                        </div>
-                        <h3>Free Domain Transfer</h3>
-                        <p>Let place fly together third creature night at called fowl fill upon the grass </p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-feature text-center">
-                        <div class="feature-icon">
-                            <img src="{{ asset('lorahost/img/home/png/005-headset.png') }}" alt="">
-                        </div>
-                        <h3>Live Chat Support</h3>
-                        <p>Let place fly together third creature night at called fowl fill upon the grass </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--================ Feature section end =================--> --}}
     <!--================  Dedicated server section start =================-->
     <section class="section-margin">
         <div class="container">
@@ -583,8 +408,8 @@
     </section>
     <!--================  Dedicated server section end =================-->
     <!-- Modal -->
-    <div class="modal fade" id="verificationModal" tabindex="-1" role="dialog" aria-labelledby="verificationModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="verificationModal" tabindex="-1" role="dialog"
+        aria-labelledby="verificationModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="{{ route('verification.send') }}" method="post">
                 @csrf
