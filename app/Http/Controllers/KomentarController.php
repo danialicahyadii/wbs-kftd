@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Events\MyEvent;
 use App\Models\Komentar;
 use App\Models\Pengaduan;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class KomentarController extends Controller
@@ -33,18 +35,23 @@ class KomentarController extends Controller
      */
     public function store(Request $request)
     {
-            $komen = Komentar::create([
-                'pengaduan_id' => $request->pengaduan_id,
+        $pengaduan = Pengaduan::find($request->pengaduan_id);
+        $komen = Komentar::create([
+                'pengaduan_id' => $pengaduan->id,
                 'user_id' => Auth::user()->id,
                 'parent_id' => $request->parent_id ?? null,
                 'komentar' => $request->komentar
             ]);
-
+        if($request->user()->id === $pengaduan->user_id){
+            $email = User::role('Admin')->first();
+        }else{
+            $email = $pengaduan->user->email;
+        }
             // event(new MyEvent($komen->komentar));
-            $pengaduan = Pengaduan::find($komen->pengaduan_id);
             activity()
             ->performedOn($pengaduan)
             ->log('Menambahkan Komentar "'.$komen->komentar.'"');
+            Mail::to($email)->send(new \App\Mail\Komentar($pengaduan, $komen));
             return back()->with('toast_success', 'Komentar Ditambahkan!');
     }
 

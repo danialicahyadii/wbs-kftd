@@ -23,7 +23,8 @@
                                 <div class="mb-3">
                                     <label for="file" class="form-label">File <span
                                             class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="file" id="file" required>
+                                    <input type="file" class="form-control" name="file" id="file"
+                                        accept=".jpg,.jpeg,.png,.pdf,.xlsx,.xls,.doc,.docx,.pptx,.mp4,.mp3" required>
                                     <input type="text" name="pengaduan_id" value="{{ $laporan->id }}" hidden>
                                 </div>
                             </div><!--end col-->

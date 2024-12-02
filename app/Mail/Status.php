@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Pengaduan as ModelsPengaduan;
+use App\Models\Pengaduan;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,16 +11,16 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Crypt;
 
-class Laporan extends Mailable
+class Status extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(protected ModelsPengaduan $pengaduan)
+    public function __construct(protected Pengaduan $pengaduan, $keterangan)
     {
-        //
+        $this->keterangan = $keterangan;
     }
 
     /**
@@ -39,11 +39,15 @@ class Laporan extends Mailable
     public function content(): Content
     {
         $url = route('pengaduan.show', Crypt::encrypt($this->pengaduan->id));
+        $pengaduan = $this->pengaduan->statusPengaduan;
+        $keterangan = $this->keterangan;
         return new Content(
-            markdown: 'emails.laporan',
+            markdown: 'mail.status',
             with: [
                 'tiket' => $this->pengaduan->tiket,
-                'url' => $url
+                'url' => $url,
+                'keterangan' => $keterangan,
+                'status' => $pengaduan->nama
             ]
         );
     }

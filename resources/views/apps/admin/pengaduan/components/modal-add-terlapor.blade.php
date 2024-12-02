@@ -16,7 +16,7 @@
                                     <label for="namaTerlapor" class="form-label">Nama (Terlapor) <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="nama"
-                                        placeholder="Masukkan Nama" id="namaTerlapor">
+                                        placeholder="Masukkan Nama" id="namaTerlapor" required>
                                 </div>
                             </div><!--end col-->
                             <div class="col-6">
@@ -24,7 +24,7 @@
                                     <label for="jabatanTerlapor" class="form-label">Jabatan/Bagian (Terlapor) <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="jabatan"
-                                        placeholder="Masukkan Jabatan" id="jabatanTerlapor">
+                                        placeholder="Masukkan Jabatan" id="jabatanTerlapor" required>
                                 </div>
                             </div><!--end col-->
                             <div class="col-6">
@@ -32,7 +32,7 @@
                                     <label for="unitTerlapor" class="form-label">Unit Kerja (Terlapor) <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="unit"
-                                        placeholder="Masukkan Unit Kerja" id="unitTerlapor">
+                                        placeholder="Masukkan Unit Kerja" id="unitTerlapor" required>
                                     <input type="text" name="pengaduan_id" value="{{ $laporan->id }}" hidden>
                                 </div>
                             </div><!--end col-->

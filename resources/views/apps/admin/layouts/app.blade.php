@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>WBS - KFTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="IT KFTD" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}">

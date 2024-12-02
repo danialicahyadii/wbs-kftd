@@ -6,12 +6,14 @@ use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Laporan as MailPengaduan;
+use App\Mail\Status;
 use App\Models\FileBukti;
 use App\Models\JenisPelanggaran;
 use App\Models\Komentar;
 use App\Models\PihakTerlibat;
 use App\Models\SaksiSaksi;
 use App\Models\Terlapor;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -237,6 +239,9 @@ class PengaduanController extends Controller
             ->performedOn($pengaduan)
             ->withProperties(['status' => $pengaduan->statusPengaduan->nama])
             ->log($request->keterangan);
+
+            Mail::to($request->user()->email)->send(new Status($pengaduan, $request->keterangan));
+
             return back()->with('toast_success', 'Status Berhasil Diperbarui');
         }elseif ($request->jenis_pelanggaran){
 
