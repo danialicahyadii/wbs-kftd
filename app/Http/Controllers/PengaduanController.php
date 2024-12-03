@@ -59,7 +59,7 @@ class PengaduanController extends Controller
             'alamat_pelapor' => 'required|string|max:255',
             'no_hp_pelapor' => 'required|numeric|digits_between:10,15',
             'jenis_pelanggaran' => 'required|array|min:1',
-            'kronologi' => 'required|string|max:1000',
+            'kronologi' => 'required|string',
             'waktu_pelanggaran' => 'required|date',
             'tempat_pelanggaran' => 'required|string|max:255',
             'konsekuensi' => 'nullable|string|max:255',
@@ -240,7 +240,7 @@ class PengaduanController extends Controller
             ->withProperties(['status' => $pengaduan->statusPengaduan->nama])
             ->log($request->keterangan);
 
-            Mail::to($request->user()->email)->send(new Status($pengaduan, $request->keterangan));
+            Mail::to($pengaduan->user->email)->send(new Status($pengaduan, $request->keterangan));
 
             return back()->with('toast_success', 'Status Berhasil Diperbarui');
         }elseif ($request->jenis_pelanggaran){
@@ -258,15 +258,17 @@ class PengaduanController extends Controller
                 'jenis_pelanggaran' => json_encode($newJenisPelanggaran)
             ]);
             if (!empty($newlyAdded)) {
-                activity()
+                activity('jenis_pelanggaran')
                     ->performedOn($pengaduan)
+                    ->withProperties(['jenis_pelanggaran' => $newlyAdded])
                     ->log('Jenis Pelanggaran Baru Ditambahkan: ' . implode(', ', $newlyAdded));
             }
 
             // Catat log perubahan untuk elemen yang dihapus
             if (!empty($removed)) {
-                activity()
+                activity('jenis_pelanggaran')
                     ->performedOn($pengaduan)
+                    ->withProperties(['jenis_pelanggaran' => $removed])
                     ->log('Jenis Pelanggaran Dihapus: ' . implode(', ', $removed));
             }
             // activity()
@@ -277,7 +279,7 @@ class PengaduanController extends Controller
             activity('konsekuensi')
             ->performedOn($pengaduan)
             ->withProperties(['konsekuensi' => $request->konsekuensi])
-            ->log('Menambahkan Kronologi');
+            ->log('Menambahkan Konsekuensi');
             return back()->with('toast_success', 'Konsekuensi Berhasil Ditambah');
         }
 

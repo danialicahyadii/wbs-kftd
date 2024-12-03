@@ -118,12 +118,19 @@
                                                 </div>
                                                 {{-- <p>{!! $laporan->kronologi !!}</p> --}}
                                                 {!! $laporan->kronologi !!}
-                                                @if ($activities->where('log_name', 'kronologi')->count() !== 0)
+                                                @if ($activities->where('log_name', 'kronologi')->isNotEmpty())
                                                     <p class="fw-bold">Kronologi Tambahan :</p>
                                                     @foreach ($activities->where('log_name', 'kronologi') as $item)
-                                                        <p class="mb-4">{{ $item->getExtraProperty('kronologi') }}
-                                                            <small>{{ $item->created_at->diffForHumans() }}</small>
-                                                        </p>
+                                                        <td class="d-flex">
+                                                            <div class="mb-3">
+                                                                <p class="mb-0 text-muted">
+                                                                    {{ $item->getExtraProperty('kronologi') }}
+                                                                </p>
+                                                                <small class="mb-0 text-muted">
+                                                                    {{ $item->created_at->diffForHumans() }} by
+                                                                    {{ $item->causer->name }}</small>
+                                                            </div>
+                                                        </td>
                                                     @endforeach
                                                 @endif
                                             </div>
@@ -141,6 +148,20 @@
                                                         <li>{{ $item }}</li>
                                                     @endforeach
                                                 </ul>
+                                                @if ($activities->where('log_name', 'konsekuensi')->isNotEmpty())
+                                                    <p class="fw-bold">Histori Jenis Pelanggaran :</p>
+                                                    @foreach ($activities->where('log_name', 'jenis_pelanggaran') as $item)
+                                                        <td class="d-flex">
+                                                            <div class="mb-3">
+                                                                <h5 class="fs-13 mb-0 text-muted">
+                                                                    {{ $item->description }}</h5>
+                                                                <small class="mb-0 text-muted">
+                                                                    {{ $item->created_at->diffForHumans() }} by
+                                                                    {{ $item->causer->name }}</small>
+                                                            </div>
+                                                        </td>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                             <div class="text-muted mt-4">
                                                 <div class="clearfix">
@@ -151,7 +172,7 @@
                                                             class="ri-edit-2-fill me-1 align-bottom"></i> Update</button>
                                                 </div>
                                                 <p>{{ $laporan->konsekuensi }}</p>
-                                                @if ($activities->where('log_name', 'konsekuensi'))
+                                                @if ($activities->where('log_name', 'konsekuensi')->isNotEmpty())
                                                     <p class="fw-bold">Konsekuensi Tambahan :</p>
                                                     @foreach ($activities->where('log_name', 'konsekuensi') as $item)
                                                         <td class="d-flex">
@@ -159,7 +180,8 @@
                                                                 <h5 class="fs-13 mb-0 text-muted">
                                                                     {{ $item->getExtraProperty('konsekuensi') }}</h5>
                                                                 <small class="mb-0 text-muted">
-                                                                    {{ $item->created_at->diffForHumans() }}</small>
+                                                                    {{ $item->created_at->diffForHumans() }} by
+                                                                    {{ $item->causer->name }}</small>
                                                             </div>
                                                         </td>
                                                     @endforeach
@@ -398,7 +420,7 @@
                                             <div class="flex-shrink-0">
                                                 <button type="button" class="btn btn-soft-warning btn-sm"
                                                     data-bs-toggle="modal"
-                                                    @if ($laporan->status !== 1 && Auth::user()->getRoleName() !== 'Admin') onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else   data-bs-target="#saksiSaksi" @endif><i
+                                                    @if ($laporan->status !== 1 && Auth::user()->getRoleName() !== 'Admin') onclick="lock({{ json_encode($laporan->statusPengaduan->nama) }})" @else    data-bs-target="#saksiSaksi" @endif><i
                                                         class="ri-add-line me-1 align-bottom"></i> Add</button>
                                             </div>
                                         </div>

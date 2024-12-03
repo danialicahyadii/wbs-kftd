@@ -1,9 +1,9 @@
 <x-mail::message>
-# Admin memperbarui status pengaduan :
+# Pembaruan Status
 
-{{ $status }}
+Status Pengaduan : {{ $status }}
 
-{{ $keterangan }}
+Keterangan : {{ $keterangan }}
 
 <x-mail::button :url="$url">
 Lihat Detail
