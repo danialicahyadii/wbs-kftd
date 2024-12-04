@@ -8,6 +8,12 @@
                 <div class="mt-4 text-center">
                     <h4>Kamu ingin Menghapus Pengaduan ?</h4>
                     <p class="text-muted fs-14 mb-4">Pengaduan akan dihapus beserta dengan detail detailnya</p>
+                    <div class="form-check form-check-danger hstack gap-2 justify-content-center mt-1 mb-4">
+                        <input class="form-check-input" type="checkbox" name="bin" id="formCheck10" checked>
+                        <label class="form-check-label text-muted" for="formCheck10">
+                            Don't Move To Bin
+                        </label>
+                    </div>
                     <div class="hstack gap-2 justify-content-center remove">
                         <form action="{{ route('pengaduan.destroy', $row->id) }}" method="POST"
                             enctype="multipart/form-data">

@@ -65,10 +65,20 @@
                                     </div><!--end col-->
                                     <div class="col-lg-6 col-sm-12">
                                         <div class="mb-3">
-                                            <label for="lastNameinput" class="form-label">No.HP (Pelapor) <span
-                                                    class="text-danger">*</span></label>
-                                            <input type="text" name="no_hp_pelapor" value="{{ old('no_hp_pelapor') }}"
-                                                id="lastNameinput" class="form-control" placeholder="+(62) 8212 45123">
+                                            <label for="lastNameinput" class="form-label">No.HP (Pelapor)</label>
+                                            {{-- <input type="text" name="no_hp_pelapor" value="{{ old('no_hp_pelapor') }}"
+                                                id="lastNameinput" class="form-control" placeholder="+(62) 8212 45123"> --}}
+                                            <div class="input-group" data-input-flag="">
+                                                <button class="btn btn-light border" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"><img
+                                                        src="{{ asset('interactive/assets/images/flags/id.svg') }}"
+                                                        alt="flag img" height="20" class="country-flagimg rounded"><span
+                                                        class="ms-2 country-codeno">+62</span></button>
+                                                <input type="text" name="no_hp_pelapor"
+                                                    class="form-control rounded-end flag-input"
+                                                    value="{{ old('no_hp_pelapor') }}" placeholder="Masukkan No Hp"
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                            </div>
                                             @error('no_hp_pelapor')
                                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                                             @enderror
@@ -151,7 +161,7 @@
                                     <div class="col-lg-6 col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">Kronologi <span class="text-danger">*</span></label>
-                                            <textarea class="ckeditor-classic" name="kronologi" cols="30" rows="10">{{ old('kronologi') }}</textarea>
+                                            <textarea class="ckeditor-classic" name="kronologi">{{ old('kronologi') }}</textarea>
                                             @error('kronologi')
                                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                                             @enderror
@@ -456,7 +466,7 @@
             ClassicEditor
                 .create(document.querySelector('.ckeditor-classic'))
                 .then(function(editor) {
-                    editor.ui.view.editable.element.style.height = '300px';
+                    editor.ui.view.editable.element.style.height = '200px';
                 })
                 .catch(function(error) {
                     console.error(error);

@@ -138,8 +138,8 @@
                                                                 <i class="ri-more-fill align-middle"></i>
                                                             </button>
                                                             <ul class="dropdown-menu dropdown-menu-end">
-                                                                <li><button class="dropdown-item showPengaduan"
-                                                                        data-id="{{ Crypt::encrypt($row->id) }}"><i
+                                                                <li><button class="dropdown-item" data-bs-toggle="modal"
+                                                                        data-bs-target="#editFaq{{ $row->id }}"><i
                                                                             class="ri-pencil-fill align-bottom me-2 text-muted"></i>
                                                                         Edit</button></li>
                                                                 <li>
@@ -152,7 +152,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                @include('apps.admin.pengaduan.components.modal-delete')
+                                                @include('apps.admin.faq.components.modal-edit-faq')
                                             @endforeach
                                         @else
                                         @endif
@@ -224,6 +224,18 @@
                     console.error(error);
                 });
         });
+
+        var ckClassicEditor3 = document.querySelectorAll(".editAnswerCk")
+        ckClassicEditor2.forEach(function() {
+            ClassicEditor
+                .create(document.querySelector('.editAnswerCk'))
+                .then(function(editor) {
+                    editor.ui.view.editable.element.style.height = '200px';
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        });
     </script>
     <script>
         function createPengaduan() {
@@ -235,17 +247,6 @@
             dateFormat: "Y-m-d",
             altInput: true,
             altFormat: "F j, Y",
-        })
-        $('.showPengaduan').click(function() {
-            Swal.fire({
-                html: `<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Opps !!</h4><p class="fw-12">On Development !!</p></div></div>`,
-                showCancelButton: !0,
-                showConfirmButton: !1,
-                cancelButtonClass: "btn btn-primary w-xs mb-1",
-                cancelButtonText: "Oke",
-                buttonsStyling: !1,
-                showCloseButton: !0,
-            });
         })
     </script>
 @endpush

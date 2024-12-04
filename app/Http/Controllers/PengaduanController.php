@@ -56,8 +56,8 @@ class PengaduanController extends Controller
     {
         $validated = $request->validate([
             'nama_pelapor' => 'required|string|max:255',
-            'alamat_pelapor' => 'required|string|max:255',
-            'no_hp_pelapor' => 'required|numeric|digits_between:10,15',
+            'alamat_pelapor' => 'nullable|string|max:255',
+            'no_hp_pelapor' => 'nullable|numeric|digits_between:10,15',
             'jenis_pelanggaran' => 'required|array|min:1',
             'kronologi' => 'required|string',
             'waktu_pelanggaran' => 'required|date',
@@ -80,8 +80,6 @@ class PengaduanController extends Controller
             'bukti.*.nama_file' => 'nullable|string|max:255',
         ],[
             'nama_pelapor.required' => 'Nama Pelapor wajib diisi.',
-            'alamat_pelapor.required' => 'Alamat Pelapor wajib diisi.',
-            'no_hp_pelapor.required' => 'Nomor HP Pelapor wajib diisi.',
             'no_hp_pelapor.numeric' => 'Nomor HP Pelapor harus berupa angka.',
             'no_hp_pelapor.digits_between' => 'Nomor HP Pelapor harus terdiri dari 10 hingga 15 digit.',
             'jenis_pelanggaran.required' => 'Pilih setidaknya satu jenis pelanggaran.',
@@ -290,7 +288,11 @@ class PengaduanController extends Controller
      */
     public function destroy(Pengaduan $pengaduan)
     {
-        $pengaduan->delete();
+        dd(request());
+        if(request()->trash === true){
+        }else{
+            $pengaduan->delete();
+        }
 
         return back();
     }

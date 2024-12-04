@@ -55,9 +55,11 @@ class FaqController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Faq $faq)
+    public function update(Request $request, $id)
     {
-        //
+        $faq = Faq::find($id);
+        $faq->update($request->all());
+        return back()->with('toast_succes', 'Berhasil Memperbarui');
     }
 
     /**
