@@ -5,6 +5,7 @@ use App\Http\Controllers\CaraMelaporController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FileBuktiController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\JenisPelanggaranController;
 use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PengaduanController;
@@ -44,6 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'cara-melapor' => CaraMelaporController::class,
         'komentar' => KomentarController::class,
         'faq-admin' => FaqController::class,
+        'jenis-pelanggaran' => JenisPelanggaranController::class,
     ]);
     Route::resource('laporan', LaporanController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

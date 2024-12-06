@@ -58,6 +58,12 @@
                             <i class="ri-file-list-fill"></i> <span data-key="t-widgets">Cara Melapor</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ Request::is('*jenis-pelanggaran*') ? 'active' : '' }}"
+                            href="{{ route('jenis-pelanggaran.index') }}">
+                            <i class="ri-file-list-fill"></i> <span data-key="t-widgets">Jenis Pelanggaran</span>
+                        </a>
+                    </li>
                 @endrole
                 {{-- @role('Admin')
                     <li class="menu-title"><span data-key="t-menu">Admin</span></li>
