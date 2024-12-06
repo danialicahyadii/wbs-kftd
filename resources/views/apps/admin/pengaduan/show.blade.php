@@ -600,12 +600,12 @@
                                                                                 </div>
                                                                             @elseif ($item->tipe == 'jpg')
                                                                                 <div
-                                                                                    class="avatar-title bg-light text-danger rounded fs-24">
+                                                                                    class="avatar-title bg-light text-secondary rounded fs-24">
                                                                                     <i class="ri-image-2-fill"></i>
                                                                                 </div>
                                                                             @elseif ($item->tipe == 'png')
                                                                                 <div
-                                                                                    class="avatar-title bg-light text-danger rounded fs-24">
+                                                                                    class="avatar-title bg-light text-secondary rounded fs-24">
                                                                                     <i class="ri-image-2-fill"></i>
                                                                                 </div>
                                                                             @elseif ($item->tipe == 'pdf')
