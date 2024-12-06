@@ -14,7 +14,7 @@
 @endpush
 @section('content')
     <!--================ Banner Section start =================-->
-    <section class="hero-banner" {{-- style="background-image: url('https://kftd.co.id/assets/img/slider/slider-1.jpg')" --}}>
+    <section data-aos="fade-up" data-aos-duration="1000" class="hero-banner" {{-- style="background-image: url('https://kftd.co.id/assets/img/slider/slider-1.jpg')" --}}>
         <div class="container" style="margin-top: 100px">
             {{-- <p class="text-uppercase">Smart Company With perfect space</p> --}}
             @if (session('status'))

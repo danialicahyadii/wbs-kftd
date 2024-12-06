@@ -1,8 +1,11 @@
 @extends('layouts.app')
+@push('css')
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+@endpush
 @section('content')
     <!--================ Banner SM Section start =================-->
-    <section class="hero-banner hero-banner-sm text-center"
-        style="background-image: url({{ asset('lorahost/img/banner/2.png') }})">
+    <section data-aos="fade-up" data-aos-duration="1000" class="hero-banner hero-banner-sm text-center"
+        style="background-image: url({{ asset('lorahost/img/banner/6.png') }})">
         <div class="container">
             <h1>Faq</h1>
             <nav aria-label="breadcrumb" class="banner-breadcrumb">
@@ -93,3 +96,9 @@
   </section> --}}
     <!--================  Dedicated server section end =================-->
 @endsection
+@push('js')
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+@endpush
