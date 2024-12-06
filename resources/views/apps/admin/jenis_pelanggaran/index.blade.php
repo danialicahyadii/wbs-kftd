@@ -40,11 +40,12 @@
                     <div class="card" id="ticketsList">
                         <div class="card-header border-0">
                             <div class="d-flex align-items-center">
-                                <h5 class="card-title mb-0 flex-grow-1">Tutorial</h5>
+                                <h5 class="card-title mb-0 flex-grow-1">Jenis Pelanggaran</h5>
                                 <div class="flex-shrink-0">
                                     <div class="d-flex flex-wrap gap-2">
                                         <button class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#createTutorial"><i class="ri-add-line align-bottom me-1"></i>
+                                            data-bs-target="#createJenisPelanggaran"><i
+                                                class="ri-add-line align-bottom me-1"></i>
                                             Buat
                                             {{ ucwords(request()->segment(1)) }}</button>
                                         <button class="btn btn-soft-danger" id="remove-actions"
@@ -110,9 +111,8 @@
                                                 </div>
                                             </th>
                                             <th class="sort">ID</th>
-                                            <th class="sort">Judul</th>
-                                            <th class="sort">Detail</th>
-                                            <th class="sort">Icon</th>
+                                            <th class="sort">Nama</th>
+                                            <th class="sort">Created At</th>
                                             <th class="sort">Action</th>
                                         </tr>
                                     </thead>
@@ -130,11 +130,9 @@
                                                             href="{{ route('pengaduan.show', Crypt::encrypt($row->id)) }}"
                                                             onclick="ViewTickets(this)"
                                                             class="fw-medium link-primary">#{{ $loop->iteration }}</a></td>
-                                                    <td>{!! $row->judul !!}</td>
-                                                    <td title="{{ $row->detail }}">{{ Str::limit($row->detail, 50) }}</td>
-                                                    <td><img src="{{ asset('storage/' . $row->icon) }}"
-                                                            style="background-color: black; padding: 10px;" alt=""
-                                                            width="50">
+                                                    <td>{{ $row->nama }}</td>
+                                                    <td class="text-muted">
+                                                        {{ \Carbon\Carbon::parse($row->created_at)->format('M d, Y h:m A') }}
                                                     </td>
                                                     <td>
                                                         <div class="dropdown">
@@ -150,7 +148,7 @@
                                                                         Edit</button></li>
                                                                 <li>
                                                                     <a class="dropdown-item"
-                                                                        href="{{ route('cara-melapor.destroy', $row->id) }}"
+                                                                        href="{{ route('jenis-pelanggaran.destroy', $row->id) }}"
                                                                         data-confirm-delete="true"><i
                                                                             class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>Delete</a>
                                                                 </li>
@@ -158,7 +156,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                @include('apps.admin.pengaduan.components.modal-delete')
+                                                {{-- @include('apps.admin.jenis_pelanggaran.components.modal-delete') --}}
                                             @endforeach
                                         @else
                                         @endif
@@ -197,7 +195,7 @@
         </div>
         <!-- container-fluid -->
     </div>
-    @include('apps.admin.tutorial.components.modal-add-tutorial')
+    @include('apps.admin.jenis_pelanggaran.components.modal-add-jenis_pelanggaran')
 @endsection
 @push('js')
     <script src="{{ asset('interactive/assets/libs/list.js/list.min.js') }}"></script>

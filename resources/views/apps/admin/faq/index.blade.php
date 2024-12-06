@@ -152,7 +152,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                @include('apps.admin.faq.components.modal-edit-faq')
+                                                {{-- @include('apps.admin.faq.components.modal-edit-faq') --}}
                                             @endforeach
                                         @else
                                         @endif

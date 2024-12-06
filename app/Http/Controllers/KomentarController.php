@@ -47,7 +47,7 @@ class KomentarController extends Controller
         }else{
             $email = $pengaduan->user->email;
         }
-            // event(new MyEvent($komen->komentar));
+            event(new MyEvent($komen->komentar));
             activity()
             ->performedOn($pengaduan)
             ->log('Menambahkan Komentar "'.$komen->komentar.'"');

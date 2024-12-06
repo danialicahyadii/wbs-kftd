@@ -61,7 +61,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link {{ Request::is('*jenis-pelanggaran*') ? 'active' : '' }}"
                             href="{{ route('jenis-pelanggaran.index') }}">
-                            <i class="ri-file-list-fill"></i> <span data-key="t-widgets">Jenis Pelanggaran</span>
+                            <i class="ri-bug-2-fill"></i> <span data-key="t-widgets">Jenis Pelanggaran</span>
                         </a>
                     </li>
                 @endrole

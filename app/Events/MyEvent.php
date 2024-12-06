@@ -30,9 +30,6 @@ class MyEvent implements ShouldBroadcastNow
      */
     public function broadcastOn(): array
     {
-        // return [
-        //     new PrivateChannel('channel-name'),
-        // ];
         return ['entry-notif'];
     }
 

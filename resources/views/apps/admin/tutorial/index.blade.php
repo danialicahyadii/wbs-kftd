@@ -158,7 +158,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                @include('apps.admin.pengaduan.components.modal-delete')
+                                                {{-- @include('apps.admin.pengaduan.components.modal-delete') --}}
                                             @endforeach
                                         @else
                                         @endif

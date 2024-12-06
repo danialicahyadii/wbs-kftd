@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MyEvent;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -13,6 +14,7 @@ use App\Models\Komentar;
 use App\Models\PihakTerlibat;
 use App\Models\SaksiSaksi;
 use App\Models\Terlapor;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -31,9 +33,9 @@ class PengaduanController extends Controller
         $role = '';
         $role = Auth::user()->getRoleName();
         if($role == 'Admin'){
-            $pengaduan = Pengaduan::get();
+            $pengaduan = Pengaduan::where('is_active', true)->get();
         }else{
-            $pengaduan = Pengaduan::where('user_id', Auth::user()->id)->get();
+            $pengaduan = Pengaduan::where('user_id', Auth::user()->id)->where('is_active', true)->get();
         }
         $title = 'Delete!';
         $text = "Are you sure you want to delete?";
@@ -179,9 +181,10 @@ class PengaduanController extends Controller
             ->withProperties(['status' => $pengaduan->statusPengaduan->nama])
             ->log('Pengaduan telah dibuat dengan nomer tiket #' . $pengaduan->tiket);
 
+        $admin = User::role('admin')->first();
         // Kirim email ke pengguna
         Mail::to($request->user()->email)->send(new MailPengaduan($pengaduan));
-
+        
         // Notifikasi
         Alert::success('Success Title', 'Success Message');
 
@@ -288,8 +291,9 @@ class PengaduanController extends Controller
      */
     public function destroy(Pengaduan $pengaduan)
     {
-        dd(request());
-        if(request()->trash === true){
+        if(request()->trash == false){
+            $pengaduan->is_active = false;
+            $pengaduan->save();
         }else{
             $pengaduan->delete();
         }

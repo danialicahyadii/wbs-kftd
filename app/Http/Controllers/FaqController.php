@@ -13,9 +13,7 @@ class FaqController extends Controller
     public function index()
     {
         $faq = Faq::get();
-        $title = 'Delete FAQ!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
+
         return view('apps.admin.faq.index', compact('faq'));
     }
 

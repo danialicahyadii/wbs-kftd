@@ -12,7 +12,11 @@ class JenisPelanggaranController extends Controller
      */
     public function index()
     {
-        return view('apps.admin.jenis_pelanggaran.index');
+        $tutorial = JenisPelanggaran::get();
+        $title = 'Delete Jenis Pelanggaran!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return view('apps.admin.jenis_pelanggaran.index', compact('tutorial'));
     }
 
     /**
@@ -28,7 +32,8 @@ class JenisPelanggaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        JenisPelanggaran::create($request->all());
+        return back()->with('toast_success', 'Jenis Pelanggaran Berhasil Ditambahkan!');
     }
 
     /**
@@ -60,6 +65,7 @@ class JenisPelanggaranController extends Controller
      */
     public function destroy(JenisPelanggaran $jenisPelanggaran)
     {
-        //
+        $jenisPelanggaran->delete();
+        return back()->with('toast_success', 'Berhasil Dihapus!');
     }
 }
