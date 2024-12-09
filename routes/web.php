@@ -15,8 +15,11 @@ use App\Http\Controllers\SaksiSaksiController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TerlaporController;
 use App\Http\Controllers\TutorialController;
+use App\Models\Komentar;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -47,6 +50,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'faq-admin' => FaqController::class,
         'jenis-pelanggaran' => JenisPelanggaranController::class,
     ]);
+    Route::get('notifications/unread', function(){
+        if(Auth::user()->roles->first()->name === 'Admin'){
+            $unreadCount = Komentar::whereNot('user_id', Auth::user()->id)->count();
+        }else{
+            $unreadCount = Komentar::whereHas('pengaduan', function (Builder $query) {
+                $query->where('user_id', Auth::user()->id); // Make sure pengaduan is related to Auth user
+            })
+            ->whereHas('user', function (Builder $query) {
+                $query->where('user_id', 1); // Assuming 'role' is how you identify admins
+            })
+            ->get();
+        }
+
+        return response()->json([
+        'unread_count' => $unreadCount->count()
+    ]);
+    });
     Route::resource('laporan', LaporanController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

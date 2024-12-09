@@ -33,24 +33,54 @@
         src='{{ asset('interactive/assets/libs/choices.js/public/assets/scripts/choices.min.js') }}'></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
+        var id = {{ Auth::user()->id }};
         Pusher.logToConsole = true;
 
         var pusher = new Pusher('936768dd47c4a9b5133d', {
             cluster: 'ap1'
         });
 
-        var channel = pusher.subscribe('entry-notif');
+        var channel = pusher.subscribe(`pengaduan.${id}`);
         channel.bind('my-event', function(data) {
-            alert(JSON.stringify(data.message));
-            // Swal.fire({
-            //     html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon><div class="mt-4 pt-2 fs-15"><h4>Oops...! Masih Tahap Pengembangan !</h4></div></div>',
-            //     showCancelButton: !0,
-            //     showConfirmButton: !1,
-            //     cancelButtonClass: "btn btn-primary w-xs mb-1",
-            //     cancelButtonText: "Oke",
-            //     buttonsStyling: !1,
-            //     showCloseButton: !0,
-            // });
+            // alert(JSON.stringify(data.isi.total_komentar));
+            var totalKomentar = data.isi.total_komentar;
+            var komentarList = data.isi.komentars;
+
+            document.getElementById('notificationBadge').innerText = totalKomentar;
+
+            var commentsHtml = '';
+            komentarList.forEach(function(komentar) {
+                commentsHtml += `
+                <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                        <div class="d-flex">
+                                            <div class="avatar-xs me-3 flex-shrink-0">
+                                                <span
+                                                    class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                                    <i class="bx bx-badge-check"></i>
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <a href="#!" class="stretched-link">
+                                                    <h6 class="mt-0 mb-2 lh-base">${komentar.komentar}
+                                                    </h6>
+                                                </a>
+                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                    <span><i class="mdi mdi-clock-outline"></i> Just 30 sec ago</span>
+                                                </p>
+                                            </div>
+                                            <div class="px-2 fs-15">
+                                                <div class="form-check notification-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="all-notification-check01">
+                                                    <label class="form-check-label"
+                                                        for="all-notification-check01"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                `;
+            });
+            document.getElementById('commentsList').innerHTML = commentsHtml;
         });
     </script>
 
@@ -121,7 +151,16 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-
+    <script>
+        function updateUnreadCount() {
+            fetch('/notifications/unread')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('notificationBadge').innerText = data.unread_count;
+                });
+        }
+        updateUnreadCount();
+    </script>
     @stack('js')
 </body>
 

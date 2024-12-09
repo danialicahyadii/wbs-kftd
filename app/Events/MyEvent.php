@@ -18,9 +18,14 @@ class MyEvent implements ShouldBroadcastNow
     /**
      * Create a new event instance.
      */
-    public function __construct($message)
+    public function __construct($userId, $message, $komentars)
     {
-        $this->message = $message;
+        $this->message = [
+            'user_id' => $userId,
+            'komentar' => $message,
+            'komentars' => $komentars,
+            'total_komentar' => $komentars->count()
+        ];
     }
 
     /**
@@ -30,7 +35,7 @@ class MyEvent implements ShouldBroadcastNow
      */
     public function broadcastOn(): array
     {
-        return ['entry-notif'];
+        return ['pengaduan.'.$this->message['user_id']];
     }
 
     public function broadcastAs()
@@ -46,7 +51,7 @@ class MyEvent implements ShouldBroadcastNow
     public function broadcastWith(): array
     {
         return [
-            'message' => $this->message
+            'isi' => $this->message
         ];
     }
 }

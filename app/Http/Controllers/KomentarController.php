@@ -42,12 +42,19 @@ class KomentarController extends Controller
                 'parent_id' => $request->parent_id ?? null,
                 'komentar' => $request->komentar
             ]);
-        if($request->user()->id === $pengaduan->user_id){
-            $email = User::role('Admin')->first();
-        }else{
-            $email = $pengaduan->user->email;
-        }
-            event(new MyEvent($komen->komentar));
+        $admin = User::role('Admin')->first();
+
+            if(Auth::user()->roles->first()->name === 'Admin'){
+                $notify = $pengaduan->user_id;
+                $email = $pengaduan->user->email;
+                $komentars = Komentar::where('pengaduan_id', $pengaduan->id)->where('user_id', $admin->id)->orderBy('id', 'desc')->get();
+            }else{
+                $notify = $admin->id;
+                $email = $admin->email;
+                $komentars = Komentar::whereNot('user_id', $admin->id)->orderBy('id', 'desc')->get();
+            }
+
+            event(new MyEvent($notify,$komen->komentar, $komentars));
             activity()
             ->performedOn($pengaduan)
             ->log('Menambahkan Komentar "'.$komen->komentar.'"');
