@@ -339,13 +339,13 @@
     <script src="{{ asset('interactive/assets/libs/list.pagination.js/list.pagination.min.js') }}"></script>
     <script src="{{ asset('interactive/assets/js/pages/ticketlist.init.js') }}"></script>
     <script src="{{ asset('interactive/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script nonce="{{ csp_nonce() }}" src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script nonce="{{ csp_nonce() }}">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
         function createPengaduan() {
             window.location.href = "{{ route('pengaduan.create') }}";
         }
     </script>
-    <script nonce="{{ csp_nonce() }}">
+    <script>
         $('#demo-datepicker').flatpickr({
             dateFormat: "Y-m-d",
             altInput: true,

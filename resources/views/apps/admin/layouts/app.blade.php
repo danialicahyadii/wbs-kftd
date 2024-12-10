@@ -30,8 +30,8 @@
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}
     <script type='text/javascript'
         src='{{ asset('interactive/assets/libs/choices.js/public/assets/scripts/choices.min.js') }}'></script>
-    <script nonce="{{ csp_nonce() }}" src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script nonce="{{ csp_nonce() }}">
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
         var id = {{ Auth::user()->id }};
         Pusher.logToConsole = true;
 
@@ -149,7 +149,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script nonce="{{ csp_nonce() }}">
+    <script>
         function updateUnreadCount() {
             fetch('/notifications/unread')
                 .then(response => response.json())

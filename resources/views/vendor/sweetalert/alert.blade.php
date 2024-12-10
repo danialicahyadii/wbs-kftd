@@ -12,7 +12,7 @@
     @endif
 
     @if (Session::has('alert.delete') || Session::has('alert.config'))
-        <script nonce="{{ csp_nonce() }}">
+        <script>
             document.addEventListener('click', function(event) {
                 // Check if the clicked element or its parent has the attribute
                 var target = event.target;

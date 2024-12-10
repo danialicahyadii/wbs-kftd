@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('css')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style nonce="{{ csp_nonce() }}">
+    <style>
         .hero-banner {
             background-image: url({{ asset('lorahost/img/banner/1.png') }})
         }
@@ -56,7 +56,7 @@
                             <div class="col-6">
                                 <button type="submit" class="btn btn-primary btn-block mt-2">Login</button>
                                 {{-- <button type="button" class="btn google-btn btn-block mt-3" onclick="loginWithGoogle()"
-                                    nonce="{{ csp_nonce() }}">
+                                    >
                                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png"
                                         alt="Google Logo" width="25">
                                     Login dengan Google
@@ -85,7 +85,7 @@
 @endsection
 @push('js')
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script nonce="{{ csp_nonce() }}">
+    <script>
         function loginWithGoogle() {
             window.location.href = `/auth/google`;
         }

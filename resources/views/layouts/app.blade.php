@@ -37,9 +37,9 @@
     <script src="{{ asset('lorahost/js/jquery.ajaxchimp.min.js') }}"></script>
     <script src="{{ asset('lorahost/js/mail-script.js') }}"></script>
     <script src="{{ asset('lorahost/js/main.js') }}"></script>
-    <script nonce="{{ csp_nonce() }}" src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     @stack('js')
-    <script nonce="{{ csp_nonce() }}">
+    <script>
         AOS.init();
     </script>
 </body>

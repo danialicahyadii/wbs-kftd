@@ -2,7 +2,7 @@
 @push('css')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <style nonce="{{ csp_nonce() }}">
+    <style>
         .hero-banner {
             background-image: url('{{ asset('lorahost/img/banner/5.png') }}');
         }
@@ -90,8 +90,8 @@
 @endsection
 @push('js')
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script nonce="{{ csp_nonce() }}" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script nonce="{{ csp_nonce() }}">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
         var map = L.map('map', {
             center: [-6.161853, 106.835590],
             zoom: 15,
