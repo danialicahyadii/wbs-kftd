@@ -8,7 +8,6 @@
     <title>WBS - KFTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="IT KFTD" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- App favicon -->
@@ -31,8 +30,8 @@
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}
     <script type='text/javascript'
         src='{{ asset('interactive/assets/libs/choices.js/public/assets/scripts/choices.min.js') }}'></script>
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script>
+    <script nonce="{{ csp_nonce() }}" src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script nonce="{{ csp_nonce() }}">
         var id = {{ Auth::user()->id }};
         Pusher.logToConsole = true;
 
@@ -150,8 +149,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script>
+    <script nonce="{{ csp_nonce() }}">
         function updateUnreadCount() {
             fetch('/notifications/unread')
                 .then(response => response.json())

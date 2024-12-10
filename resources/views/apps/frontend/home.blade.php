@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('css')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
+    <style nonce="{{ csp_nonce() }}">
         .header_area .navbar {
             background: #1f185944;
             border: 0px;
@@ -440,7 +440,7 @@
     @endif
 @endsection
 @push('js')
-    <script>
+    <script nonce="{{ csp_nonce() }}">
         function showVerificationModal() {
             $('#verificationModal').modal('show');
         }
@@ -480,7 +480,7 @@
             });
         });
     </script> --}}
-    <script>
+    <script nonce="{{ csp_nonce() }}">
         $(document).ready(function() {
             $('#searchForm').on('submit', function(event) {
                 event.preventDefault();
@@ -510,7 +510,4 @@
         });
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
 @endpush

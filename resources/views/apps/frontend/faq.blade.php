@@ -20,7 +20,7 @@
 
 
     <!--================ Price Table section start =================-->
-    <section class="section-padding">
+    <section class="section-padding" data-aos="fade-up" data-aos-duration="2000">
         <div class="container">
             <div class="pb-85px text-center">
                 <h2>Pertanyaan yang sering muncul</h2>
@@ -98,7 +98,4 @@
 @endsection
 @push('js')
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
 @endpush
