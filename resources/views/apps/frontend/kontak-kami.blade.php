@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="form-group mt-lg-3">
-                            <button type="submit" class="button button-contactForm">Send Message</button>
+                            <button type="submit" class="button button-contactForm button-outline">Send Message</button>
                         </div>
                     </form>
 
