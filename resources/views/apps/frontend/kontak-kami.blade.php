@@ -39,7 +39,12 @@
                 <div id="map"></div>
             </div>
 
-
+            <div class="alert alert-warning alert-dismissible fade show d-none" id="alert-maintenance" role="alert">
+                <strong>Dalam Perbaikan !</strong> Silahkan hubungi kami melalui Whatsapp!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="row" data-aos="fade-up" data-aos-duration="2000">
                 <div class="col-12">
                     <h2 class="contact-title">Get in Touch</h2>
@@ -74,7 +79,8 @@
                             </div>
                         </div>
                         <div class="form-group mt-lg-3">
-                            <button type="submit" class="button button-contactForm button-outline">Send Message</button>
+                            <button type="button" class="button button-contactForm button-outline"
+                                onclick="maintenance()">Send Message</button>
                         </div>
                     </form>
 
@@ -110,5 +116,15 @@
                 "<center><img src='https://kftd.co.id/assets/img/content/map-popup.jpg' width='100px' class='shadow border rounded'/><hr class='hr m-1' /> <b>PT Kimia Farma Trading & Distribution</b> <br /> Jl. Budi Utomo No.1, Ps. Baru, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10710 <hr class='hr m-1' /> <a href='https://www.google.com/maps/dir//PT+Kimia+Farma+Trading+Dan+Distribution+(Kantor+Pusat)+Jl.+Budi+Utomo+No.1+Ps.+Baru+Kecamatan+Sawah+Besar,+Kota+Jakarta+Pusat,+Daerah+Khusus+Ibukota+Jakarta+10710/@-6.1674199,106.8360857,20z/data=!4m8!4m7!1m0!1m5!1m1!1s0x2e69f5d6f4d9dd95:0xdc6180f07e9c9130!2m2!1d106.8360857!2d-6.1674199?entry=ttu' class='genric-btn primary small' target='_blank'><i class='fas fa-map-marked-alt'></i> Rute</a> </center>"
             )
             .openOn(map);
+    </script>
+    <script>
+        function maintenance() {
+            var alertElement = document.getElementById('alert-maintenance');
+            if (alertElement.classList.contains('d-none')) {
+                alertElement.classList.remove('d-none');
+            } else {
+                alertElement.classList.add('d-none');
+            }
+        }
     </script>
 @endpush

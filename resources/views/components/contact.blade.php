@@ -9,7 +9,7 @@
     <div class="media contact-info">
         <span class="contact-info__icon"><i class="ti-tablet"></i></span>
         <div class="media-body">
-            <h3><a href="tel:0213456959">(021) - 3456959</a></h3>
+            <h3><a href="https://wa.me/6281313138812">081313138812</a></h3>
             <p>Mon to Fri 7.30am to 4.00pm</p>
         </div>
     </div>
