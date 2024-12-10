@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\MyEvent;
 use App\Models\Komentar;
+use App\Mail\Komentar as MailKomentar;
 use App\Models\Pengaduan;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -58,7 +59,7 @@ class KomentarController extends Controller
             activity()
             ->performedOn($pengaduan)
             ->log('Menambahkan Komentar "'.$komen->komentar.'"');
-            Mail::to($email)->send(new \App\Mail\Komentar($pengaduan, $komen));
+            Mail::to($email)->send(new MailKomentar($pengaduan, $komen));
             return back()->with('toast_success', 'Komentar Ditambahkan!');
     }
 
