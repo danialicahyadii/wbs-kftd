@@ -304,77 +304,22 @@
             @php
                 $tutorial = App\Models\CaraMelapor::orderBy('no_urut')->get();
             @endphp
-            @if ($tutorial->isEmpty())
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
+            <div class="row">
+                @foreach ($tutorial as $item => $row)
+                    <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1000">
                         <div class="card-service text-center rounded">
                             <div class="service-icon">
-                                <img src="{{ asset('lorahost/img/home/png/006-server.png') }}" alt="">
-                                <h1 class="text-white">1</h1>
+                                <img src="{{ asset('storage/' . $row->icon) }}" alt="" class="p-2 rounded"
+                                    width="50">
+                                <h1 class="text-white">{{ $row->no_urut }}</h1>
                             </div>
-                            <h3 class="text-white">Login/Register ke Akun Anda</h3>
-                            <p class="text-white">Sebelum melaporkan pengaduan Anda di Whistleblower System KBUMN, terlebih
-                                dahulu lakukan
-                                login/register </p>
+                            <h3 class="text-white">{{ $row->judul }}</h3>
+                            <p class="text-white">{{ $row->detail }}
+                            </p>
                         </div>
                     </div>
-
-                    <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="card-service text-center rounded">
-                            <div class="service-icon">
-                                <img src="{{ asset('lorahost/img/home/png/004-home-page.png') }}" alt="">
-                                <h1 class="text-white">2</h1>
-                            </div>
-                            <h3 class="text-white">Isi Form dan Ceritakan Kasusnya</h3>
-                            <p class="text-white">Klik Menu "Pengaduan" dan lanjutkan dengan klik tombol tambah/"+" untuk
-                                mengisi formulir
-                                pengaduan yang telah disediakan </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="card-service text-center rounded">
-                            <div class="service-icon">
-                                <img src="{{ asset('lorahost/img/home/png/007-server-1.png') }}" alt="">
-                                <h1 class="text-white">3</h1>
-                            </div>
-                            <h3 class="text-white">Kirimkan Form Yang sudah terisi</h3>
-                            <p class="text-white">Klik tombol "Simpan" untuk mengirim pengaduan anda, anda dapat memantau
-                                pengaduan yang dikirim
-                                dan melakukan komunikasi secara pribadi dengan administrator WBS </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="card-service text-center rounded">
-                            <div class="service-icon">
-                                <img src="{{ asset('lorahost/img/home/png/009-art.png') }}" alt="">
-                                <h1 class="text-white">4</h1>
-                            </div>
-                            <h3 class="text-white">Kirimkan Form Yang sudah terisi</h3>
-                            <p class="text-white">Klik tombol "Simpan" untuk mengirim pengaduan anda, anda dapat memantau
-                                pengaduan yang dikirim
-                                dan melakukan komunikasi secara pribadi dengan administrator WBS </p>
-                        </div>
-                    </div>
-                </div>
-            @else
-                <div class="row">
-                    @foreach ($tutorial as $item => $row)
-                        <div class="col-lg-3 col-sm-6 mb-3" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="card-service text-center rounded">
-                                <div class="service-icon">
-                                    <img src="{{ asset('storage/' . $row->icon) }}" alt="" class="p-2 rounded"
-                                        width="50">
-                                    <h1 class="text-white">{{ $row->no_urut }}</h1>
-                                </div>
-                                <h3 class="text-white">{{ $row->judul }}</h3>
-                                <p class="text-white">{{ $row->detail }}
-                                </p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @endif
+                @endforeach
+            </div>
         </div>
     </section>
     <!--================ Subscribe section end =================-->
@@ -408,8 +353,8 @@
     </section>
     <!--================  Dedicated server section end =================-->
     <!-- Modal -->
-    <div class="modal fade" id="verificationModal" tabindex="-1" role="dialog"
-        aria-labelledby="verificationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="verificationModal" tabindex="-1" role="dialog" aria-labelledby="verificationModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="{{ route('verification.send') }}" method="post">
                 @csrf
