@@ -120,39 +120,60 @@ class PengaduanController extends Controller
         $pihakTerlibat = $request->terlibat ?? null;
         $saksiSaksi = $request->saksi ?? null;
 
+
         // Menambahkan data Terlapor
         if ($terlapor) {
-            foreach ($terlapor as $row) {
-                Terlapor::create([
-                    'pengaduan_id' => $pengaduan->id,
-                    'nama' => $row['nama'],
-                    'jabatan' => $row['jabatan'],
-                    'unit' => $row['unit'],
-                ]);
+            $filteredTerlapor = array_filter($terlapor, function($row) {
+                return !is_null($row['nama']) && !is_null($row['jabatan']) && !is_null($row['unit']);
+            });
+
+            if(!empty($filteredTerlapor)){
+                foreach ($terlapor as $row) {
+                    Terlapor::create([
+                        'pengaduan_id' => $pengaduan->id,
+                        'nama' => $row['nama'],
+                        'jabatan' => $row['jabatan'],
+                        'unit' => $row['unit'],
+                    ]);
+                }
             }
         }
 
         // Menambahkan Pihak Terlibat jika ada
         if ($pihakTerlibat) {
-            foreach ($pihakTerlibat as $row) {
-                PihakTerlibat::create([
-                    'pengaduan_id' => $pengaduan->id,
-                    'nama' => $row['nama'],
-                    'jabatan' => $row['jabatan'],
-                    'unit' => $row['unit'],
-                ]);
+            // Filter data untuk memastikan hanya yang memiliki nama, jabatan, dan unit yang tidak null
+            $filteredPihakTerlibat = array_filter($pihakTerlibat, function($row) {
+                return !is_null($row['nama']) && !is_null($row['jabatan']) && !is_null($row['unit']);
+            });
+
+            // Jika ada data yang valid setelah difilter
+            if (!empty($filteredPihakTerlibat)) {
+                foreach ($filteredPihakTerlibat as $row) {
+                    PihakTerlibat::create([
+                        'pengaduan_id' => $pengaduan->id,
+                        'nama' => $row['nama'],
+                        'jabatan' => $row['jabatan'],
+                        'unit' => $row['unit'],
+                    ]);
+                }
             }
         }
 
+
         // Menambahkan Saksi-saksi jika ada
         if ($saksiSaksi) {
-            foreach ($saksiSaksi as $row) {
-                SaksiSaksi::create([
-                    'pengaduan_id' => $pengaduan->id,
-                    'nama' => $row['nama'],
-                    'jabatan' => $row['jabatan'],
-                    'unit' => $row['unit'],
-                ]);
+            $filteredSaksisaksi = array_filter($saksiSaksi, function($row) {
+                return !is_null($row['nama']) && !is_null($row['jabatan']) && !is_null($row['unit']);
+            });
+            if(!empty($filteredSaksisaksi)){
+                foreach ($saksiSaksi as $row) {
+                    SaksiSaksi::create([
+                        'pengaduan_id' => $pengaduan->id,
+                        'nama' => $row['nama'],
+                        'jabatan' => $row['jabatan'],
+                        'unit' => $row['unit'],
+                    ]);
+                }
             }
         }
 
@@ -184,7 +205,7 @@ class PengaduanController extends Controller
         $admin = User::role('admin')->first();
         // Kirim email ke pengguna
         Mail::to($request->user()->email)->send(new MailPengaduan($pengaduan));
-        
+
         // Notifikasi
         Alert::success('Success Title', 'Success Message');
 
