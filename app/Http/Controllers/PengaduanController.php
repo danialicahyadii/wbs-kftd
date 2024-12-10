@@ -65,7 +65,7 @@ class PengaduanController extends Controller
             'waktu_pelanggaran' => 'required|date',
             'tempat_pelanggaran' => 'required|string|max:255',
             'konsekuensi' => 'nullable|string|max:255',
-            'terlapor' => 'required|array|min:1', // Minimal 1 terlapor
+            'terlapor' => 'nullable|array|min:1', // Minimal 1 terlapor
             'terlapor.*.nama' => 'required|string|max:255',
             'terlapor.*.jabatan' => 'required|string|max:255',
             'terlapor.*.unit' => 'required|string|max:255',
@@ -89,7 +89,7 @@ class PengaduanController extends Controller
             'waktu_pelanggaran.required' => 'Waktu pelanggaran wajib diisi.',
             'tempat_pelanggaran.required' => 'Tempat pelanggaran wajib diisi.',
             'konsekuensi.max' => 'Konsekuensi tidak boleh lebih dari 500 karakter.',
-            'terlapor.required' => 'Minimal satu terlapor harus diisi.',
+            'terlapor.min' => 'Minimal satu terlapor harus diisi.',
             'terlapor.*.nama.required' => 'Nama terlapor wajib diisi.',
             'terlapor.*.jabatan.required' => 'Jabatan terlapor wajib diisi.',
             'terlapor.*.unit.required' => 'Unit terlapor wajib diisi.',
@@ -184,7 +184,7 @@ class PengaduanController extends Controller
         $admin = User::role('admin')->first();
         // Kirim email ke pengguna
         Mail::to($request->user()->email)->send(new MailPengaduan($pengaduan));
-
+        
         // Notifikasi
         Alert::success('Success Title', 'Success Message');
 
