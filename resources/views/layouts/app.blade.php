@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('lorahost/vendors/owl-carousel/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lorahost/vendors/owl-carousel/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lorahost/css/style.css') }}">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     @stack('css')
 </head>
 

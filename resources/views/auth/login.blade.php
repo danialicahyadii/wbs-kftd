@@ -27,6 +27,18 @@
     <!-- ================ contact section start ================= -->
     <section class="section-margin">
         <div class="container">
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-12">
                     <h5 class="contact-title">Masuk.</h5>
@@ -52,7 +64,9 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row justify-content-center">
+                            <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
                             <div class="col-6">
                                 <button type="submit" class="btn btn-primary btn-block mt-2">Login</button>
                                 {{-- <button type="button" class="btn google-btn btn-block mt-3" onclick="loginWithGoogle()"

@@ -19,38 +19,6 @@
 
     <!-- ================ contact section start ================= -->
     <section class="section-margin">
-        <!-- Modal Register -->
-        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registerModalLabel">Daftar</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="register-form">
-                            <div class="form-group">
-                                <label for="register-email">Email</label>
-                                <input type="email" class="form-control" id="register-email" placeholder="Masukkan email"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="register-password">Password</label>
-                                <input type="password" class="form-control" id="register-password"
-                                    placeholder="Masukkan password" required>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="button" class="btn btn-primary" onclick="register()">Daftar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container">
             @if ($errors->any())
                 <div class="alert alert-warning" role="alert">
@@ -74,15 +42,15 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="name">Nama Lengkap</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Enter your email"
-                                        required>
+                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}"
+                                        placeholder="Enter your email" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="email">Email address</label>
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Enter your email" required>
+                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}"
+                                        id="email" placeholder="Enter your email" required>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -101,6 +69,7 @@
                             </div>
                         </div>
                         <div class="row justify-content-center">
+                            <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
                             <div class="col-6">
                                 <button type="submit" class="btn btn-primary btn-block mt-2">Daftar</button>
                                 <button type="button" class="btn google-btn btn-block mt-3" onclick="loginWithGoogle()">
