@@ -3,7 +3,7 @@
 <td class="panel-content">
 <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
 <tr>
-<td class="panel-item">
+<td class="panel-item" style="justify-content: center; align-items: center;">
 {{ Illuminate\Mail\Markdown::parse($slot) }}
 </td>
 </tr>
