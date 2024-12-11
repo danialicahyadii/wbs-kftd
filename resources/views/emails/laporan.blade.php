@@ -2,7 +2,7 @@
 # Tiket Pengaduan WBS KFTD
 
 <x-mail::panel>
-    {{ $tiket }}
+{{ $tiket }}
 </x-mail::panel>
 
 Pantau proses pengaduan kamu menggunakan no tiket diatas atau klik dibawah ini :

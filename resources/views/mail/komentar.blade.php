@@ -1,5 +1,5 @@
 <x-mail::message>
-# {{ $sender }} menambahkan komentar :
+# {{ $sender }} komentar # {{ $tiket }} :
 
 {{ $komentar }}.
 
