@@ -2,9 +2,7 @@
 # Tiket Pengaduan WBS KFTD
 
 <x-mail::panel>
-    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-        {{ $tiket }}
-    </div>
+    {{ $tiket }}
 </x-mail::panel>
 
 Pantau proses pengaduan kamu menggunakan no tiket diatas atau klik dibawah ini :
