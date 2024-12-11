@@ -48,6 +48,9 @@ class LoginRequest extends FormRequest
 
             throw ValidationException::withMessages([
                 'email' => 'Email atau Password tidak sesuai !',
+                'password.required' => 'Email atau password salah.',
+                'g-recaptcha-response.required' => 'Verifikasi reCAPTCHA diperlukan.',
+                'g-recaptcha-response.captcha' => 'Verifikasi reCAPTCHA tidak valid.',
             ]);
         }
 
